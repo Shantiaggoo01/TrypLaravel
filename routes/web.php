@@ -18,3 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index']);
+Route::resource('productos', App\Http\Controllers\ProductoController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
