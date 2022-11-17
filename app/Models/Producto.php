@@ -34,6 +34,7 @@ class Producto extends Model
     ];
 
     protected $perPage = 20;
+    protected $primaryKey = 'idproducto';
 
     /**
      * Attributes that should be mass-assignable.

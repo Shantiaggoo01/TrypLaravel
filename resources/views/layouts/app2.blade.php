@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +18,7 @@
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/toastr/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/sweetalert/sweetalert.css')}}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body id="page-top">
@@ -85,7 +87,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="nueva_venta.html">Gestión de  Ventas</a>
                         <a class="collapse-item" href="historial_venta.html">Clientes</a>
-                        <a class="collapse-item" href="historial_venta.html">Productos</a>
+                        <a class="collapse-item" href="{{route('productos.index')}}">Productos</a>
                     </div>
                 </div>
             </li>
@@ -176,7 +178,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                   
+                    @yield('content')
                 </div>
                 <!-- /.container-fluid -->
 
@@ -209,6 +211,6 @@
     <script src="{{asset('vendor/toastr/toastr.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.js')}}"></script>
     <script src="{{asset('vendor/loadingoverlay/loadingoverlay.min.js')}}"></script>
-    
+    @yield('js')
 </body>
 </html>
