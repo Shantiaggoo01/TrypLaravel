@@ -70,7 +70,7 @@
                 </a>
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="categorias.html">Proveedores</a>
+                        <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
                         <a class="collapse-item" href="productos.html">Insumos</a>
                         <a class="collapse-item" href="productos.html">Compras</a>
                     </div>
@@ -188,7 +188,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; Tryp  2022</span>
                     </div>
                 </div>
             </footer>

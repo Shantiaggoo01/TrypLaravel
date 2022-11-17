@@ -19,7 +19,8 @@ Route::get('/', function () {
 });
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index']);
 Route::resource('productos', App\Http\Controllers\ProductoController::class);
-
+Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class);
+Route::resource('proveedores', App\Http\Controllers\ProveedoreController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
