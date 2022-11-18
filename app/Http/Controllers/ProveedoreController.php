@@ -20,8 +20,8 @@ class ProveedoreController extends Controller
     public function index()
     {
         $proveedores = Proveedore::paginate();
-
-        return view('proveedore.index', compact('proveedores'))
+        $tipo_proveedors = TipoProveedor::pluck('nombre', 'id');
+        return view('proveedore.index', compact('proveedores', 'tipo_proveedors'))
             ->with('i', (request()->input('page', 1) - 1) * $proveedores->perPage());
     }
 

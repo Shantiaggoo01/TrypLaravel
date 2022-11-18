@@ -64,7 +64,7 @@
 										<th>Telefono</th>
 										<th>Banco</th>
 										<th>Cuenta</th>
-										<th>Idtipo Proveedor</th>
+										<th>Tipo proveedor</th>
 
                                         <th></th>
                                     </tr>
@@ -80,7 +80,7 @@
 											<td>{{ $proveedore->telefono }}</td>
 											<td>{{ $proveedore->banco }}</td>
 											<td>{{ $proveedore->cuenta }}</td>
-											<td>{{ $proveedore->idtipo_proveedor }}</td>
+											<td>{{ $proveedore->tipoProveedor->nombre }}</td>
 
                                             <td>
                                                 <form action="{{ route('proveedores.destroy',$proveedore->id) }}" method="POST">
