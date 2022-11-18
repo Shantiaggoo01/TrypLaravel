@@ -3,6 +3,8 @@
 use App\Http\Controllers\Dashboard;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index']);
+
+Route::resource('/users', UserController::class)->names('indexUsuarios');
+
+
 Route::resource('productos', App\Http\Controllers\ProductoController::class);
 Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class);
 Route::resource('proveedores', App\Http\Controllers\ProveedoreController::class);
