@@ -71,7 +71,7 @@
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
-                        <a class="collapse-item" href="productos.html">Insumos</a>
+                        <a class="collapse-item" href="{{route('insumos.index')}}">Insumos</a>
                         <a class="collapse-item" href="productos.html">Compras</a>
                     </div>
                 </div>
@@ -85,8 +85,8 @@
                 </a>
                 <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="nueva_venta.html">Gestión de  Ventas</a>
-                        <a class="collapse-item" href="historial_venta.html">Clientes</a>
+                        <a class="collapse-item" href="{{route('ventas.index')}}">Gestión de  Ventas</a>
+                        <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
                         <a class="collapse-item" href="{{route('productos.index')}}">Productos</a>
                     </div>
                 </div>
