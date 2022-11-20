@@ -56,7 +56,7 @@
                 </a>
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="">Usuarios</a>
+                        <a class="collapse-item" href="/users">Usuarios</a>
                         <a class="collapse-item" href="negocio.html">Roles</a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
                         <a class="collapse-item" href="{{route('insumos.index')}}">Insumos</a>
-                        <a class="collapse-item" href="productos.html">Compras</a>
+                        <a class="collapse-item" href="{{route('compras.index')}}">Compras</a>
                     </div>
                 </div>
             </li>
