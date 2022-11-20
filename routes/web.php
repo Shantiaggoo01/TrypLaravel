@@ -23,6 +23,9 @@ Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index']);
 
 Route::resource('/users', UserController::class)->names('indexUsuarios');
 
+Route::resource('compras', App\Http\Controllers\CompraController::class);
+Route::resource('detalle_compras', App\Http\Controllers\DetalleCompraController::class);
+
 
 Route::resource('productos', App\Http\Controllers\ProductoController::class);
 Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class);
