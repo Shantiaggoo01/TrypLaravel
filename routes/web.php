@@ -18,23 +18,23 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index']);
+})->middleware('auth');
+Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index'])->middleware('auth');
 
-Route::resource('/users', UserController::class)->names('indexUsuarios');
+Route::resource('/users', UserController::class)->names('indexUsuarios')->middleware('auth');
 
-Route::resource('compras', App\Http\Controllers\CompraController::class);
-Route::resource('detalle_compras', App\Http\Controllers\DetalleCompraController::class);
+Route::resource('compras', App\Http\Controllers\CompraController::class)->middleware('auth');
+Route::resource('detalle_compras', App\Http\Controllers\DetalleCompraController::class)->middleware('auth');
 
 
-Route::resource('productos', App\Http\Controllers\ProductoController::class);
-Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class);
-Route::resource('proveedores', App\Http\Controllers\ProveedoreController::class);
-Route::resource('insumos', App\Http\Controllers\InsumoController::class);
-Route::resource('clientes', App\Http\Controllers\ClienteController::class);
-Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class);
-Route::resource('ventas', App\Http\Controllers\VentaController::class);
+Route::resource('productos', App\Http\Controllers\ProductoController::class)->middleware('auth');
+Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class)->middleware('auth');
+Route::resource('proveedores', App\Http\Controllers\ProveedoreController::class)->middleware('auth');
+Route::resource('insumos', App\Http\Controllers\InsumoController::class)->middleware('auth');
+Route::resource('clientes', App\Http\Controllers\ClienteController::class)->middleware('auth');
+Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class)->middleware('auth');
+Route::resource('ventas', App\Http\Controllers\VentaController::class)->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
