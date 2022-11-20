@@ -75,8 +75,9 @@ class InsumoController extends Controller
     public function edit($id)
     {
         $insumo = Insumo::find($id);
+        $estados= $this->estados();
 
-        return view('insumo.edit', compact('insumo'));
+        return view('insumo.edit', compact('insumo', 'estados'));
     }
 
     /**
