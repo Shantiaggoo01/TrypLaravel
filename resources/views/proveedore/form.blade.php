@@ -31,8 +31,11 @@
             {{ Form::text('cuenta', $proveedore->cuenta, ['class' => 'form-control' . ($errors->has('cuenta') ? ' is-invalid' : ''), 'placeholder' => 'Cuenta']) }}
             {!! $errors->first('cuenta', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <a href="{{ route('tipo-proveedors.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+            {{ __('Agregar nuevo tipo proveedor') }}
+        </a>
         <div class="form-group">
-            {{ Form::label('idtipo_proveedor') }}
+            {{ Form::label('Tipo de proveedor') }}
             {{ Form::select('idtipo_proveedor',$tipo_proveedors, $proveedore->idtipo_proveedor, ['class' => 'form-control' . ($errors->has('idtipo_proveedor') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un tipo de proveedor']) }}
             {!! $errors->first('idtipo_proveedor', '<div class="invalid-feedback">:message</div>') !!}
         </div>

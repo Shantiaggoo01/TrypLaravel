@@ -103,11 +103,11 @@ class TipoProveedorController extends Controller
     public function destroy($id)
     {
          //validar que no tenga proveedores asociados
-         $tipoProveedor=Proveedore::where('id',$id)->get();
-            if($tipoProveedor){
-                return redirect()->route('tipo-proveedors.index')
-                ->with('error', 'No se puede eliminar el tipo de proveedor, tiene proveedores asociados');
-            }
+        $proveedores = Proveedore::where('idtipo_proveedor', $id)->get();
+        if(count($proveedores) > 0){
+            return redirect()->route('tipo-proveedors.index')
+            ->with('error', 'No se puede eliminar el tipo de proveedor, tiene proveedores asociados.');
+        }
         $tipoProveedor = TipoProveedor::find($id)->delete();
         return redirect()->route('tipo-proveedors.index')
             ->with('success', 'Se ha eliminado correctamente');
