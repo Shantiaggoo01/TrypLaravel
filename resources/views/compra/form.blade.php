@@ -1,13 +1,23 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
+
+        <a href="{{ route('proveedores.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                {{ __('Agregar Nuevo Proveedor') }}
+            </a>
+
             {{ Form::label('Seleccione el proveedor') }}
             {{ Form::select('id_proveedor',$proveedores, $compra->id_proveedor, ['class' => 'form-control' . ($errors->has('id_proveedor') ? ' is-invalid' : ''), 'placeholder' => '---Seleccione---']) }}
             {!! $errors->first('id_proveedor', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
         <div class="form-group">
+
+            <a href="{{ route('insumos.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                {{ __('Agregar Nuevo Insumo') }}
+            </a>
+
             {{ Form::label('seleccione el Insumo') }}
             {{ Form::select('id_insumo',$insumos, $compra->id_insumo, ['class' => 'form-control' . ($errors->has('id_insumo') ? ' is-invalid' : ''), 'placeholder' => '---Seleccione---']) }}
             {!! $errors->first('id_insumo', '<div class="invalid-feedback">:message</div>') !!}
