@@ -8,8 +8,8 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('Falta crear el selector') }}
-            {{ Form::text('id_insumo', $compra->id_insumo, ['class' => 'form-control' . ($errors->has('id_insumo') ? ' is-invalid' : ''), 'placeholder' => '---Seleccione---']) }}
+            {{ Form::label('seleccione el Insumo') }}
+            {{ Form::select('id_insumo',$insumos, $compra->id_insumo, ['class' => 'form-control' . ($errors->has('id_insumo') ? ' is-invalid' : ''), 'placeholder' => '---Seleccione---']) }}
             {!! $errors->first('id_insumo', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 

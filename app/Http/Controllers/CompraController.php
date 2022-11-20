@@ -35,8 +35,8 @@ class CompraController extends Controller
     {
         $compra = new Compra();
         $proveedores = Proveedore::pluck('nombre','id');
-       /* $insumos = Insumo::pluck('nombre','id');*/
-        return view('compra.create', compact('compra','proveedores'));
+       $insumos = Insumo::pluck('nombre','id');
+        return view('compra.create', compact('compra','proveedores','insumos'));
     }
 
     /**
