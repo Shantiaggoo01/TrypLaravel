@@ -71,10 +71,10 @@
                                             
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $insumo->Nombre }}</td>
-											<td>{{ $insumo->Precio }}</td>
-											<td>{{ $insumo->TipoCantidad }}</td>
-											<td>{{ $insumo->Estado }}</td>
+											<td>{{ $insumo->nombre }}</td>
+											<td>{{ $insumo->precio }}</td>
+											<td>{{ $insumo->tipoCantidad }}</td>
+											<td>{{ $insumo->estado }}</td>
 
                                             <td>
                                                 <form action="{{ route('insumos.destroy',$insumo->id) }}" method="POST">
