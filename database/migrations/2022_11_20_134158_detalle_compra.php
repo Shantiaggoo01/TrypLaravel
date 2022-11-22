@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->timestamps();
 
-            $table->foreign('id_Compra')->references('nFactura')->on('Compras');
+            $table->foreign('id_Compra')->references('id')->on('Compras');
             $table->foreign('id_Insumos')->references('id')->on('Insumos');
         });
     }

@@ -33,7 +33,6 @@ class Compra extends Model
     ];
 
     protected $perPage = 20;
-
     /**
      * Attributes that should be mass-assignable.
      *

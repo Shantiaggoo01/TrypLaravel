@@ -12,7 +12,11 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>$(document).ready(function () {
-    $('#example').DataTable();
+    $('#example').DataTable({
+        "language":{
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+        }
+    });
 });</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if ($message = Session::get('success') )
@@ -67,18 +71,18 @@
                                             
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $insumo->nombre }}</td>
-											<td>{{ $insumo->precio }}</td>
-											<td>{{ $insumo->tipoCantidad }}</td>
-											<td>{{ $insumo->estado }}</td>
+											<td>{{ $insumo->Nombre }}</td>
+											<td>{{ $insumo->Precio }}</td>
+											<td>{{ $insumo->TipoCantidad }}</td>
+											<td>{{ $insumo->Estado }}</td>
 
                                             <td>
                                                 <form action="{{ route('insumos.destroy',$insumo->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('insumos.show',$insumo->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('insumos.edit',$insumo->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('insumos.show',$insumo->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('insumos.edit',$insumo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
                                                 </form>
                                             </td>
                                         </tr>

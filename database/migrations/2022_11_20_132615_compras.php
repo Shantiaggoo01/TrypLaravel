@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('Compras', function (Blueprint $table) {
-            $table->bigIncrements('nFactura');
+            $table->bigIncrements('id');
+            $table->double('nFactura');
             $table->bigInteger('id_proveedor')->unsigned();
             $table->bigInteger('id_insumo')->unsigned();
             $table->double('totalCompra');
