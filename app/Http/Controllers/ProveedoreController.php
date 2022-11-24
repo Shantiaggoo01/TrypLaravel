@@ -6,12 +6,29 @@ use App\Models\Proveedore;
 use App\Models\TipoProveedor;
 use Illuminate\Http\Request;
 
+//Agregamos 
+
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Illuminate\support\Facades\DB;
+
 /**
  * Class ProveedoreController
  * @package App\Http\Controllers
  */
 class ProveedoreController extends Controller
 {
+
+    // si habilito esta funcion se supone que debe de dar permisos ---
+    function __construct()
+    {
+        $this->middleware('permission:ver-proveedor|crear-proveedor|editar-proveedor|borrar-proveedor')->only('index');
+        $this->middleware('permission: crear-proveedor' , ['only' => ['create','store']]);
+        $this->middleware('permission: editar-proveedor' , ['only' => ['edit','update']]);
+        $this->middleware('permission: borrar-proveedor' , ['only' => ['destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *

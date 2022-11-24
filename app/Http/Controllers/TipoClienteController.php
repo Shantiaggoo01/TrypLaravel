@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
  */
 class TipoClienteController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-tipocliente|crear-tipocliente|editar-tipocliente|borrar-tipocliente')->only('index');
+        $this->middleware('permission: crear-tipocliente' , ['only' => ['create','store']]);
+        $this->middleware('permission: editar-tipocliente' , ['only' => ['edit','update']]);
+        $this->middleware('permission: borrar-tipocliente' , ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

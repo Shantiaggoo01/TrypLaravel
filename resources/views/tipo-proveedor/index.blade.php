@@ -45,12 +45,15 @@
                             <span id="card_title">
                                 {{ __('Tipo Proveedor') }}
                             </span>
-
+                            
                              <div class="float-right">
+                             @can('crear-tipoproveedor')
                                 <a href="{{ route('tipo-proveedors.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Agregar nuevo') }}
                                 </a>
-                              </div>
+                                @endcan
+                              </div>}
+                              
                         </div>
                     </div>
                     
@@ -79,10 +82,16 @@
                                             <td>
                                                 <form action="{{ route('tipo-proveedors.destroy',$tipoProveedor->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('tipo-proveedors.show',$tipoProveedor->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    @can('editar-tipoproveedor')
                                                     <a class="btn btn-sm btn-success" href="{{ route('tipo-proveedors.edit',$tipoProveedor->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @endcan
                                                     @csrf
+                                                    
                                                     @method('DELETE')
+                                                    @can('borrar-tipoproveedor')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    @endcan
+                                                    
                                                 </form>
                                             </td>
                                         </tr>

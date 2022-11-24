@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
 @section('template_title')
-Producto
+Usuario
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
@@ -31,7 +31,7 @@ Producto
 
 @section('content')
 <div class="float-right">
-    <a href="{{ route('register') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+    <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
         {{ __('Registrar Usuario') }}
     </a>
 </div>
@@ -66,11 +66,21 @@ Producto
                 <td>{{ $user->name}}</td>
                 <td>{{ $user->apellido }}</td>
                 <td>{{ $user->telefono }}</td>
-                <td></td>
+                <td> @if(!empty($user->getRoleNames()))
+                    @foreach($user->getRoleNames() as $rolName)
+                    <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
+                    @endforeach
+                    @endif
+                </td>
                 <td>{{ $user->email }}</td>
 
                 <td>
-
+                    <form action="{{ route('usuarios.destroy',$user->id) }}" method="POST">
+                        <a class="btn btn-sm btn-success" href="{{route('usuarios.edit', $user->id)}}"> Editar </a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

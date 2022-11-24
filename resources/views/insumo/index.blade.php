@@ -40,12 +40,15 @@
                             <span id="card_title">
                                 {{ __('Insumo') }}
                             </span>
-
+                            
                              <div class="float-right">
+                             @can('crear-insumos')
                                 <a href="{{ route('insumos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                                @endcan
                               </div>
+                              
                         </div>
                     </div>
                     
@@ -79,10 +82,15 @@
                                             <td>
                                                 <form action="{{ route('insumos.destroy',$insumo->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('insumos.show',$insumo->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    @can('editar-insumos')
                                                     <a class="btn btn-sm btn-success" href="{{ route('insumos.edit',$insumo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                    @endcan
                                                     @csrf
+                                                    
                                                     @method('DELETE')
+                                                    @can('borrar-insumos')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>

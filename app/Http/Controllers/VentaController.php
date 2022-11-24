@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
  */
 class VentaController extends Controller
 {
+
+    function __construct()
+        {
+            $this->middleware('permission:ver-venta|crear-venta|editar-venta|borrar-venta')->only('index');
+            $this->middleware('permission: crear-venta' , ['only' => ['create','store']]);
+            $this->middleware('permission: editar-venta' , ['only' => ['edit','update']]);
+            $this->middleware('permission: borrar-venta' , ['only' => ['destroy']]);
+        }
     /**
      * Display a listing of the resource.
      *
