@@ -49,6 +49,7 @@ class UsuarioController extends Controller
     {
         $role = Role::pluck('name', 'name')->all();
         return view('usuarios.create', compact('role'));
+        
     }
 
     /**
@@ -57,7 +58,27 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+// agrego esto
+  public function store(Request $request)
+    {
+        $this->validate($request, [
+            'documento' => 'required|unique:users',
+            'name' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|same:confirm-password',
+        ]);
+
+        $input = $request->all();
+        $input['password'] = Hash::make($input['password']);
+
+        $user = ModelsUser::create($input);
+        $user->roles()->sync($request->input('roles'));
+        return redirect()->route('usuarios.index')->with('success', 'Se registró correctamente');
+    }
+    /*public function store(Request $request)
     {
 
         $this->validate($request, [
@@ -79,7 +100,7 @@ class UsuarioController extends Controller
 
         return redirect()->route('usuarios.index');
 
-    }
+    }*/
 
     
 
@@ -142,6 +163,7 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+
         ModelsUser::find($id);
         return redirect()->route('usuarios.index');
     }
