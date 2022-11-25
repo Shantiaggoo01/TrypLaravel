@@ -75,12 +75,13 @@ Usuario
                 <td>{{ $user->email }}</td>
 
                 <td>
-                    <form action="{{ route('usuarios.destroy',$user->id) }}" method="POST">
-                        <a class="btn btn-sm btn-success" href="{{route('usuarios.edit', $user->id)}}"> Editar </a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                    </form>
+
+                <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
+
+                    {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
+                    {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
+                    {!!Form::close()!!}
+
                 </td>
             </tr>
             @endforeach

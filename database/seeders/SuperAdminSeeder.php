@@ -34,7 +34,7 @@ class SuperAdminSeeder extends Seeder
             'apellido'=>'Empleado',
             'telefono'=>'Empleado',
             'direccion'=>'Empleado',
-            'email'=>'Empleado@gmail.com',
+            'email'=>'empleado@gmail.com',
             'password'=>bcrypt('12345678')
 
         ]);
