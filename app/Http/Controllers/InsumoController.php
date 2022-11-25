@@ -11,6 +11,15 @@ use Illuminate\Http\Request;
  */
 class InsumoController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-insumos|crear-insumos|editar-insumos|borrar-insumos')->only('index');
+        $this->middleware('permission: crear-insumos' , ['only' => ['create','store']]);
+        $this->middleware('permission: editar-insumos' , ['only' => ['edit','update']]);
+        $this->middleware('permission: borrar-insumos' , ['only' => ['destroy']]);
+    }
+    /*
     /**
      * Display a listing of the resource.
      *

@@ -15,12 +15,15 @@
                             <span id="card_title">
                                 {{ __('Detalle Compra') }}
                             </span>
-
+                            
                              <div class="float-right">
+                             @can('crear-detallecompra')
                                 <a href="{{ route('detalle-compras.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
+                                @endcan
                               </div>
+                              
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -58,11 +61,16 @@
 
                                             <td>
                                                 <form action="{{ route('detalle-compras.destroy',$detalleCompra->id) }}" method="POST">
+                                                    
                                                     <a class="btn btn-sm btn-primary " href="{{ route('detalle-compras.show',$detalleCompra->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    @can('editar-detallecompra')
                                                     <a class="btn btn-sm btn-success" href="{{ route('detalle-compras.edit',$detalleCompra->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @endcan
                                                     @csrf
                                                     @method('DELETE')
+                                                    @can('borrar-detallecompra')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>

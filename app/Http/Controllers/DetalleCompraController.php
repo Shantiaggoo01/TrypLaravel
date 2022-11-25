@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
  */
 class DetalleCompraController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('permission:ver-detallecompra|crear-detallecompra|editar-detallecompra|borrar-detallecompra')->only('index');
+        $this->middleware('permission: crear-detallecompra' , ['only' => ['create','store']]);
+        $this->middleware('permission: editar-detallecompra' , ['only' => ['edit','update']]);
+        $this->middleware('permission: borrar-detallecompra' , ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

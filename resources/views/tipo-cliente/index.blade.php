@@ -36,13 +36,15 @@
                             <span id="card_title">
                                 {{ __('Tipo Cliente') }}
                             </span>
-
+                            
                              <div class="float-right">
+                             @can('crear-tipocliente')
                                 <a href="{{ route('tipo-clientes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                                
+                                @endcan
                               </div>
+                            
                         </div>
                     </div>
                     
@@ -68,10 +70,15 @@
                                             <td>
                                                 <form action="{{ route('tipo-clientes.destroy',$tipoCliente->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('tipo-clientes.show',$tipoCliente->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    @can('editar-tipocliente')
                                                     <a class="btn btn-sm btn-success" href="{{ route('tipo-clientes.edit',$tipoCliente->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @endcan
                                                     @csrf
+                                                    
                                                     @method('DELETE')
+                                                    @can('borrar-tipocliente')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>

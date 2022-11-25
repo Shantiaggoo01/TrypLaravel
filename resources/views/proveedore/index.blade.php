@@ -37,16 +37,20 @@
                             <span id="card_title">
                                 {{ __('Proveedore') }}
                             </span>
-
+                            
                              <div class="float-right">
+                             @can('crear-proveedor')
                                 <a href="{{ route('proveedores.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Agregar proveedor') }}
                                 </a>
+                                @endcan
+                                @can('crear-tipoproveedor')
                                 <a href="{{ route('tipo-proveedors.index') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
                                     {{ __('Agregar tipo proveedor') }}
                                   </a>
+                                  @endcan
                               </div>
-                              
+                            
                         </div>
                     </div>
                     
@@ -83,12 +87,18 @@
 											<td>{{ $proveedore->tipoProveedor->nombre }}</td>
 
                                             <td>
+                                            
                                                 <form action="{{ route('proveedores.destroy',$proveedore->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('proveedores.show',$proveedore->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    @can('editar-proveedor')
                                                     <a class="btn btn-sm btn-success" href="{{ route('proveedores.edit',$proveedore->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @endcan
                                                     @csrf
+                                                    
                                                     @method('DELETE')
+                                                    @can('borrar-proveedor')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    @endcan
                                                 </form>
                                             </td>
                                         </tr>
