@@ -17,24 +17,39 @@ class SuperAdminSeeder extends Seeder
      */
     public function run()
     {
-        $usuario = User::create([
-            'name'=>'Jean Paul',
+        $admin = User::create([
+            'name'=>'Administrador',
             'documento'=>'1017253837',
-            'apellido'=>'Estrada Gomez',
-            'telefono'=>'000000',
-            'direccion'=>'000000',
-            'email'=>'admin@admin.com',
+            'apellido'=>'Administrador',
+            'telefono'=>'Administrador',
+            'direccion'=>'Administrador',
+            'email'=>'administrador@gmail.com',
+            'password'=>bcrypt('12345678')
+
+        ]);
+
+        $empleado = User::create([
+            'name'=>'Empleado',
+            'documento'=>'1234567890',
+            'apellido'=>'Empleado',
+            'telefono'=>'Empleado',
+            'direccion'=>'Empleado',
+            'email'=>'Empleado@gmail.com',
             'password'=>bcrypt('12345678')
 
         ]);
 
        $rol = Role::create(['name'=>'Administrador']);
 
+       $rol = Role::create(['name'=>'Empleado']);
+
        $permisos = Permission::pluck('id','id')->all();
 
        $rol->syncPermissions($permisos);
 
-        $usuario -> assignRole(['Administrador']);
+        $admin -> assignRole(['Administrador']);
+
+        $empleado -> assignRole(['Empleado']);
 
     }
 }

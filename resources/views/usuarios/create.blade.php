@@ -43,12 +43,25 @@ Crear Usuarios
         </div>
         <div class="card-body">
 
+            @if($errors->any())
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                <strong>¡Revise los campos !</strong>
+                @foreach($errors->all() as $error)
+                <span class="badge badge-danger">{{$error}}</span>
+                @endforeach
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+
 
             {!!Form::open(array('route'=>'usuarios.store','method'=>'POST'))!!}
             <div class="row">
                 <div class="col-md-12">
+
                     <div class="form-group">
-                        <label for="documento">Documento</label>
+                        <label for="">Documento</label>
                         {!!Form::text('documento',null,array('class'=>'form-control'))!!}
                     </div>
 
@@ -89,43 +102,36 @@ Crear Usuarios
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="password"> Contraseña </label>
-                        {!!Form::password('password',null,array('class'=>'form-control'))!!}
+                        {!!Form::password('password',array('class'=>'form-control'))!!}
                     </div>
                 </div>
 
-               <div class="col-md-12">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="confirm-password"> Confirmar contraseña </label>
-                        {!!Form::password('confirm-password',null,array('class'=>'form-control'))!!}
+                        {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                     </div>
-                </div> 
+                </div>
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for=""> Roles </label>
+                        <label for="role"> Roles </label>
                         {!!Form::select('role[]',$role,[],array('class'=>'form-control'))!!}
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
-
             </div>
 
-            {!!Form::close()!!}
-
-
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
         </div>
-    </div>
-    </div>
+
+        {!!Form::close()!!}
 
 
-
     </div>
-    </div>
-    </div>
-    </div>
+    
 </section>
 
 
