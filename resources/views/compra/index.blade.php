@@ -43,7 +43,7 @@
                                 <a href="{{ route('compras.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Crear Compra') }}
                                 </a>
-                                @endcompra
+                                @endcan
                               </div>
                              
                         </div>

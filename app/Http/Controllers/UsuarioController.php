@@ -138,7 +138,6 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
-
         ModelsUser::find($id);
         return redirect()->route('usuarios.index');
     }
