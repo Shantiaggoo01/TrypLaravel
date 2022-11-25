@@ -40,31 +40,26 @@ Roles
             <span class="card-title">Crear Rol</span>
         </div>
         <div class="card-body">
-
             @can('crear-rol')
             <a class="btn btn-primary" href="{{route('roles.create')}}"> Crear Rol</a>
             @endcan
-
             <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
                     <tr>
-                    <th>id</th>
-                        <th>Rol</th>
-                        <th>Acciones</th>
-
-                        <th></th>
+                        <th>id</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($roles as $role)
                     <tr>
-                    <td>{{ $role->id }}</td>
+                        @foreach ($roles as $role)
+                        <td>{{ $role->id }}</td>
                         <td>{{ $role->name }}</td>
                         <td>
                             @can('editar-rol')
                             <a class="btn btn-primary" href="{{route('roles.edit',$role->id)}}"> Editar </a>
                             @endcan
-
                             @can('borrar-rol')
                             {!!Form::open(['method'=>'DELETE','route'=>['roles.destroy',$role->id],'style'=>'display:inline'])!!}
                             {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
@@ -75,14 +70,7 @@ Roles
                     @endforeach
                 </tbody>
             </table>
-
-
-
         </div>
     </div>
-
-
-
-
 </section>
 @endsection
