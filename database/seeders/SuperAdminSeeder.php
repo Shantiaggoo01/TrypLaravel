@@ -23,7 +23,7 @@ class SuperAdminSeeder extends Seeder
             'apellido'=>'Administrador',
             'telefono'=>'Administrador',
             'direccion'=>'Administrador',
-            'email'=>'administrador@gmail.com',
+            'email'=>'admin@gmail.com',
             'password'=>bcrypt('12345678')
 
         ]);
@@ -41,15 +41,11 @@ class SuperAdminSeeder extends Seeder
 
        $rol = Role::create(['name'=>'Administrador']);
 
-       $rol = Role::create(['name'=>'Empleado']);
-
        $permisos = Permission::pluck('id','id')->all();
 
        $rol->syncPermissions($permisos);
 
         $admin -> assignRole(['Administrador']);
-
-        $empleado -> assignRole(['Empleado']);
 
     }
 }
