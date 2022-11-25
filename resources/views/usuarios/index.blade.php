@@ -31,9 +31,11 @@ Usuario
 
 @section('content')
 <div class="float-right">
+    @can('crear-usuario')
     <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
         {{ __('Registrar Usuario') }}
     </a>
+    @endcan
 </div>
 
 
@@ -75,12 +77,14 @@ Usuario
                 <td>{{ $user->email }}</td>
 
                 <td>
-
+                @can('editar-usuario')
                 <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
-
+                @endcan
+                @can('borrar-usuario')
                     {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
                     {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
                     {!!Form::close()!!}
+                    @endcan
 
                 </td>
             </tr>

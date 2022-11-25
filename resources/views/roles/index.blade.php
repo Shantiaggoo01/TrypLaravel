@@ -48,7 +48,7 @@ Roles
             <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
                     <tr>
-
+                    <th>id</th>
                         <th>Rol</th>
                         <th>Acciones</th>
 
@@ -58,6 +58,7 @@ Roles
                 <tbody>
                     @foreach ($roles as $role)
                     <tr>
+                    <td>{{ $role->id }}</td>
                         <td>{{ $role->name }}</td>
                         <td>
                             @can('editar-rol')

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Compra
  *
+ * @property $id
  * @property $nFactura
  * @property $id_proveedor
  * @property $id_insumo
@@ -33,6 +34,7 @@ class Compra extends Model
     ];
 
     protected $perPage = 20;
+
     /**
      * Attributes that should be mass-assignable.
      *
@@ -46,7 +48,7 @@ class Compra extends Model
      */
     public function detalleCompras()
     {
-        return $this->hasMany('App\Models\DetalleCompra', 'id_Compra', 'nFactura');
+        return $this->hasMany('App\Models\DetalleCompra', 'id_Compra', 'id');
     }
     
     /**

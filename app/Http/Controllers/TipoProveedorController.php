@@ -16,9 +16,9 @@ class TipoProveedorController extends Controller
     function __construct()
     {
         $this->middleware('permission:ver-tipoproveedor|crear-tipoproveedor|editar-tipoproveedor|borrar-tipoproveedor')->only('index');
-        $this->middleware('permission: crear-tipoproveedor' , ['only' => ['create','store']]);
-        $this->middleware('permission: editar-tipoproveedor' , ['only' => ['edit','update']]);
-        $this->middleware('permission: borrar-tipoproveedor' , ['only' => ['destroy']]);
+        $this->middleware('permission:crear-tipoproveedor' , ['only' => ['create','store']]);
+        $this->middleware('permission:editar-tipoproveedor' , ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-tipoproveedor' , ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

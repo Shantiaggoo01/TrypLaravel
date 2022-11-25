@@ -1,3 +1,4 @@
+
 @extends('layouts.app2')
 
 @section('template_title')
@@ -76,7 +77,7 @@
 
                                             <td>
                                                 <form action="{{ route('compras.destroy',$compra->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-copra.index',$compra->id) }}"><i class="fa fa-fw fa-eye"></i>Detalle de Compra</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-compra.index',$compra->id) }}"><i class="fa fa-fw fa-eye"></i>Detalle de Compra</a>
                                                    
                                                     @can('editar-compra')
                                                     <a class="btn btn-sm btn-success" href="{{ route('compras.edit',$compra->id) }}"><i class="fa fa-fw fa-edit"></i>Editar</a>
@@ -100,3 +101,4 @@
         </div>
     </div>
 @endsection
+
