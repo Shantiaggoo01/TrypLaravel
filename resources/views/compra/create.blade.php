@@ -1,7 +1,10 @@
-@extends('layouts.app')
+
+
+
+@extends('layouts.app2')
 
 @section('template_title')
-    Create Compra
+    CrearCompra
 @endsection
 
 @section('content')

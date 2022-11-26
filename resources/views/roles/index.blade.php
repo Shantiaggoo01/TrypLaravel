@@ -13,7 +13,11 @@ Roles
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+        "language":{
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+        }
+    });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -37,12 +41,13 @@ Roles
 
     <div class="card card-default">
         <div class="card-header">
-            <span class="card-title">Crear Rol</span>
+            <span class="card-title">Roles</span>
+            @can('crear-rol')
+            <a href="{{route('roles.create')}}" class="btn btn-primary btn-sm float-right" data-placement="left" > Crear Rol</a>
+            @endcan
         </div>
         <div class="card-body">
-            @can('crear-rol')
-            <a class="btn btn-primary" href="{{route('roles.create')}}"> Crear Rol</a>
-            @endcan
+            
             <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
                     <tr>
