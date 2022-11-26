@@ -18,7 +18,7 @@
                             
                              <div class="float-right">
                              @can('crear-detallecompra')
-                                <a href="{{ route('detalle-compras.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('detalle-compra.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                                 @endcan

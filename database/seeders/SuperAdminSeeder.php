@@ -40,6 +40,7 @@ class SuperAdminSeeder extends Seeder
         ]);
 
        $rol = Role::create(['name'=>'Administrador']);
+       
 
        $permisos = Permission::pluck('id','id')->all();
 

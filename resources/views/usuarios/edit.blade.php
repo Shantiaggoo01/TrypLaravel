@@ -86,19 +86,6 @@ Crear Usuarios
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="password"> Contraseña </label>
-                        {!!Form::password('password',null,array('class'=>'form-control'))!!}
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="confirm-password"> Confirmar contraseña </label>
-                        {!!Form::password('confirm-password',null,array('class'=>'form-control'))!!}
-                    </div>
-                </div>
 
                 <div class="col-md-12">
                     <div class="form-group">

@@ -68,6 +68,12 @@ class SeederTablePermisos extends Seeder
                'crear-roles',
                'borrar-roles',
 
+               // tabla usuario
+               'ver-usuario',
+               'editar-usuario',
+               'crear-usuario',
+               'borrar-usuario',
+
                 // tabla tipo-cliente
                 'ver-tipocliente',
                 'editar-tipocliente',

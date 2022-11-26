@@ -1,3 +1,4 @@
+
 @extends('layouts.app2')
 
 @section('template_title')
@@ -12,7 +13,11 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>$(document).ready(function () {
-    $('#example').DataTable({});
+     $('#example').DataTable({
+        "language":{
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+        }
+    });
 });</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if ($message = Session::get('success') )
@@ -76,7 +81,7 @@
 
                                             <td>
                                                 <form action="{{ route('compras.destroy',$compra->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-copra.index',$compra->id) }}"><i class="fa fa-fw fa-eye"></i>Detalle de Compra</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-compra.index',$compra->id) }}"><i class="fa fa-fw fa-eye"></i>Detalle de Compra</a>
                                                    
                                                     @can('editar-compra')
                                                     <a class="btn btn-sm btn-success" href="{{ route('compras.edit',$compra->id) }}"><i class="fa fa-fw fa-edit"></i>Editar</a>
@@ -100,3 +105,4 @@
         </div>
     </div>
 @endsection
+

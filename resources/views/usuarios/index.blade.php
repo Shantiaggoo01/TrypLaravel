@@ -13,7 +13,11 @@ Usuario
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+        "language":{
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+        }
+    });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -30,64 +34,70 @@ Usuario
 
 
 @section('content')
-<div class="float-right">
-    <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-        {{ __('Registrar Usuario') }}
-    </a>
-</div>
 
 
-<div class="table-responsive">
-    <br>
+<div class="card card-default">
+    <div class="card-header">
+        <span class="card-title">Crear Usuario</span>
 
-    <table id="example" class="table table-striped table-hover">
-        <thead class="thead">
-            <tr>
+        @can('crear-usuario')
+        <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+            {{ __('Registrar Usuario') }}
+        </a>
+        @endcan
+    </div>
+    <div class="card-body">
 
-                <th>ID</th>
-                <th>Documento</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Telefono</th>
-                <th>Rol</th>
-                <th>Email</th>
+        <table id="example" class="table table-striped table-hover">
+            <thead class="thead">
+                <tr>
 
-
-
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-            <tr>
-
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->documento}}</td>
-                <td>{{ $user->name}}</td>
-                <td>{{ $user->apellido }}</td>
-                <td>{{ $user->telefono }}</td>
-                <td> @if(!empty($user->getRoleNames()))
-                    @foreach($user->getRoleNames() as $rolName)
-                    <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
-                    @endforeach
-                    @endif
-                </td>
-                <td>{{ $user->email }}</td>
-
-                <td>
-
-                <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
-
-                    {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
-                    {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
-                    {!!Form::close()!!}
-
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
+                    <th>ID</th>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Rol</th>
+                    <th>Email</th>
 
 
-@endsection
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                <tr>
+
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->documento}}</td>
+                    <td>{{ $user->name}}</td>
+                    <td>{{ $user->apellido }}</td>
+                    <td>{{ $user->telefono }}</td>
+                    <td> @if(!empty($user->getRoleNames()))
+                        @foreach($user->getRoleNames() as $rolName)
+                        <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
+                        @endforeach
+                        @endif
+                    </td>
+                    <td>{{ $user->email }}</td>
+
+                    <td>
+                        @can('editar-usuario')
+                        <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
+                        @endcan
+                        @can('borrar-usuario')
+                        {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
+                        {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
+                        {!!Form::close()!!}
+                        @endcan
+
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
+    @endsection
