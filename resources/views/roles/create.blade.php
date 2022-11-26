@@ -43,48 +43,73 @@ Crear Usuarios
         </div>
         <div class="card-body">
 
-        @if($errors->any())
-    <div class="alert alert-dark alert-dismissible fade show" role="alert">
-        <strong>¡Revise los campos !</strong>
-        @foreach($errors->all() as $error)
-        <span class="badge badge-danger">{{$error}}</span>
-        @endforeach
-        <button type="button" class="close" data-dismiss="alert" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+            @if($errors->any())
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                <strong>¡Revise los campos !</strong>
+                @foreach($errors->all() as $error)
+                <span class="badge badge-danger">{{$error}}</span>
+                @endforeach
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
 
 
             {!!Form::open(array('route'=>'roles.store','method'=>'POST'))!!}
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12">
 
                     <div class="form-group">
                         <label for="">Nombre del rol</label>
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
-                    </div>
-                    <div class="col-md-12 ">
+                </div>
+
+                <div class="col-md-12 ">
                     <div class="form-group">
+
                         <label for="">Permisos para este Rol:</label>
                         <br>
                         @foreach($permission as $value)
-                        <label>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}
-                            {{$value->name}}</label>
-                            <br/>
-                            @endforeach
+                        <label>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}{{$value->name}}</label>
+                        <br />
+                        @endforeach
                     </div>
-                    </div>
+                </div> -->
 
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
+
+            <div class="form-group">
+                <label for="">Nombre del rol</label>
+                {!!Form::text('name',null,array('class'=>'form-control'))!!}
             </div>
-            {!!Form::close()!!}
 
 
+            <table id="example" class="table table-striped table-hover">
+                <thead class="thead">
+                    <tr>
+                        <th> -- Seleccione -- </th>
+                        <th> <label for="">Permisos para este Rol:</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($permission as $value)
+                    <tr>
+                        <td><label>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</label></td>
+                        <td><label> {{$value->name}}</label></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
         </div>
+        {!!Form::close()!!}
+
+
+    </div>
     </div>
     </div>
 

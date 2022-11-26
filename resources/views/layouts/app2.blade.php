@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
@@ -49,21 +50,30 @@
             </li>
 
             <!-- Nav Item - Administración Collapse Menu -->
+            @can('ver-MenuConfiguracion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
                     <i class="fas fa-fw fa-cog"></i>
+                    
                     <span>Configuración</span>
+                    
                 </a>
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="usuarios">Usuarios</a>
+                     
+                        <a class="collapse-item" href="usuarios">Usuarios</a>
+                        
+                        
                         <a class="collapse-item" href="roles">Roles</a>
+                        
                     </div>
                 </div>
             </li>
-            
+            @endcan
+
 
             <!-- Nav Item - Inventario Collapse Menu -->
+            @can('ver-MenuCompras')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
                     <i class="fas fa-fw fa-clipboard-list"></i>
@@ -77,8 +87,10 @@
                     </div>
                 </div>
             </li>
+            @endcan
 
             <!-- Nav Item - Venta Collapse Menu -->
+            @can('ver-MenuVentas')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
                     <i class="fas fa-fw fa-tags"></i>
@@ -86,13 +98,16 @@
                 </a>
                 <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('ventas.index')}}">Gestión de  Ventas</a>
+                        <a class="collapse-item" href="{{route('ventas.index')}}">Gestión de Ventas</a>
                         <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
                         <a class="collapse-item" href="{{route('productos.index')}}">Productos</a>
                     </div>
                 </div>
             </li>
+            @endcan
+
             <!-- Nav Item - Produccion Collapse Menu -->
+            @can('ver-Menuproduccion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducción">
                     <i class="fas fa-fw fa-tag"></i>
@@ -100,12 +115,13 @@
                 </a>
                 <div id="collapseProducción" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="nueva_venta.html">Gestión de  Producción</a>
+                        <a class="collapse-item" href="nueva_venta.html">Gestión de Producción</a>
                     </div>
                 </div>
             </li>
-
+@endcan
             <!-- Nav Item - Reportes Collapse Menu -->
+            @can('ver-MenuReportes')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
                     <i class="fas fa-fw fa-chart-area"></i>
@@ -117,6 +133,7 @@
                     </div>
                 </div>
             </li>
+            @endcan
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -147,16 +164,13 @@
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                                <img class="img-profile rounded-circle"
-                                     src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
+                                <img class="img-profile rounded-circle" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                 aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
@@ -166,7 +180,7 @@
                                 document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Salir
-                                    
+
                                 </a>
                             </div>
                         </li>
@@ -189,7 +203,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tryp  2022</span>
+                        <span>Copyright &copy; Tryp 2022</span>
                     </div>
                 </div>
             </footer>
@@ -214,4 +228,5 @@
     <script src="{{asset('vendor/loadingoverlay/loadingoverlay.min.js')}}"></script>
     @yield('js')
 </body>
+
 </html>
