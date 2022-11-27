@@ -8,7 +8,7 @@
 
     <div class="card card-default">
         <div class="card-header">
-            <span class="card-title">Crear Usuario</span>
+            <span class="card-title">Registrar Usuario</span>
         </div>
         <div class="card-body">
 
@@ -81,18 +81,18 @@
                         {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                     </div>
                 </div>
-
+ss
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="role"> Roles </label>
-                        {!!Form::select('role[]',$role,[],array('class'=>'form-control'))!!}
+                        <label for="role"> Seleccione el rol para el usuario </label>
+                        {!!Form::select('role[]',$role,[],array('class'=>'form-control','placeholder' => '---Seleccione---'))!!}
                     </div>
                 </div>
 
             </div>
 
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary">Registrar Este Usuario</button>
             </div>
         </div>
 

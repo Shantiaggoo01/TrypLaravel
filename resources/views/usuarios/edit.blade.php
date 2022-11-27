@@ -89,8 +89,22 @@ Crear Usuarios
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for=""> Roles </label>
-                        {!!Form::select('roles[]',$roles,[],array('class'=>'form-control'))!!}
+                        <label for=""> Rol del Usuario </label>
+                        {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione Nuevo Rol ---'))!!}
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="password"> Cambiar Contraseña </label>
+                        {!!Form::password('password',array('class'=>'form-control'))!!}
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="confirm-password"> Confirmar contraseña </label>
+                        {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                     </div>
                 </div>
 

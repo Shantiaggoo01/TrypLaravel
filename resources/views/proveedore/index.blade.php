@@ -39,7 +39,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Proveedore') }}
+                                {{ __('Proveedores') }}
                             </span>
                             
                              <div class="float-right">
@@ -48,6 +48,7 @@
                                   {{ __('Agregar proveedor') }}
                                 </a>
                                 @endcan
+                                
                                 @can('crear-tipoproveedor')
                                 <a href="{{ route('tipo-proveedors.index') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
                                     {{ __('Agregar tipo proveedor') }}

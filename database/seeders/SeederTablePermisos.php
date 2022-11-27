@@ -69,6 +69,11 @@ class SeederTablePermisos extends Seeder
                'borrar-roles',
 
                // tabla usuario
+               'ver-MenuConfiguracion',
+               'ver-MenuCompras',
+               'ver-MenuVentas',
+               'ver-Menuproduccion',
+               'ver-MenuReportes',
                'ver-usuario',
                'editar-usuario',
                'crear-usuario',
