@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\Insumo;
+use App\Models\DetalleProducto;
 use Illuminate\Http\Request;
 
 /**
@@ -40,7 +42,8 @@ class ProductoController extends Controller
     public function create()
     {
         $producto = new Producto();
-        return view('producto.create', compact('producto'));
+        $insumos = Insumo::all();
+        return view('producto.create', compact('producto','insumos'));
     }
 
     /**

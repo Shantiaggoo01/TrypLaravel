@@ -19,7 +19,12 @@
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/toastr/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/sweetalert/sweetalert.css')}}" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
     @yield('css')
+    @yield('js')
 </head>
 
 <body id="page-top">
@@ -226,7 +231,7 @@
     <script src="{{asset('vendor/toastr/toastr.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.js')}}"></script>
     <script src="{{asset('vendor/loadingoverlay/loadingoverlay.min.js')}}"></script>
-    @yield('js')
+    
 </body>
 
 </html>
