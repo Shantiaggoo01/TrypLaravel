@@ -37,8 +37,14 @@
             {!! $errors->first('cantidad', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+        <div class="form-group">
+            {{ Form::label('precio') }}
+            {{ Form::text('precio', $producto->precio, ['class' => 'form-control' . ($errors->has('precio') ? ' is-invalid' : ''), 'placeholder' => 'Precio']) }}
+            {!! $errors->first('precio', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>

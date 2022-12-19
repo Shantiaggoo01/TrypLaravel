@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Venta;
 use App\Models\Cliente;
+use App\Models\Producciones;
+use App\Models\detalle_ventas;
 use Illuminate\Http\Request;
+use App\Models\Producto;
+use DB;
 
 /**
  * Class VentaController
@@ -12,6 +16,8 @@ use Illuminate\Http\Request;
  */
 class VentaController extends Controller
 {
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +26,11 @@ class VentaController extends Controller
     public function index()
     {
         $ventas = Venta::paginate();
-        
+        $detalle_ventas = detalle_ventas::all();
+        $produccion = Producciones::all();
+        $productos = Producto::all();
 
-        return view('venta.index', compact('ventas'))
+        return view('venta.index', compact('ventas','produccion','detalle_ventas','productos'))
             ->with('i', (request()->input('page', 1) - 1) * $ventas->perPage());
     }
 
@@ -35,7 +43,11 @@ class VentaController extends Controller
     {
         $venta = new Venta();
         $clientes = Cliente::pluck('Nombre','id');
-        return view('venta.create', compact('venta','clientes'));
+        $detalle_ventas = detalle_ventas::all();
+        $produccion = Producciones::all();
+        $productos = Producto::all();
+
+        return view('venta.create', compact('venta','clientes','produccion','detalle_ventas','productos'));
     }
 
     /**

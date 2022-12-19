@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,6 +26,9 @@ Route::resource('insumos', App\Http\Controllers\InsumoController::class);
 Route::resource('clientes', App\Http\Controllers\ClienteController::class);
 Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class);
 Route::resource('ventas', App\Http\Controllers\VentaController::class);
+Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
+
+
 
 Auth::routes();
 

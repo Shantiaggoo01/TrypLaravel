@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $invima
  * @property $peso
  * @property $cantidad
+ * @property $precio
  * @property $created_at
  * @property $updated_at
  *
@@ -31,6 +32,7 @@ class Producto extends Model
 		'invima' => 'required',
 		'peso' => 'required',
 		'cantidad' => 'required',
+    'precio' => 'required',
     ];
 
     protected $perPage = 20;
@@ -41,7 +43,7 @@ class Producto extends Model
      *
      * @var array
      */
-    protected $fillable = ['idproducto','nombre','tamaño','sabor','invima','peso','cantidad'];
+    protected $fillable = ['idproducto','nombre','tamaño','sabor','invima','peso','cantidad', 'precio'];
 
 
 

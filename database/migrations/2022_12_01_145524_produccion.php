@@ -13,18 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('productos', function (Blueprint $table) {
-            $table->id('idproducto');
-            $table->string('nombre');
-            $table->string('tamaño');
-            $table->string('sabor');
-            $table->string('invima');
-            $table->integer('peso');
-            $table->integer('cantidad');
-            $table->double('precio', 60);
+        //
+        Schema::create('producciones', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('idProducto')->unsigned();
+            $table->foreign('idProducto')->references('idproducto')->on('productos');
+            $table->Date('FechaProduccion');
+            $table->Date('FechaVencimiento');
+            $table->double('Total', 60);
             $table->timestamps();
         });
-
     }
 
     /**

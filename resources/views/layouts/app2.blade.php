@@ -19,6 +19,7 @@
     <link href="{{asset('vendor/toastr/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/sweetalert/sweetalert.css')}}" rel="stylesheet">
     @yield('css')
+
 </head>
 
 <body id="page-top">
@@ -72,7 +73,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
                         <a class="collapse-item" href="{{route('insumos.index')}}">Insumos</a>
-                        <a class="collapse-item" href="{{route('compras.index')}}">Compras</a>
+                        <a class="collapse-item" href="">Compras</a>
                     </div>
                 </div>
             </li>
@@ -85,8 +86,9 @@
                 </a>
                 <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('ventas.index')}}">Gestión de  Ventas</a>
+                        <a class="collapse-item" href="{{route('detalle_ventas.index')}}">Gestión de  Ventas</a>
                         <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
+                       
                         <a class="collapse-item" href="{{route('productos.index')}}">Productos</a>
                     </div>
                 </div>
@@ -212,5 +214,8 @@
     <script src="{{asset('vendor/sweetalert/sweetalert.js')}}"></script>
     <script src="{{asset('vendor/loadingoverlay/loadingoverlay.min.js')}}"></script>
     @yield('js')
+
+    @yield("script")
+
 </body>
 </html>
