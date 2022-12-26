@@ -1,8 +1,7 @@
-
 @extends('layouts.app2')
 
 @section('template_title')
-    Proveedores
+    Compra_insumos
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
@@ -13,11 +12,7 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>$(document).ready(function () {
-     $('#example').DataTable({
-        "language":{
-            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-        }
-    });
+    $('#example').DataTable();
 });</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if ($message = Session::get('success') )
@@ -30,8 +25,8 @@
 </script>
 @endif
 @endsection
-
 @section('content')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -39,60 +34,68 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
+                        @if(session('status'))
+                    @if (session('status') == '1')
+                    <div class="alert alert-success">
+                        se guardo correctamente
+                    </div>
+                    @else
+                    <div class="alert alert-danger">
+                        {{session('status')}}
+                    </div>
+                    @endif
+                    @endif
+
                             <span id="card_title">
-                                {{ __('Compras') }}
+                                {{ __('Compra') }}
                             </span>
-                            
+
                              <div class="float-right">
-                             @can('crear-compra')
-                                <a href="{{ route('compras.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear Compra') }}
+                                <a href="{{ route('compra_insumos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Nueva Compra') }}
                                 </a>
-                                @endcan
                               </div>
-                             
                         </div>
                     </div>
-                    
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
+                                        <th>No</th>
                                         
-										<th>Numero de factura</th>
-										<th>Nombre proveedor</th>
-										<th>Insumo</th>
-										<th>Compra total</th>
-										<th>Iva</th>
+										<th>#Factura</th>
+										<th>Nombre De Proveedor</th>
+										<th>insumos</th>
+                                        <th>Fecha de compra </th>
+                                        <th>Total de la compra</th>
 
-                                        <th> Acciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($compras as $compra)
+                                    @foreach ($compras as $comp)
                                         <tr>
+                                            <td>{{$comp->id}}</td>
                                             
-											<td>{{ $compra->nFactura }}</td>
-											<td>{{ $compra->id_proveedor }}</td>
-											<td>{{ $compra->id_insumo }}</td>
-											<td>{{ $compra->totalCompra }}</td>
-											<td>{{ $compra->iva }}</td>
+											<td>{{ $comp->nFactura }}</td>
+											<td>{{ $comp->id_proveedor }}</td>
+											<td>{{ $comp->id_insumo }}</td>
+                                            <td>{{ $comp->FechaCompra }}</td>
+                                            <td>{{ $comp->Total }}</td>
 
                                             <td>
-                                                <form action="{{ route('compras.destroy',$compra->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('detalle-compra.index',$compra->id) }}"><i class="fa fa-fw fa-eye"></i>Detalle de Compra</a>
-                                                   
-                                                    @can('editar-compra')
-                                                    <a class="btn btn-sm btn-success" href="{{ route('compras.edit',$compra->id) }}"><i class="fa fa-fw fa-edit"></i>Editar</a>
-                                                    @endcan
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @can('borrar-compra')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>Borrar</button>
-                                                    @endcan
-                                                </form>
+                                            
                                             </td>
+                                           
+
+                                          
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -100,9 +103,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $compras->links() !!}
+                
             </div>
         </div>
     </div>
 @endsection
-
