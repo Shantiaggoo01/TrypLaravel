@@ -24,7 +24,14 @@ class CompraInsumoController extends Controller
     public function index()
     {
         $compraInsumos = CompraInsumo::paginate();
-        $compras = Compra::all();
+
+        //$compras = Compra::all();
+
+        $compras = Compra::select("compras.*","proveedores.nombre as nombreProveedor")
+        ->join("proveedores","proveedores.id","=","compras.id_proveedor")
+        ->get();
+        
+
         $insumos = Insumo::all();
         $proveedores = Proveedore::all();
         return view('compra_insumos.index', compact('compraInsumos', 'compras', 'insumos', 'proveedores'))
@@ -116,9 +123,7 @@ class CompraInsumoController extends Controller
      */
     public function show($id)
     {
-        $compraInsumo = CompraInsumo::find($id);
-
-        return view('compra_insumos.show', compact('compraInsumo'));
+        
     }
 
     /**

@@ -68,13 +68,12 @@
                             <table id="example" class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
+ 
 										<th>#Factura</th>
-										<th>Nombre De Proveedor</th>
+										<th>Proveedor</th>
 										<th>insumos</th>
                                         <th>Fecha de compra </th>
-                                        <th>Total de la compra</th>
+                                        <th>$Total Compra</th>
 
                                         <th></th>
                                     </tr>
@@ -82,10 +81,9 @@
                                 <tbody>
                                     @foreach ($compras as $comp)
                                         <tr>
-                                            <td>{{$comp->id}}</td>
-                                            
+
 											<td>{{ $comp->nFactura }}</td>
-											<td>{{ $comp->id_proveedor }}</td>
+											<td>{{ $comp->nombreProveedor }}</td>
 											<td>{{ $comp->id_insumo }}</td>
                                             <td>{{ $comp->FechaCompra }}</td>
                                             <td>{{ $comp->Total }}</td>
