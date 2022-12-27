@@ -30,7 +30,7 @@ Route::group(['middleware'=>['auth']],function(){
 Route::resource('usuarios', App\Http\Controllers\UsuarioController::class)->middleware('auth');
 Route::resource('roles', App\Http\Controllers\RolController::class)->middleware('auth');
 Route::resource('proveedores',App\Http\Controllers\ProveedoreController::class)->middleware('auth');
-Route::resource('compras', App\Http\Controllers\CompraController::class)->middleware('auth');
+
 Route::resource('detalle-compra', App\Http\Controllers\DetalleCompraController::class)->middleware('auth');
 Route::resource('productos', App\Http\Controllers\ProductoController::class)->middleware('auth');
 Route::resource('tipo-proveedors', App\Http\Controllers\TipoProveedorController::class)->middleware('auth');
@@ -39,6 +39,10 @@ Route::resource('clientes', App\Http\Controllers\ClienteController::class)->midd
 Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class)->middleware('auth');
 Route::resource('ventas', App\Http\Controllers\VentaController::class)->middleware('auth');
 
+// Controladores de el video
+
+Route::resource('compra_insumos', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
+Route::resource('compra_insumos/guardar', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
 
 });
 

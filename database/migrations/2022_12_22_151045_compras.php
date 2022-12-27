@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('Compras', function (Blueprint $table) {
+        //
+        Schema::create('compras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->double('nFactura');
+            $table->string('nFactura');
             $table->bigInteger('id_proveedor')->unsigned();
             $table->bigInteger('id_insumo')->unsigned();
-            $table->double('totalCompra');
-            $table->double('iva',);
-            $table->timestamps();
-
+            $table->date('FechaCompra');
+            $table->double('Total', 60);   
+            
             $table->foreign('id_proveedor')->references('id')->on('Proveedores');
-            $table->foreign('id_insumo')->references('id')->on('Insumos');
+            $table->foreign('id_insumo')->references('id')->on('insumos');
+
+            $table->timestamps();
         });
     }
 

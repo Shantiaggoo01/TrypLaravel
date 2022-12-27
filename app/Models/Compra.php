@@ -11,12 +11,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property $nFactura
  * @property $id_proveedor
  * @property $id_insumo
- * @property $totalCompra
- * @property $iva
+ * @property $FechaCompra
+ * @property $Total
  * @property $created_at
  * @property $updated_at
  *
- * @property DetalleCompra[] $detalleCompras
  * @property Insumo $insumo
  * @property Proveedore $proveedore
  * @package App
@@ -29,8 +28,8 @@ class Compra extends Model
 		'nFactura' => 'required',
 		'id_proveedor' => 'required',
 		'id_insumo' => 'required',
-		'totalCompra' => 'required',
-		'iva' => 'required',
+		'FechaCompra' => 'required',
+		'Total' => 'required',
     ];
 
     protected $perPage = 20;
@@ -40,17 +39,9 @@ class Compra extends Model
      *
      * @var array
      */
-    protected $fillable = ['nFactura','id_proveedor','id_insumo','totalCompra','iva'];
+    protected $fillable = ['nFactura','id_proveedor','id_insumo','FechaCompra','Total'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function detalleCompras()
-    {
-        return $this->hasMany('App\Models\DetalleCompra', 'id_Compra', 'id');
-    }
-    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

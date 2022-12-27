@@ -5,30 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class DetalleCompra
+ * Class CompraInsumo
  *
  * @property $id
- * @property $id_Compra
- * @property $precio_Unitario
- * @property $precio_Total
- * @property $id_Insumos
+ * @property $id_compra
+ * @property $id_proveedor
+ * @property $id_insumo
  * @property $cantidad
  * @property $created_at
  * @property $updated_at
  *
  * @property Compra $compra
  * @property Insumo $insumo
+ * @property Proveedore $proveedore
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class DetalleCompra extends Model
+class CompraInsumo extends Model
 {
     
     static $rules = [
-		'id_Compra' => 'required',
-		'precio_Unitario' => 'required',
-		'precio_Total' => 'required',
-		'id_Insumos' => 'required',
+		'id_compra' => 'required',
+		//'id_proveedor' => 'required',
+		'id_insumo' => 'required',
 		'cantidad' => 'required',
     ];
 
@@ -39,7 +38,7 @@ class DetalleCompra extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_Compra','precio_Unitario','precio_Total','id_Insumos','cantidad'];
+    protected $fillable = ['id_compra',/*'id_proveedor'*/'id_insumo','cantidad'];
 
 
     /**
@@ -47,7 +46,7 @@ class DetalleCompra extends Model
      */
     public function compra()
     {
-        return $this->hasOne('App\Models\Compra', 'nFactura', 'id_Compra');
+        return $this->hasOne('App\Models\Compra', 'id', 'id_compra');
     }
     
     /**
@@ -55,8 +54,16 @@ class DetalleCompra extends Model
      */
     public function insumo()
     {
-        return $this->hasOne('App\Models\Insumo', 'id', 'id_Insumos');
+        return $this->hasOne('App\Models\Insumo', 'id', 'id_insumo');
     }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+   /* public function proveedore()
+    {
+        return $this->hasOne('App\Models\Proveedore', 'id', 'id_proveedor');
+    }*/
     
 
 }
