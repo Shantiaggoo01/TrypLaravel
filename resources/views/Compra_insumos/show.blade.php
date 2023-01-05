@@ -58,7 +58,7 @@ detalle de el proveedor
 <div class="card-body">
     <div class="table-responsive">
         <div class="col">
-            <h2 colspan="4" class="text-center">INSUMOS COMPRA</h2>
+            <h2 colspan="4" class="text-center">INSUMOS COMPRADOS</h2>
             <hr>
             <table id="example" class="table table-striped table-hover">
                 <thead>
