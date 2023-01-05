@@ -73,10 +73,10 @@ Compra_insumos
                         <table id="example" class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
+                                    <th>ID</th>
 
                                     <th>#Factura</th>
                                     <th>Proveedor</th>
-                                    <th>insumos</th>
                                     <th>Fecha de compra </th>
                                     <th>$Total Compra</th>
 
@@ -86,27 +86,24 @@ Compra_insumos
                             <tbody>
                                 @foreach ($compras as $comp)
                                 <tr>
-
+                                    <td>{{ $comp->id }}</td>
                                     <td>{{ $comp->nFactura }}</td>
                                     <td>{{ $comp->nombreProveedor }}</td>
-                                    <td>{{ $comp->id_insumo }}</td>
                                     <td>{{ $comp->FechaCompra }}</td>
                                     <td>{{ $comp->Total }}</td>
 
                                     <td>
-
+                                        <a class="btn btn-sm btn-primary" href="compra_insumos/show?id={{$comp->id}}">Detalles</a>
                                     </td>
 
-
-
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -54,18 +54,33 @@ Crear Usuarios
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
-                        <label for="">Permisos para este Rol:</label>
-                        <br>
-                        @foreach($permission as $value)
-                        <label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}
-                            {{$value->name}}</label>
-                        <br />
-                        @endforeach
+
+                        <table id="example" class="table table-striped table-hover">
+                            <thead class="thead">
+                                <tr>
+                                    <th> -- Seleccione -- </th>
+                                    <th> <label for="">Permisos para este Rol:</label></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <label for="">Permisos para este Rol:</label>
+                                <br>
+                                @foreach($permission as $value)
+                                <tr>
+                                <td> <label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}{{$value->name}}</label>   </td>
+                                <td><label> {{$value->name}}</label></td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-left">Guardar</button>
+
+                    <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
                 </div>
             </div>
             {!!Form::close()!!}

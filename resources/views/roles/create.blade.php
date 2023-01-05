@@ -104,7 +104,10 @@ Crear Usuarios
             </table>
 
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+
+                <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+
+                <button type="submit" class="btn btn-primary float-left">Guardar</button>
             </div>
         </div>
         {!!Form::close()!!}
