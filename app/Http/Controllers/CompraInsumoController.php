@@ -121,8 +121,27 @@ class CompraInsumoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
+
+
+        $id = $request->input("id");
+        $insumos=[];
+        if($id != null){
+            $insumos = Insumo::select("insumos.*","compra_insumos.cantidad")
+            ->join("compra_insumos","insumos.id","=","compra_insumos.id_insumo")
+            ->where("compra_insumos.id_compra", $id)
+            ->get();
+        }
+        $compras=[];
+        if($id != null){
+        $compras = Compra::select("compras.*")
+        ->join("compra_insumos","compras.id","=","compra_insumos.id_compra")
+        ->where("compra_insumos.id_compra", $id)
+        ->get();
+        }
+
+        return view("compra_insumos.show", compact("insumos","compras"));
         
     }
 

@@ -81,7 +81,7 @@
                         {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                     </div>
                 </div>
-ss
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="role"> Seleccione el rol para el usuario </label>
@@ -91,8 +91,15 @@ ss
 
             </div>
 
+            <br>
+
             <div class="col-md-12">
-                <button type="submit" class="btn btn-primary">Registrar Este Usuario</button>
+
+                <button type="submit" class="btn btn-primary float-left">Registrar Usuario</button>
+                
+                <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+
+
             </div>
         </div>
 
@@ -100,7 +107,7 @@ ss
 
 
     </div>
-    
+
 </section>
 
 

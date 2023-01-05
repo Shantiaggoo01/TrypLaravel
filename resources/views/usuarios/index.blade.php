@@ -42,7 +42,7 @@ Usuario
 
         @can('crear-usuario')
         <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-            {{ __('Registrar Usuario') }}
+            {{ __('Nuevo Usuario') }}
         </a>
         @endcan
     </div>

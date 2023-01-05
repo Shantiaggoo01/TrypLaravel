@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
-
+use Spatie\Permission\Commands\Show;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ Route::resource('ventas', App\Http\Controllers\VentaController::class)->middlewa
 // Controladores de el video
 
 Route::resource('compra_insumos', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
-Route::resource('compra_insumos/guardar', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
+Route::resource('compra_insumos/show', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
 
 });
 
