@@ -178,4 +178,13 @@ class UsuarioController extends Controller
         DB::table('users')->where('id',$id)->delete();
         return redirect()->route('usuarios.index');
     }
+
+    public function show($id){
+
+        $user = ModelsUser::findOrFail($id);
+
+        //dd($user);
+
+        return view('usuarios.show', compact('user'));
+    }
 }

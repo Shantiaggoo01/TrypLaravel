@@ -20,7 +20,7 @@ use Spatie\Permission\Commands\Show;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/dashboard');
 })->middleware('auth');
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index'])->middleware('auth');
 

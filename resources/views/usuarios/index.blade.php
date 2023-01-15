@@ -53,16 +53,16 @@ Usuario
                 <tr>
 
                     <th>ID</th>
-                    <th>Documento</th>
+                     
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Telefono</th>
+
                     <th>Rol</th>
-                    <th>Email</th>
 
 
 
-                    <th></th>
+
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,22 +70,24 @@ Usuario
                 <tr>
 
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->documento}}</td>
                     <td>{{ $user->name}}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td>{{ $user->telefono }}</td>
                     <td> @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $rolName)
                         <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
                         @endforeach
                         @endif
                     </td>
-                    <td>{{ $user->email }}</td>
+
 
                     <td>
+
+                    <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
+
                         @can('editar-usuario')
                         <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
                         @endcan
+
                         @can('borrar-usuario')
                         {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
                         {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
