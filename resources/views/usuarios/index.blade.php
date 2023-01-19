@@ -38,7 +38,7 @@ Usuario
 
 <div class="card card-default">
     <div class="card-header">
-        <span class="card-title">Crear Usuario</span>
+        <span class="card-title">Usuarios</span>
 
         @can('crear-usuario')
         <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">

@@ -14,8 +14,21 @@ Crear Compra
             <div class="card card-default">
                 <div class="card-header">
                     <span class="card-title">Crear Compra</span>
-                  
+
                 </div>
+
+                @if($errors->any())
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>¡Revise los campos !</strong>
+                    @foreach($errors->all() as $error)
+                    <span class="badge badge-danger">{{$error}}</span>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+
                 <div class="card-body">
                     <div class="box box-info padding-1">
                         <div class="box-body">
