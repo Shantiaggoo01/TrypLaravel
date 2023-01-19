@@ -30,6 +30,22 @@ Usuario
     });
 </script>
 @endif
+
+<script>
+    //confirmacion de eliminar 
+function confirmacion() {
+    var respuesta=confirm("¿Seguro que desea eliminar este USUARIO?");
+
+    if(respuesta==true){
+        return true;
+    }else {
+        return false;
+    }
+
+    //'onclick'=>'return confirmacion()'
+}
+
+</script>
 @endsection
 
 
@@ -89,7 +105,7 @@ Usuario
                         @endcan
 
                         @can('borrar-usuario')
-                        {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
+                        {!!Form::open(['method'=>'DELETE','onclick'=>'return confirmacion()','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
                         {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
                         {!!Form::close()!!}
                         @endcan

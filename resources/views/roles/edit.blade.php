@@ -30,6 +30,23 @@ Crear Usuarios
     });
 </script>
 @endif
+
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para EDITAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+
 @endsection
 @section('content')
 
@@ -67,8 +84,8 @@ Crear Usuarios
                                 <br>
                                 @foreach($permission as $value)
                                 <tr>
-                                <td> <label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}{{$value->name}}</label>   </td>
-                                <td><label> {{$value->name}}</label></td>
+                                    <td> <label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}{{$value->name}}</label> </td>
+                                    <td><label> {{$value->name}}</label></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -78,7 +95,7 @@ Crear Usuarios
                 </div>
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary float-left">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar()">Guardar</button>
 
                     <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
                 </div>

@@ -30,6 +30,24 @@ Roles
     });
 </script>
 @endif
+
+
+<script>
+    //confirmacion de eliminar 
+function confirmacion() {
+    var respuesta=confirm("¿Seguro que desea eliminar este ROL?");
+
+    if(respuesta==true){
+        return true;
+    }else {
+        return false;
+    }
+
+    //'onclick'=>'return confirmacion()'
+}
+
+</script>
+
 @endsection
 
 
@@ -66,7 +84,7 @@ Roles
                             <a class="btn btn-primary" href="{{route('roles.edit',$role->id)}}"> Editar </a>
                             @endcan
                             @can('borrar-rol')
-                            {!!Form::open(['method'=>'DELETE','route'=>['roles.destroy',$role->id],'style'=>'display:inline'])!!}
+                            {!!Form::open(['method'=>'DELETE','onclick'=>'return confirmacion()','route'=>['roles.destroy',$role->id],'style'=>'display:inline'])!!}
                             {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
                             {!!Form::close()!!}
                             @endcan

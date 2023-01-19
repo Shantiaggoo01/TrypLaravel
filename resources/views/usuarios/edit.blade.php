@@ -30,6 +30,22 @@ Crear Usuarios
     });
 </script>
 @endif
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para EDITAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+
 @endsection
 @section('content')
 
@@ -123,7 +139,7 @@ Crear Usuarios
                 <div class="col-md-12">
 
                 <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
-                    <button type="submit" class="btn btn-primary float-left">Editar y Guardar </button>
+                    <button type="submit" class="btn btn-primary float-left" onclick= "return confirmacionGuardar()">Editar y Guardar </button>
                 </div>
 
 

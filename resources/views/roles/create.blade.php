@@ -31,6 +31,24 @@ Crear Usuarios
     });
 </script>
 @endif
+
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+
+
 @endsection
 @section('content')
 
@@ -107,7 +125,7 @@ Crear Usuarios
 
                 <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
 
-                <button type="submit" class="btn btn-primary float-left">Guardar</button>
+                <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar()">Guardar</button>
             </div>
         </div>
         {!!Form::close()!!}

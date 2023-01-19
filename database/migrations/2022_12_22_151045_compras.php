@@ -16,12 +16,12 @@ return new class extends Migration
         //
         Schema::create('compras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nFactura');
+            $table->string('nFactura'); //->unique();
             $table->bigInteger('id_proveedor')->unsigned();
             $table->bigInteger('id_insumo')->unsigned();
             $table->date('FechaCompra');
-            $table->double('Total', 60);   
-            
+            $table->double('Total', 60);
+
             $table->foreign('id_proveedor')->references('id')->on('Proveedores');
             $table->foreign('id_insumo')->references('id')->on('insumos');
 

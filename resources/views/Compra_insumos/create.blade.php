@@ -132,7 +132,7 @@ Crear Compra
 
                                 <div class="row text-center">
                                     <div class="box-footer mt20">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" class="btn btn-primary" onclick= "return confirmacionGuardar()">Guardar</button>
                                     </div>
                                 </div>
                         </div>
@@ -141,6 +141,22 @@ Crear Compra
 
 
                     @section("js")
+
+
+                    <script>
+                        //confirmacion de Guardar 
+                        function confirmacionGuardar() {
+                            var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+
+                            if (respuesta == true) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+
+                            //'onclick'=>'return confirmacionGuardar()'
+                        }
+                    </script>
 
                     <script>
                         function colocar_proveedor() {
@@ -192,9 +208,20 @@ Crear Compra
                         }
 
                         function eliminar_insumo(id, subtotal) {
-                            $("#tr-" + id).remove();
-                            let precio_total = $("#precio_total").val() || 0;
-                            $("#precio_total").val(parseInt(precio_total) - subtotal);
+
+
+
+                            var respuesta = confirm("¿Seguro que desea eliminar el insumo agregado a la lista?");
+
+                            if (respuesta == true) {
+                                $("#tr-" + id).remove();
+                                let precio_total = $("#precio_total").val() || 0;
+                                $("#precio_total").val(parseInt(precio_total) - subtotal);
+
+                                return true;
+                            } else {
+                                return false;
+                            }
 
                         }
                     </script>
