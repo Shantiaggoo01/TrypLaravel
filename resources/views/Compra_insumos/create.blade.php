@@ -38,8 +38,9 @@ Crear Compra
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card">
+                                            <br>
                                             <div class="card-head">
-                                                <h4>Informacion de la Compra</h4>
+                                            <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la Compra</i></h4>
                                             </div>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
@@ -78,9 +79,8 @@ Crear Compra
                                     <div class="col-6">
 
                                         <div class="card">
-                                            <div class="card-head">
-                                                <h4>Informacion de Insumo</h4>
-                                            </div>
+                                            <br>
+                                        <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de los Insumos</i></h4>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Insumo</label>
@@ -107,9 +107,13 @@ Crear Compra
 
                                             </div>
                                         </div class="card">
-
                                     </div>
-                                    <hr>
+
+                                    
+
+                                </div>
+
+                                <hr>
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -126,13 +130,11 @@ Crear Compra
                                         </tbody>
                                     </table>
 
-                                </div>
-
                                 <hr>
 
-                                <div class="row text-center">
+                                <div class="col text-center">
                                     <div class="box-footer mt20">
-                                        <button type="submit" class="btn btn-primary" onclick= "return confirmacionGuardar()">Guardar</button>
+                                        <button type="submit" class="btn btn-primary" onclick="return confirmacionGuardar()">Guardar</button>
                                     </div>
                                 </div>
                         </div>

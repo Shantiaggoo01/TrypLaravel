@@ -164,7 +164,7 @@ Crear Usuarios
                 <div class="col-md-12">
 
                     <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
-                    <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar()">Editar y Guardar </button>
+                    <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar();"history.back()">Editar y Guardar </button>
                 </div>
 
 
