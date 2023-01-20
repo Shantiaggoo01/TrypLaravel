@@ -99,12 +99,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="role"> Seleccione el rol para el usuario </label>
-                        {!!Form::select('role[]',$role,[],array('class'=>'form-control','placeholder' => '---Seleccione---'))!!}
-                    </div>
-                </div>
 
             </div>
 
