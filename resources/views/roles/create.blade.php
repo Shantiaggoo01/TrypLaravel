@@ -3,25 +3,45 @@
 @section('template_title')
 Crear Usuarios
 @endsection
+
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+<!-- agregamos para los estilos de la datatable  -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css">
 @endsection
 @section('js')
+<!-- agregamos para los estilos de la datatable  -->
+
+<!-- datos anteriores  -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#example').DataTable({
+<script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-            }
-        });
-    });
+<script>
+
+    $(document).ready(function() {
+    $('#example').DataTable( {
+
+        language: {
+               "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            },
+
+        columnDefs: [ {
+            orderable: false,
+            targets:   0
+        } ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]]
+    } );
+} );
+
+
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @if ($message = Session::get('success') )
 <script>
     swal({
@@ -99,23 +119,23 @@ Crear Usuarios
 
 
             <div class="form-group">
-                <label for="">Nombre del rol</label>
+                <label for=""><h3>Nombre del Rol</h3></label>
                 {!!Form::text('name',null,array('class'=>'form-control'))!!}
             </div>
 
 
-            <table id="example" class="table table-striped table-hover">
+            <table id="example" class="display" style="width:100%">
                 <thead class="thead">
                     <tr>
-                        <th> -- Seleccione -- </th>
+                        <th class="col-md-1 "><label>Seleccione</label></th>
                         <th> <label for="">Permisos para este Rol:</label></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($permission as $value)
                     <tr>
-                        <td><label>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</label></td>
-                        <td><label> {{$value->name}}</label></td>
+                        <td >{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</td>
+                        <td>{{$value->name}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -123,9 +143,9 @@ Crear Usuarios
 
             <div class="col-md-12">
 
-                <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+                <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
 
-                <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar()">Guardar</button>
+                <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar()">Guardar</button>
             </div>
         </div>
         {!!Form::close()!!}

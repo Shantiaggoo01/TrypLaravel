@@ -33,7 +33,7 @@ Crear Usuarios
 <script>
     //confirmacion de Guardar 
     function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para EDITAR la informacion!");
+        var respuesta = confirm("¡Confirme para EDITAR y GUARDAR la informacion!");
 
         if (respuesta == true) {
             return true;
