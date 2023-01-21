@@ -82,7 +82,7 @@ Crear Usuarios
         <div class="col-md-12">
             <div class="form-group">
                 <label for=""> Rol del Usuario </label>
-                {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione Nuevo Rol ---'))!!}
+                {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione el Rol ---'))!!}
             </div>
         </div>
 
