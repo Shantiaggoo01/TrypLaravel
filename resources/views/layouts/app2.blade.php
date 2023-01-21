@@ -61,10 +61,10 @@
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                      
-                        <a class="collapse-item" href="usuarios">Usuarios</a>
+                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>
                         
                         
-                        <a class="collapse-item" href="roles">Roles</a>
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
                         
                     </div>
                 </div>
