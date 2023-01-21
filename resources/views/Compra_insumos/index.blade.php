@@ -13,7 +13,11 @@ Compra_insumos
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+        "language":{
+            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+        }
+    });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
