@@ -14,10 +14,10 @@ Compra_insumos
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-        "language":{
-            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-        }
-    });
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -40,17 +40,12 @@ Compra_insumos
                 <div class="card-header">
 
                     <div>
-                         @if(session('status'))
-                        @if (session('status') == '1')
-                        <div class="alert alert-success">
-                            se guardo correctamente
-                        </div>
-                        @else
+                        @if (session('status'))
                         <div class="alert alert-danger">
                             {{session('status')}}
                         </div>
                         @endif
-                        @endif 
+
 
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -66,11 +61,12 @@ Compra_insumos
                         </div>
                     </div>
                 </div>
-                @if ($message = Session::get('success'))
+
+                <!-- @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
                 </div>
-                @endif
+                @endif -->
 
                 <div class="card-body">
                     <div class="table-responsive">

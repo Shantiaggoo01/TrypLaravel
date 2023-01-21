@@ -89,7 +89,7 @@ class CompraInsumoController extends Controller
 
 
             DB::commit();
-            return redirect("compra_insumos")->with('status','1');
+            return redirect("compra_insumos")->with('success', 'Compra Realizada Con Exito');
             
 
         } catch (Exception $e) {
