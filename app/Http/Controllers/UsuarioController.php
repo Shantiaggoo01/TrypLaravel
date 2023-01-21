@@ -70,7 +70,7 @@ class UsuarioController extends Controller
   public function store(Request $request)
     {
         $this->validate($request, [
-            'documento' => 'required|unique:users',
+            'documento' => 'required|max:12|unique:users',
             'name' => 'required',
             'apellido' => 'required',
             'telefono' => 'required',
@@ -136,13 +136,22 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = ModelsUser::find($id);
         //
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required| email|unique:users,email,'.$id,
             'password' =>'same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'image' => 'required|image',
         ]);
+
+        
+
+        $image = $request->file('image');
+        $imagePath = $image->store('images', 'public');
+        $user->update(['image' => $imagePath]);
+
 
         $input = $request->all();
         if(!empty($input['password'])){
@@ -153,13 +162,13 @@ class UsuarioController extends Controller
 
         }
 
-        $user = ModelsUser::find($id);
+        
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('usuarios.index'); 
+        return redirect()->route('usuarios.index')->with('success', 'Se Actualizo Correctamente'); 
     }
 
     /**
@@ -176,7 +185,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index');*/
 
         DB::table('users')->where('id',$id)->delete();
-        return redirect()->route('usuarios.index');
+        return redirect()->route('usuarios.index')->with('success', 'Se Elimino Correctamente');
     }
 
     public function show($id){
