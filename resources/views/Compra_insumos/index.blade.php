@@ -36,7 +36,7 @@ Compra_insumos
                 <div class="card-header">
 
                     <div>
-                        @if(session('status'))
+                         @if(session('status'))
                         @if (session('status') == '1')
                         <div class="alert alert-success">
                             se guardo correctamente
@@ -46,7 +46,7 @@ Compra_insumos
                             {{session('status')}}
                         </div>
                         @endif
-                        @endif
+                        @endif 
 
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
