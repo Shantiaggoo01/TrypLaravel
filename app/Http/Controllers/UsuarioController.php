@@ -143,15 +143,7 @@ class UsuarioController extends Controller
             'email' => 'required| email|unique:users,email,'.$id,
             'password' =>'same:confirm-password',
             'roles' => 'required',
-            'image' => 'required|image',
         ]);
-
-        
-
-        $image = $request->file('image');
-        $imagePath = $image->store('images', 'public');
-        $user->update(['image' => $imagePath]);
-
 
         $input = $request->all();
         if(!empty($input['password'])){

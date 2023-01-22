@@ -40,9 +40,7 @@ class SeederTablePermisos extends Seeder
 
             // tabla compras
             'ver-compra',
-            'editar-compra',
             'crear-compra',
-            'borrar-compra',
 
             // tabla detalle-compra
             'ver-detallecompra',
