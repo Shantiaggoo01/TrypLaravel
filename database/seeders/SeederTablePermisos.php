@@ -27,7 +27,6 @@ class SeederTablePermisos extends Seeder
 
             // tabla proveedores
             'ver-proveedor',
-            'agregar-tipoproveedor',
             'crear-proveedor',
             'editar-proveedor',
             'borrar-proveedor',
@@ -39,14 +38,7 @@ class SeederTablePermisos extends Seeder
             'borrar-cliente',
 
             // tabla compras
-            'ver-compra',
-            'crear-compra',
-
-            // tabla detalle-compra
-            'ver-detallecompra',
-            'editar-detallecompra',
-            'crear-detallecompra',
-            'borrar-detallecompra',
+            'Crear-Compra',
 
               // tabla insumos
               'ver-insumos',
@@ -67,12 +59,12 @@ class SeederTablePermisos extends Seeder
                'borrar-roles',
 
                // tabla usuario
-               'ver-MenuConfiguracion',
-               'ver-MenuCompras',
-               'ver-MenuVentas',
-               'ver-Menuproduccion',
-               'ver-MenuReportes',
-               'ver-usuario',
+               'Ver-Menu-Configuracion',
+               'Ver-Menu-Compras',
+               'Ver-Menu-Ventas',
+               'Ver-Menu-produccion',
+               'Ver-Menu-Reportes',
+               'Ver-usuario',
                'editar-usuario',
                'crear-usuario',
                'borrar-usuario',

@@ -74,14 +74,14 @@ Crear Usuarios
     <div class="card card-default">
         <div class="card-header">
             <span class="card-title">
-                <h2><i>Asignar Rol</i></h2>
+            <label> <h3>Asignar Rol Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
             </span>
         </div>
         <br>
 
         <div class="col-md-12">
             <div class="form-group">
-                <label for=""> Rol del Usuario </label>
+                <label for=""> Rol del Usuario</label>
                 {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione el Rol ---'))!!}
             </div>
         </div>
@@ -93,7 +93,7 @@ Crear Usuarios
     <div class="card card-default">
         <div class="card-header">
             <span class="card-title">
-                <h3>Editar Usuario</h3>
+                <h3>Editar Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
             </span>
         </div>
         <div class="card-body">

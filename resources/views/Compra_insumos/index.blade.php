@@ -53,12 +53,14 @@ Compra_insumos
                         <span id="card_title">
                             {{ __('Compra') }}
                         </span>
-
+                        @can('Crear-Compra')
                         <div class="float-right">
                             <a href="{{ route('compra_insumos.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                 {{ __('Nueva Compra') }}
                             </a>
                         </div>
+
+                        @endcan
                     </div>
                 </div>
 
