@@ -61,6 +61,10 @@ class CompraInsumoController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        $this->validate($request, [
+            'nFactura' => 'required|unique:compras',
+        ]);
         
         try {
             DB::beginTransaction();

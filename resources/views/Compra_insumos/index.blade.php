@@ -48,6 +48,20 @@ Compra_insumos
 
 
                     </div>
+                    @if($errors->any())
+                    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                        <strong>¡Revise los campos !</strong>
+                        @foreach($errors->all() as $error)
+                        <span class="badge badge-danger">{{$error}}</span>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    <div>
+
+                    </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
 
                         <span id="card_title">

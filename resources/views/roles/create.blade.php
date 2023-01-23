@@ -68,19 +68,6 @@ Crear Usuarios
         </div>
         <div class="card-body">
 
-            @if($errors->any())
-            <div class="alert alert-dark alert-dismissible fade show" role="alert">
-                <strong>¡Revise los campos !</strong>
-                @foreach($errors->all() as $error)
-                <span class="badge badge-danger">{{$error}}</span>
-                @endforeach
-                <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            @endif
-
-
             {!!Form::open(array('route'=>'roles.store','method'=>'POST'))!!}
             <!-- <div class="row">
                 <div class="col-md-12">
@@ -109,6 +96,9 @@ Crear Usuarios
                     <h3>Nombre del Rol</h3>
                 </label>
                 {!!Form::text('name',null,array('class'=>'form-control'))!!}
+                @error('name')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
 
@@ -127,7 +117,13 @@ Crear Usuarios
                     </tr>
                     @endforeach
                 </tbody>
+               
             </table>
+            @error('permission')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+
+                <br>
 
             <div class="col-md-12">
 
