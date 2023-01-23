@@ -18,27 +18,13 @@ Crear Usuarios
 <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
 <script>
-
     $(document).ready(function() {
-    $('#example').DataTable( {
-
-        language: {
-               "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-            },
-
-        columnDefs: [ {
-            orderable: false,
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]]
-    } );
-} );
-
-
+        $('#example').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
+    });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -119,12 +105,14 @@ Crear Usuarios
 
 
             <div class="form-group">
-                <label for=""><h3>Nombre del Rol</h3></label>
+                <label for="">
+                    <h3>Nombre del Rol</h3>
+                </label>
                 {!!Form::text('name',null,array('class'=>'form-control'))!!}
             </div>
 
 
-            <table id="example" class="display" style="width:100%">
+            <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
                     <tr>
                         <th class="col-md-1 "><label>Seleccione</label></th>
@@ -134,7 +122,7 @@ Crear Usuarios
                 <tbody>
                     @foreach($permission as $value)
                     <tr>
-                        <td >{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</td>
+                        <td>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</td>
                         <td>{{$value->name}}</td>
                     </tr>
                     @endforeach
@@ -152,14 +140,10 @@ Crear Usuarios
 
 
     </div>
-    </div>
-    </div>
 
 
 
-    </div>
-    </div>
-    </div>
+
     </div>
 </section>
 

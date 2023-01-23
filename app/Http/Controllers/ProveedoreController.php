@@ -22,7 +22,7 @@ class ProveedoreController extends Controller
     // si habilito esta funcion se supone que debe de dar permisos ---
     function __construct()
     {
-        $this->middleware('permission:ver-proveedor|crear-proveedor|editar-proveedor|borrar-proveedor')->only('index');
+        $this->middleware('permission:ver-proveedor|crear-proveedor|editar-proveedor|borrar-proveedor|Ver-Menu-Configuracion|ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-proveedor' , ['only' => ['create','store']]);
         $this->middleware('permission:editar-proveedor' , ['only' => ['edit','update']]);
         $this->middleware('permission:borrar-proveedor' , ['only' => ['destroy']]);
