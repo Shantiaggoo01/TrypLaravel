@@ -74,9 +74,15 @@ Crear Usuarios
     <div class="card card-default">
         <div class="card-header">
             <span class="card-title">
-            <label> <h3>Asignar Rol Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
+            <label> <h4>Asignar Rol Al Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
+             </i>Rol Actual :   @if(!empty($user->getRoleNames()))
+                       <i style="color:red">  @foreach($user->getRoleNames() as $rolName)
+                        {{$rolName}}
+                        @endforeach
+                        @endif</i></h4>
             </span>
         </div>
+        
         <br>
 
         <div class="col-md-12">
