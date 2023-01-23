@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-desktop"></i>
                 </div>
@@ -50,7 +50,7 @@
             </li>
 
             <!-- Nav Item - Administración Collapse Menu -->
-            @can('ver-MenuConfiguracion')
+            @can('Ver-Menu-Configuracion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
                     <i class="fas fa-fw fa-cog"></i>
@@ -61,10 +61,10 @@
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                      
-                        <a class="collapse-item" href="usuarios">Usuarios</a>
+                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>
                         
                         
-                        <a class="collapse-item" href="roles">Roles</a>
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
                         
                     </div>
                 </div>
@@ -73,7 +73,7 @@
 
 
             <!-- Nav Item - Inventario Collapse Menu -->
-            @can('ver-MenuCompras')
+            @can('Ver-Menu-Compras')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
                     <i class="fas fa-fw fa-clipboard-list"></i>
@@ -90,7 +90,7 @@
             @endcan
 
             <!-- Nav Item - Venta Collapse Menu -->
-            @can('ver-MenuVentas')
+            @can('Ver-Menu-Ventas')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
                     <i class="fas fa-fw fa-tags"></i>
@@ -107,7 +107,7 @@
             @endcan
 
             <!-- Nav Item - Produccion Collapse Menu -->
-            @can('ver-Menuproduccion')
+            @can('Ver-Menu-Produccion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducción">
                     <i class="fas fa-fw fa-tag"></i>
@@ -121,7 +121,7 @@
             </li>
 @endcan
             <!-- Nav Item - Reportes Collapse Menu -->
-            @can('ver-MenuReportes')
+            @can('Ver-Menu-Reportes')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
                     <i class="fas fa-fw fa-chart-area"></i>
@@ -171,10 +171,10 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="">
+                                <!-- <a class="dropdown-item" href="">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
-                                </a>
+                                </a> -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#logoutModal">
@@ -203,7 +203,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Tryp 2022</span>
+                        <span>Copyright &copy; Tryp 2023</span>
                     </div>
                 </div>
             </footer>

@@ -1,4 +1,21 @@
 @extends('layouts.app2')
+@section('js')
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+@endsection
 
 @section('content')
 
@@ -82,12 +99,6 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="role"> Seleccione el rol para el usuario </label>
-                        {!!Form::select('role[]',$role,[],array('class'=>'form-control','placeholder' => '---Seleccione---'))!!}
-                    </div>
-                </div>
 
             </div>
 
@@ -95,7 +106,7 @@
 
             <div class="col-md-12">
 
-                <button type="submit" class="btn btn-primary float-left">Registrar Usuario</button>
+                <button type="submit" class="btn btn-primary float-left" onclick= "return confirmacionGuardar()">Registrar Usuario</button>
                 
                 <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
 

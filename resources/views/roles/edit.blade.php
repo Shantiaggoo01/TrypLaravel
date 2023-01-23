@@ -4,23 +4,43 @@
 Crear Usuarios
 @endsection
 @section('css')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+<!-- agregamos para los estilos de la datatable  -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.5.0/css/select.dataTables.min.css">
 @endsection
 @section('js')
+<!-- agregamos para los estilos de la datatable  -->
+
+<!-- datos anteriores  -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
+
 <script>
+
     $(document).ready(function() {
-        $('#example').DataTable({
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-            }
-        });
-    });
+    $('#example').DataTable( {
+
+        language: {
+               "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            },
+
+        columnDefs: [ {
+            orderable: false,
+            targets:   0
+        } ],
+        select: {
+            style:    'os',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]]
+    } );
+} );
+
+
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 @if ($message = Session::get('success') )
 <script>
     swal({
@@ -30,6 +50,23 @@ Crear Usuarios
     });
 </script>
 @endif
+
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para EDITAR y GUARDAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+
 @endsection
 @section('content')
 
@@ -48,27 +85,26 @@ Crear Usuarios
                 <div class="col-md-12">
 
                     <div class="form-group">
-                        <label for="">Nombre del rol</label>
+                        <label for=""><h3>Nombre del rol</h3></label>
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
 
-                        <table id="example" class="table table-striped table-hover">
+                    <table id="example" class="display" style="width:100%">
                             <thead class="thead">
                                 <tr>
-                                    <th> -- Seleccione -- </th>
+                                    <th class="col-md-1 "><label>Seleccione</label> </th>
                                     <th> <label for="">Permisos para este Rol:</label></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <label for="">Permisos para este Rol:</label>
-                                <br>
+                                
                                 @foreach($permission as $value)
                                 <tr>
-                                <td> <label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}{{$value->name}}</label>   </td>
-                                <td><label> {{$value->name}}</label></td>
+                                    <td><label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}</label> </td>
+                                    <td><label> {{$value->name}}</label></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -78,9 +114,9 @@ Crear Usuarios
                 </div>
 
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary float-left">Guardar</button>
+                    <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar()">Guardar</button>
 
-                    <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+                    <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
                 </div>
             </div>
             {!!Form::close()!!}

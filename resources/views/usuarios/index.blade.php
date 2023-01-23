@@ -30,6 +30,22 @@ Usuario
     });
 </script>
 @endif
+
+<script>
+    //confirmacion de eliminar 
+function confirmacion() {
+    var respuesta=confirm("¿Seguro que desea eliminar este USUARIO?");
+
+    if(respuesta==true){
+        return true;
+    }else {
+        return false;
+    }
+
+    //'onclick'=>'return confirmacion()'
+}
+
+</script>
 @endsection
 
 
@@ -38,7 +54,7 @@ Usuario
 
 <div class="card card-default">
     <div class="card-header">
-        <span class="card-title">Crear Usuario</span>
+        <span class="card-title">Usuarios</span>
 
         @can('crear-usuario')
         <a href="{{ route('usuarios.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
@@ -53,16 +69,16 @@ Usuario
                 <tr>
 
                     <th>ID</th>
-                    <th>Documento</th>
+                     
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Telefono</th>
+
                     <th>Rol</th>
-                    <th>Email</th>
 
 
 
-                    <th></th>
+
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -70,24 +86,26 @@ Usuario
                 <tr>
 
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->documento}}</td>
                     <td>{{ $user->name}}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td>{{ $user->telefono }}</td>
                     <td> @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $rolName)
                         <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
                         @endforeach
                         @endif
                     </td>
-                    <td>{{ $user->email }}</td>
+
 
                     <td>
+
+                    <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
+
                         @can('editar-usuario')
-                        <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar </a>
+                        <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar / Asignar Rol </a>
                         @endcan
+
                         @can('borrar-usuario')
-                        {!!Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
+                        {!!Form::open(['method'=>'DELETE','onclick'=>'return confirmacion()','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
                         {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
                         {!!Form::close()!!}
                         @endcan

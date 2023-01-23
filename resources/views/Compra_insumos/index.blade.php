@@ -13,7 +13,11 @@ Compra_insumos
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -36,17 +40,12 @@ Compra_insumos
                 <div class="card-header">
 
                     <div>
-                        @if(session('status'))
-                        @if (session('status') == '1')
-                        <div class="alert alert-success">
-                            se guardo correctamente
-                        </div>
-                        @else
+                        @if (session('status'))
                         <div class="alert alert-danger">
                             {{session('status')}}
                         </div>
                         @endif
-                        @endif
+
 
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -54,19 +53,22 @@ Compra_insumos
                         <span id="card_title">
                             {{ __('Compra') }}
                         </span>
-
+                        @can('Crear-Compra')
                         <div class="float-right">
                             <a href="{{ route('compra_insumos.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                 {{ __('Nueva Compra') }}
                             </a>
                         </div>
+
+                        @endcan
                     </div>
                 </div>
-                @if ($message = Session::get('success'))
+
+                <!-- @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
                 </div>
-                @endif
+                @endif -->
 
                 <div class="card-body">
                     <div class="table-responsive">

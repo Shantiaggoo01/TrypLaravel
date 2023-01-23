@@ -30,6 +30,22 @@ Crear Usuarios
     });
 </script>
 @endif
+<script>
+    //confirmacion de Guardar 
+    function confirmacionGuardar() {
+        var respuesta = confirm("¡Confirme para EDITAR y GUARDAR la informacion!");
+
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacionGuardar()'
+        //onclick= "return confirmacionGuardar()"
+    }
+</script>
+
 @endsection
 @section('content')
 
@@ -37,20 +53,57 @@ Crear Usuarios
 
     @includeif('partials.errors')
 
+
+
+
+    @if($errors->any())
+    <div class="alert alert-dark alert-dismissible fade show" role="alert">
+        <strong>¡Revise los campos !</strong>
+        @foreach($errors->all() as $error)
+        <span class="badge badge-danger">{{$error}}</span>
+        @endforeach
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+
+
+    {!!Form::model($user,['method'=>'PATCH','route'=>['usuarios.update',$user->id]] )!!}
+
     <div class="card card-default">
         <div class="card-header">
-            <span class="card-title"> Editar Usuario</span>
+            <span class="card-title">
+            <label> <h3>Asignar Rol Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
+            </span>
+        </div>
+        <br>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for=""> Rol del Usuario</label>
+                {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione el Rol ---'))!!}
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="card card-default">
+        <div class="card-header">
+            <span class="card-title">
+                <h3>Editar Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
+            </span>
         </div>
         <div class="card-body">
 
-
-            {!!Form::model($user,['method'=>'PATCH','route'=>['usuarios.update',$user->id]] )!!}
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="documento">Documento</label>
                         {!!Form::text('documento',null,array('class'=>'form-control'))!!}
-                    </div> 
+                    </div>
 
                     <div class="form-group">
                         <label for="name">Nombre</label>
@@ -87,12 +140,12 @@ Crear Usuarios
                 </div>
 
 
-                <div class="col-md-12">
+                <!-- <div class="col-md-12">
                     <div class="form-group">
                         <label for=""> Rol del Usuario </label>
                         {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione Nuevo Rol ---'))!!}
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-md-12">
                     <div class="form-group">
@@ -110,8 +163,8 @@ Crear Usuarios
 
                 <div class="col-md-12">
 
-                <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
-                    <button type="submit" class="btn btn-primary float-left">Editar y Guardar </button>
+                    <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+                    <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar();"history.back()">Editar y Guardar </button>
                 </div>
 
 
@@ -123,14 +176,7 @@ Crear Usuarios
 
         </div>
     </div>
-    </div>
 
-
-
-    </div>
-    </div>
-    </div>
-    </div>
 </section>
 
 

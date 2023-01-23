@@ -20,7 +20,7 @@ use Spatie\Permission\Commands\Show;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/dashboard');
 })->middleware('auth');
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index'])->middleware('auth');
 
@@ -42,7 +42,7 @@ Route::resource('ventas', App\Http\Controllers\VentaController::class)->middlewa
 // Controladores de el video
 
 Route::resource('compra_insumos', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
-Route::resource('compra_insumos/show', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
+
 
 });
 

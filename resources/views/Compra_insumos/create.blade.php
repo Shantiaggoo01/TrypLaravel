@@ -14,8 +14,21 @@ Crear Compra
             <div class="card card-default">
                 <div class="card-header">
                     <span class="card-title">Crear Compra</span>
-                  
+
                 </div>
+
+                @if($errors->any())
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>¡Revise los campos !</strong>
+                    @foreach($errors->all() as $error)
+                    <span class="badge badge-danger">{{$error}}</span>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+
                 <div class="card-body">
                     <div class="box box-info padding-1">
                         <div class="box-body">
@@ -25,8 +38,9 @@ Crear Compra
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card">
+                                            <br>
                                             <div class="card-head">
-                                                <h4>Informacion de la Compra</h4>
+                                            <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la Compra</i></h4>
                                             </div>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
@@ -65,9 +79,8 @@ Crear Compra
                                     <div class="col-6">
 
                                         <div class="card">
-                                            <div class="card-head">
-                                                <h4>Informacion de Insumo</h4>
-                                            </div>
+                                            <br>
+                                        <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de los Insumos</i></h4>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Insumo</label>
@@ -94,9 +107,13 @@ Crear Compra
 
                                             </div>
                                         </div class="card">
-
                                     </div>
-                                    <hr>
+
+                                    
+
+                                </div>
+
+                                <hr>
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -113,13 +130,11 @@ Crear Compra
                                         </tbody>
                                     </table>
 
-                                </div>
-
                                 <hr>
 
-                                <div class="row text-center">
+                                <div class="col text-center">
                                     <div class="box-footer mt20">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                        <button type="submit" class="btn btn-primary" onclick="return confirmacionGuardar()">Guardar</button>
                                     </div>
                                 </div>
                         </div>
@@ -128,6 +143,22 @@ Crear Compra
 
 
                     @section("js")
+
+
+                    <script>
+                        //confirmacion de Guardar 
+                        function confirmacionGuardar() {
+                            var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+
+                            if (respuesta == true) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+
+                            //'onclick'=>'return confirmacionGuardar()'
+                        }
+                    </script>
 
                     <script>
                         function colocar_proveedor() {
@@ -179,9 +210,20 @@ Crear Compra
                         }
 
                         function eliminar_insumo(id, subtotal) {
-                            $("#tr-" + id).remove();
-                            let precio_total = $("#precio_total").val() || 0;
-                            $("#precio_total").val(parseInt(precio_total) - subtotal);
+
+
+
+                            var respuesta = confirm("¿Seguro que desea eliminar el insumo agregado a la lista?");
+
+                            if (respuesta == true) {
+                                $("#tr-" + id).remove();
+                                let precio_total = $("#precio_total").val() || 0;
+                                $("#precio_total").val(parseInt(precio_total) - subtotal);
+
+                                return true;
+                            } else {
+                                return false;
+                            }
 
                         }
                     </script>
