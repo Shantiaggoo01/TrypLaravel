@@ -17,25 +17,13 @@ Crear Usuarios
 <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
 <script>
-
-    $(document).ready(function() {
-    $('#example').DataTable( {
-
-        language: {
-               "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-            },
-
-        columnDefs: [ {
-            orderable: false,
-            targets:   0
-        } ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        order: [[ 1, 'asc' ]]
-    } );
-} );
+  $(document).ready(function() {
+        $('#example').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
+    });
 
 
 </script>
@@ -92,7 +80,7 @@ Crear Usuarios
                 <div class="col-md-12 ">
                     <div class="form-group">
 
-                    <table id="example" class="display" style="width:100%">
+                    <table id="example" class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
                                     <th class="col-md-1 "><label>Seleccione</label> </th>

@@ -53,27 +53,21 @@
             @can('Ver-Menu-Configuracion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
-                    <i class="fas fa-fw fa-cog"></i>
-                    
+                    <i class="fas fa-fw fa-cog"></i>                   
                     <span>Configuración</span>
-                    
                 </a>
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                     
-                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>
-                        
-                        
-                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
-                        
+                    <div class="bg-white py-2 collapse-inner rounded"> 
+                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>                       
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>                       
                     </div>
                 </div>
             </li>
-            @endcan
+            @endCan
 
 
-            <!-- Nav Item - Inventario Collapse Menu -->
             @can('Ver-Menu-Compras')
+            <!-- Nav Item - Inventario Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario">
                     <i class="fas fa-fw fa-clipboard-list"></i>
@@ -89,8 +83,9 @@
             </li>
             @endcan
 
-            <!-- Nav Item - Venta Collapse Menu -->
+
             @can('Ver-Menu-Ventas')
+            <!-- Nav Item - Venta Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta">
                     <i class="fas fa-fw fa-tags"></i>
@@ -106,6 +101,7 @@
             </li>
             @endcan
 
+
             <!-- Nav Item - Produccion Collapse Menu -->
             @can('Ver-Menu-Produccion')
             <li class="nav-item">
@@ -119,7 +115,8 @@
                     </div>
                 </div>
             </li>
-@endcan
+            @endcan
+
             <!-- Nav Item - Reportes Collapse Menu -->
             @can('Ver-Menu-Reportes')
             <li class="nav-item">
@@ -134,6 +131,7 @@
                 </div>
             </li>
             @endcan
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">

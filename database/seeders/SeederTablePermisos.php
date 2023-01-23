@@ -62,8 +62,10 @@ class SeederTablePermisos extends Seeder
                'Ver-Menu-Configuracion',
                'Ver-Menu-Compras',
                'Ver-Menu-Ventas',
-               'Ver-Menu-produccion',
+               'Ver-Menu-Produccion',
                'Ver-Menu-Reportes',
+
+
                'Ver-usuario',
                'editar-usuario',
                'crear-usuario',
