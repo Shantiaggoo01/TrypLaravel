@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('producto_insumo', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('tamaño');
-            $table->string('sabor');
-            $table->string('invima');
-            $table->integer('peso');
-            $table->integer('cantidad')->default(0);
+            $table->bigInteger('id_producto')->unsigned();
+            $table->bigInteger('id_insumo')->unsigned();
+            $table->bigInteger('cantidad',);   
+            
+            $table->foreign('id_producto')->references('id')->on('productos');
+            $table->foreign('id_insumo')->references('id')->on('insumos');
+
             $table->timestamps();
         });
-
     }
 
     /**

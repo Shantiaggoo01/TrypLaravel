@@ -76,7 +76,7 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $producto->idproducto }}</td>
+											<td>{{ $producto->id }}</td>
 											<td>{{ $producto->nombre }}</td>
 											<td>{{ $producto->tamaño }}</td>
 											<td>{{ $producto->sabor }}</td>
@@ -85,16 +85,13 @@
 											<td>{{ $producto->cantidad }}</td>
 
                                             <td>
-                                                <form action="{{ route('productos.destroy',$producto->idproducto) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('productos.show',$producto->idproducto) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                <form action="{{ route('productos.destroy',$producto->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('productos.show',$producto->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
                                                     @can('editar-producto')
-                                                    <a class="btn btn-sm btn-success" href="{{ route('productos.edit',$producto->idproducto) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('productos.edit',$producto->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @endcan
                                                     @csrf
-                                                    @can('borrar-producto')
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
-                                                    @endcan
+                                                    
                                                 </form>
                                             </td>
                                         </tr>

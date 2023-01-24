@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\Insumo;
+use DB;
+use App\Models\producto_insumo;
+
 
 /**
  * Class ProductoController
@@ -40,7 +44,10 @@ class ProductoController extends Controller
     public function create()
     {
         $producto = new Producto();
-        return view('producto.create', compact('producto'));
+
+        $insumos = Insumo::all();
+
+        return view('producto.create', compact('producto', 'insumos'));
     }
 
     /**
@@ -51,12 +58,61 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Producto::$rules);
+        $input = $request->all();
+        try {
+            DB::beginTransaction();
+            $producto = Producto::create([
+                "nombre" => $input["nombre"],
+                "tamaño" => $input["tamaño"],
+                "sabor" => $input["sabor"],
+                "invima" => $input["invima"],
+                "peso" => $input["peso"],
+                "cantidad" => $input["cantidad"],
+                //"Total" => $this->calcular_precio($input["id_insumo"], $input["cantidades"])
 
-        $producto = Producto::create($request->all());
+            ]);
 
-        return redirect()->route('productos.index')
-            ->with('success', 'Producto creado satisfactoriamente.');
+            foreach($input["id_insumo"] as $key => $value){
+                $producto_insumo = producto_insumo::create([
+                    "id_insumo"=>$value,
+                   /* "id_proveedor"=>$input["proveedor"][$key],*/
+                    "id_producto"=>$producto->id,
+                    "cantidad" => $input["cantidades"][$key],
+                ]);
+
+               $ins = Insumo::find($value);
+               $ins-> update(["cantidad"=>$ins->cantidad - $input["cantidades"][$key]]);
+
+            }
+            
+
+
+            DB::commit();
+            return redirect("compra_insumos")->with('success', 'Producto creado con exito');
+            
+
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return redirect("compra_insumos")->with('status',$e->getMessage());
+        }
+
+    }
+    public function Calcular_precio($insumos, $cantidades)
+    {
+
+        $Total = 0;
+
+        foreach ($insumos as $key => $value) {
+        
+            $insumo = Insumo::find($value);
+            //capturo el valor del input cantidad
+            $cantidad=
+
+            $Total += ($insumo->Precio * $cantidades[$key]);
+        }
+
+        return $Total;
     }
 
     /**
@@ -65,11 +121,18 @@ class ProductoController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idproducto)
+    public function show($id)
     {
-        $producto = Producto::find($idproducto);
+        //mostrar los insumos que tiene el producto seleccionado
+        $producto = Producto::find($id);
+        $insumos = DB::table('producto_insumo')
+            ->join('insumos', 'producto_insumo.id_insumo', '=', 'insumos.id')
+            ->select('insumos.*', 'producto_insumo.cantidad')
+            ->where('producto_insumo.id_producto', '=', $id)
+            ->get();
 
-        return view('producto.show', compact('producto'));
+
+        return view('producto.show', compact('producto', 'insumos'));
     }
 
     /**
@@ -107,9 +170,9 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($idproducto)
+    public function destroy($id)
     {
-        $producto = Producto::find($idproducto)->delete();
+        $producto_insumo = producto_insumo::find($id)->delete();
 
         return redirect()->route('productos.index')
             ->with('success', 'Producto eliminado correctamente');
