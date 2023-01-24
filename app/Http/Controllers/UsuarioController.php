@@ -84,7 +84,7 @@ class UsuarioController extends Controller
 
         $user = ModelsUser::create($input);
         $user->roles()->sync($request->input('roles'));
-        return redirect()->route('usuarios.index')->with('success', 'Se registró correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Se REGISTRO correctamente');
     }
     /*public function store(Request $request)
     {
@@ -160,7 +160,7 @@ class UsuarioController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('usuarios.index')->with('success', 'Se Actualizo Correctamente'); 
+        return redirect()->route('usuarios.index')->with('success', 'Se ACTUALIZO Correctamente'); 
     }
 
     /**
@@ -177,7 +177,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index');*/
 
         DB::table('users')->where('id',$id)->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Se Elimino Correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Se ELIMINO Correctamente');
     }
 
     public function show($id){

@@ -17,17 +17,7 @@ Crear Compra
 
                 </div>
 
-                @if($errors->any())
-                <div class="alert alert-dark alert-dismissible fade show" role="alert">
-                    <strong>¡Revise los campos !</strong>
-                    @foreach($errors->all() as $error)
-                    <span class="badge badge-danger">{{$error}}</span>
-                    @endforeach
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
+
 
                 <div class="card-body">
                     <div class="box box-info padding-1">
@@ -40,7 +30,7 @@ Crear Compra
                                         <div class="card">
                                             <br>
                                             <div class="card-head">
-                                            <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la Compra</i></h4>
+                                                <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la Compra</i></h4>
                                             </div>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
@@ -55,17 +45,20 @@ Crear Compra
 
                                                 <div class="form-group col-6">
                                                     <label for="">Codigo de Factura</label>
-                                                    <input id="nFactura" type="text" class="form-control" name="nFactura">
+                                                    <input id="nFactura" type="text" class="form-control" name="nFactura" value="{{ old('nFactura') }}">
+                                                    @error('nFactura')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="form-group col-6">
                                                     <label for=""> <i>NIT</i> </label>
-                                                    <input id="Nit" type="text" class="form-control" name="nit" readonly>
+                                                    <input id="Nit" type="text" class="form-control" name="nit"  readonly>
                                                 </div>
 
                                                 <div class="form-group col-6">
                                                     <label for="">Fecha de compra</label>
-                                                    <input type="date" class="form-control" name="FechaCompra" required>
+                                                    <input type="date" class="form-control" name="FechaCompra" }}" required>
 
                                                 </div>
 
@@ -80,7 +73,7 @@ Crear Compra
 
                                         <div class="card">
                                             <br>
-                                        <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de los Insumos</i></h4>
+                                            <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de los Insumos</i></h4>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Insumo</label>
@@ -109,26 +102,26 @@ Crear Compra
                                         </div class="card">
                                     </div>
 
-                                    
+
 
                                 </div>
 
                                 <hr>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre Insumo </th>
-                                                <th>Cantidad</th>
-                                                <th>Precio</th>
-                                                <th>Subtotal</th>
-                                                <th>Opciones</th>
-                                            </tr>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre Insumo </th>
+                                            <th>Cantidad</th>
+                                            <th>Precio</th>
+                                            <th>Subtotal</th>
+                                            <th>Opciones</th>
+                                        </tr>
 
-                                        </thead>
-                                        <tbody id="tblInsumos">
+                                    </thead>
+                                    <tbody id="tblInsumos">
 
-                                        </tbody>
-                                    </table>
+                                    </tbody>
+                                </table>
 
                                 <hr>
 

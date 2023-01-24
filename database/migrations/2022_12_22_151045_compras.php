@@ -16,7 +16,7 @@ return new class extends Migration
         //
         Schema::create('compras', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nFactura')->unique();
+            $table->string('nFactura')->Unique();
             $table->bigInteger('id_proveedor')->unsigned();
             $table->bigInteger('id_insumo')->unsigned();
             $table->date('FechaCompra');

@@ -61,6 +61,10 @@ class CompraInsumoController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+
+        $this->validate($request, [
+            'nFactura' => 'required|unique:compras',
+        ]);
         
         try {
             DB::beginTransaction();
@@ -89,7 +93,7 @@ class CompraInsumoController extends Controller
 
 
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Compra Realizada Con Exito');
+            return redirect("compra_insumos")->with('success', 'Compra REALIZADA Con Exito');
             
 
         } catch (Exception $e) {
@@ -145,41 +149,7 @@ class CompraInsumoController extends Controller
         
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $compraInsumo = CompraInsumo::find($id);
 
-        return view('compra_insumos.edit', compact('compraInsumo'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  CompraInsumo $compraInsumo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CompraInsumo $compraInsumo)
-    {
-        request()->validate(CompraInsumo::$rules);
-
-        $compraInsumo->update($request->all());
-
-        return redirect()->route('compra_insumos.index')
-            ->with('success', 'CompraInsumo updated successfully');
-    }
-
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $compraInsumo = CompraInsumo::find($id)->delete();
