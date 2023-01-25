@@ -60,28 +60,40 @@ detalle de el proveedor
         <div class="col">
             <h2 colspan="4" class="text-center">INSUMOS COMPRADOS</h2>
             <hr>
-            <table id="example" class="table table-striped table-hover">
+            <table class="table table-bordered">
                 <thead>
-                    <tr>
+                    <b><tr>
                         <th>Nombre Insumo </th>
                         <th>Cantidad Compradas </th>
                         <th>Precio unitario</th>
                         <th>Sub Total </th>
                     </tr>
+                    </b>
                 </thead>
                 <tbody>
+                    @php
+                    $total = 0;
+                    @endphp
                     @forelse ($insumos as $value)
                     <tr>
                         <th>{{$value->Nombre}}</th>
                         <th>{{$value->cantidad}}</th>
                         <th>{{$value->Precio}}</th>
                         <th>{{$value->Precio * $value->cantidad}}</th>
+                        @php
+                        $total += $value->Precio * $value->cantidad;
+                        @endphp
                     </tr>
                     @empty no hay Insumos Regustrados
                     @endforelse
+                    <tr>
+                        <th colspan="3"></th>
+                        <th>Total De La Compra</th>
+                        <th>{{$total}}</th>
+                    </tr>
                 </tbody>
             </table>
-            
+
         </div>
         <br>
         <button onclick="history.back()" type="button" class="btn btn-primary col">Volver</button>
