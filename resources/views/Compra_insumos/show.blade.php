@@ -88,8 +88,8 @@ detalle de el proveedor
                     @endforelse
                     <tr>
                         <th colspan="3"></th>
-                        <th>Total De La Compra</th>
-                        <th>{{$total}}</th>
+                       <th><h3>Total De La Compra</h3></th>
+                        <th><h3 style="color:red">{{$total}}</h3></th>
                     </tr>
                 </tbody>
             </table>
