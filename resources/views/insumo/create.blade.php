@@ -13,7 +13,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Insumo</span>
+                        <span class="card-title">Agregar Insumo</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('insumos.store') }}"  role="form" enctype="multipart/form-data">

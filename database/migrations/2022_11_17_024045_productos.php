@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('sabor');
             $table->string('invima');
             $table->integer('peso');
+            $table->double('precio', 60);
             $table->integer('cantidad')->default(0);
             $table->timestamps();
         });

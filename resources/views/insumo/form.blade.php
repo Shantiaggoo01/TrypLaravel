@@ -24,11 +24,13 @@
             {{ Form::text('Nombre', $insumo->Nombre, ['class' => 'form-control' . ($errors->has('Nombre') ? ' is-invalid' : ''), 'placeholder' => 'Nombre']) }}
             {!! $errors->first('Nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
         <div class="form-group">
             {{ Form::label('Precio') }}
             {{ Form::text('Precio', $insumo->Precio, ['class' => 'form-control' . ($errors->has('Precio') ? ' is-invalid' : ''), 'placeholder' => 'Precio']) }}
             {!! $errors->first('Precio', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
         <div class="form-group">
             {{ Form::label('TipoCantidad') }}
             {{ Form::text('TipoCantidad', $insumo->TipoCantidad, ['class' => 'form-control' . ($errors->has('TipoCantidad') ? ' is-invalid' : ''), 'placeholder' => 'Tipocantidad']) }}
@@ -43,6 +45,6 @@
 
     </div>
     <div class="box-footer mt20">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>

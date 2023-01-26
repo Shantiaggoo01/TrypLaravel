@@ -63,7 +63,8 @@
                                         
 										<th>Nombre</th>
 										<th>Precio</th>
-										<th>Tipocantidad</th>
+										<th>Tipo de cantidad</th>
+                                        <th>Cantidad</th>
 										<th>Estado</th>
 
                                         <th></th>
@@ -78,6 +79,7 @@
 											<td>{{ $insumo->Nombre }}</td>
 											<td>{{ $insumo->Precio }}</td>
 											<td>{{ $insumo->TipoCantidad }}</td>
+                                            <td>{{ $insumo->cantidad }}</td>
 											<td>{{ $insumo->Estado }}</td>
 
                                             <td>

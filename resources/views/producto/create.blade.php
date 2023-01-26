@@ -73,6 +73,10 @@ Crear Producto
                                                     <label for=""><i>Cantidad</i></label>
                                                     <input id="cantidad" type="text" class="form-control" name="cantidad">
                                                 </div>
+                                                <div class="form-group col-6">
+                                                    <label for=""><i>Precio</i></label>
+                                                    <input id="precio" type="text" class="form-control" name="precio">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

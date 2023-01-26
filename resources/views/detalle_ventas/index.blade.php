@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
 @section('template_title')
-    Producto
+    Venta
 @endsection
 @section('css')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
@@ -12,11 +12,7 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>$(document).ready(function () {
-     $('#example').DataTable({
-        "language":{
-            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-        }
-    });
+    $('#example').DataTable();
 });</script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @if ($message = Session::get('success') )
@@ -29,9 +25,8 @@
 </script>
 @endif
 @endsection
-
-
 @section('content')
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -40,19 +35,22 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Producto') }}
+                                {{ __('Venta') }}
                             </span>
-                            
+
                              <div class="float-right">
-                             @can('crear-producto')
-                                <a href="{{ route('productos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Agregar nuevo producto') }}
+                                <a href="{{ route('detalle_ventas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Nueva venta') }}
                                 </a>
-                                @endcan
                               </div>
-                              
                         </div>
                     </div>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-hover">
@@ -60,42 +58,27 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Idproducto</th>
-										<th>Nombre</th>
-										<th>Tamaño</th>
-										<th>Sabor</th>
-										<th>Invima</th>
-										<th>Peso</th>
-										<th>Cantidad</th>
-                                        <th>Precio</th>
+										<th>Cliente</th>
+										<th>Fechaventa</th>
+										<th>Total</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($productos as $producto)
+                                    @foreach ($ventas as $venta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{$venta->id}}</td>
                                             
-											<td>{{ $producto->id }}</td>
-											<td>{{ $producto->nombre }}</td>
-											<td>{{ $producto->tamaño }}</td>
-											<td>{{ $producto->sabor }}</td>
-											<td>{{ $producto->invima }}</td>
-											<td>{{ $producto->peso }}</td>
-											<td>{{ $producto->cantidad }}</td>
-                                            <td>{{ $producto->precio }}</td>
-
+											<td>{{ $venta->cliente }}</td>
+											<td>{{ $venta->FechaVenta }}</td>
+											<td>{{ $venta->Total }}</td>
                                             <td>
-                                                <form action="{{ route('productos.destroy',$producto->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('productos.show',$producto->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    @can('editar-producto')
-                                                    <a class="btn btn-sm btn-success" href="{{ route('productos.edit',$producto->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @endcan
-                                                    @csrf
-                                                    
-                                                </form>
+                                            <a class="btn btn-sm btn-primary " href="{{ route('detalle_ventas.show',$venta->id) }}"><i class="fa fa-fw fa-eye"></i> Detalles</a>
                                             </td>
+                                           
+
+                                          
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -103,9 +86,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $productos->links() !!}
+                
             </div>
         </div>
     </div>
-   
 @endsection
