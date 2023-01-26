@@ -33,6 +33,7 @@ class Proveedore extends Model
 		'banco' => 'required',
 		'cuenta' => 'required',
 		'idtipo_proveedor' => 'required',
+    'estado' => 'required|in:Activo,Inactivo' //<!-- agregue esto para el estado  se debe agregar aqui y en fillable-->
     ];
 
     protected $perPage = 20;
@@ -42,7 +43,7 @@ class Proveedore extends Model
      *
      * @var array
      */
-    protected $fillable = ['nit','nombre','direccion','telefono','banco','cuenta','idtipo_proveedor'];
+    protected $fillable = ['nit','nombre','direccion','telefono','banco','cuenta','idtipo_proveedor','estado'];//<!-- agregue esto para el estado  -->
 
 
     /**

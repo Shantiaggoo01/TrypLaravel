@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('banco');
             $table->string('cuenta');
+            $table->string('estado')->default('Activo'); //<!-- agregue esto para el estado es el campo de la base de datos  -->
             $table->bigInteger('idtipo_proveedor')->unsigned();
             $table->foreign('idtipo_proveedor')->references('id')->on('tipo_proveedor');
             $table->timestamps();

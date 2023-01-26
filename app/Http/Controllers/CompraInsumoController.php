@@ -34,6 +34,7 @@ class CompraInsumoController extends Controller
 
         $insumos = Insumo::all();
         $proveedores = Proveedore::all();
+
         return view('compra_insumos.index', compact('compraInsumos', 'compras', 'insumos', 'proveedores'))
             ->with('i', (request()->input('page', 1) - 1) * $compraInsumos->perPage());
     }
@@ -48,7 +49,8 @@ class CompraInsumoController extends Controller
         $compraInsumo = new CompraInsumo();
         $compras = Compra::all();
         $insumos = Insumo::all();
-        $proveedores = Proveedore::all();
+        $proveedores = Proveedore::where('estado', 'Activo')->get();//<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
+
         return view('compra_insumos.create', compact('compraInsumo', 'compras', 'insumos', 'proveedores'));
     }
 
