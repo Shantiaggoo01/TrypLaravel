@@ -36,6 +36,8 @@ class ProveedoreController extends Controller
      */
     public function index()
     {
+
+      
         $proveedores = Proveedore::paginate();
         $tipo_proveedors = TipoProveedor::pluck('nombre', 'id');
         return view('proveedore.index', compact('proveedores', 'tipo_proveedors'))
@@ -64,10 +66,17 @@ class ProveedoreController extends Controller
     {
         request()->validate(Proveedore::$rules);
 
-        $proveedore = Proveedore::create($request->all());
-
-        return redirect()->route('proveedores.index')
-            ->with('success', 'Proveedor creado correctamente.');
+        $proveedore = new Proveedore();
+        $proveedore->nit = $request->nit;
+        $proveedore->nombre = $request->nombre;
+        $proveedore->direccion = $request->direccion;
+        $proveedore->telefono = $request->telefono;
+        $proveedore->banco = $request->banco;
+        $proveedore->cuenta = $request->cuenta;
+        $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
+        $proveedore->estado = $request->estado; //<!-- agregue esto para el estado  : esto valida los campos que van ala base de datos al crear el estado -->
+        $proveedore->save();
+        return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
 
     /**
@@ -103,15 +112,17 @@ class ProveedoreController extends Controller
      * @param  Proveedore $proveedore
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proveedore $proveedore)
-    {
-        request()->validate(Proveedore::$rules);
+    public function update(Request $request, $id)
+{
+    request()->validate(Proveedore::$rules);
 
-        $proveedore->update($request->all());
-
-        return redirect()->route('proveedores.index')
-            ->with('success', 'Proveedor actualizado correctamente.');
-    }
+    $proveedore = Proveedore::find($id);
+    $proveedore->update($request->all());
+    $proveedore->estado = $request->estado;// <!-- agregue esto para el estado  valida el estado al actualizar el estado-->
+    $proveedore->save();
+    return redirect()->route('proveedores.index')
+        ->with('success', 'Proveedor actualizado correctamente.');
+}
 
     /**
      * @param int $id
@@ -125,4 +136,10 @@ class ProveedoreController extends Controller
         return redirect()->route('proveedores.index')
             ->with('success', 'Proveedor eliminado correctamente.');
     }
+
+//     public function getProveedoresActivos() //<!-- agregue esto para el estado  esta funcion es para obtener los usuarios activos pero no sirve-->
+// {
+//     $proveedores = Proveedore::where('estado', 'activo')->get();
+//     return $proveedores;
+// }
 }

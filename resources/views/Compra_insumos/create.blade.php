@@ -37,7 +37,7 @@ Crear Compra
                                                     <label for="">Proveedor</label>
                                                     <select class="form-control" name="id_proveedor" id="proveedor" onchange="colocar_proveedor(this)">
                                                         <option>Seleccione el proveedor </option>
-                                                        @foreach ($proveedores as $proveedor)
+                                                        @foreach ($proveedores as $proveedor)<!-- agregue esto para el estado  -->
                                                         <option Nit="{{$proveedor->nit}}" value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
                                                         @endforeach
                                                     </select>
@@ -53,7 +53,7 @@ Crear Compra
 
                                                 <div class="form-group col-6">
                                                     <label for=""> <i>NIT</i> </label>
-                                                    <input id="Nit" type="text" class="form-control" name="nit"  readonly>
+                                                    <input id="Nit" type="text" class="form-control" name="nit" readonly>
                                                 </div>
 
                                                 <div class="form-group col-6">

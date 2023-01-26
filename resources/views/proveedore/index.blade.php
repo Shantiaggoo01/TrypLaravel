@@ -74,7 +74,7 @@
 										<th>Banco</th>
 										<th>Cuenta</th>
 										<th>Tipo proveedor</th>
-
+                                        <th>Estado</th> <!-- agregue esto para el estado  -->
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -90,6 +90,7 @@
 											<td>{{ $proveedore->banco }}</td>
 											<td>{{ $proveedore->cuenta }}</td>
 											<td>{{ $proveedore->tipoProveedor->nombre }}</td>
+                                            <td>{{ $proveedore->estado}}</td><!-- agregue esto para el estado  -->
 
                                             <td>
                                             

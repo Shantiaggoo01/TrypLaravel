@@ -54,6 +54,15 @@
             {!! $errors->first('idtipo_proveedor', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+
+        <div class="form-group"><!-- agregue esto para el estado  -->
+            {{ Form::label('Estado') }}
+            {{ Form::select('estado', ['Activo' => 'Activo', 'Inactivo' => 'Inactivo'], $proveedore->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un estado']) }}
+            {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+
+  
+
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">Submit</button>
