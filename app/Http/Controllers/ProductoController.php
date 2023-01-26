@@ -68,6 +68,7 @@ class ProductoController extends Controller
                 "invima" => $input["invima"],
                 "peso" => $input["peso"],
                 "cantidad" => $input["cantidad"],
+                "precio" => $input["precio"],
                 //"Total" => $this->calcular_precio($input["id_insumo"], $input["cantidades"])
 
             ]);

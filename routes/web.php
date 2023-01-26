@@ -38,6 +38,7 @@ Route::resource('insumos', App\Http\Controllers\InsumoController::class)->middle
 Route::resource('clientes', App\Http\Controllers\ClienteController::class)->middleware('auth');
 Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class)->middleware('auth');
 Route::resource('ventas', App\Http\Controllers\VentaController::class)->middleware('auth');
+Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
 
 // Controladores de el video
 

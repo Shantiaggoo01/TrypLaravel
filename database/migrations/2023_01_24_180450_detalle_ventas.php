@@ -14,13 +14,15 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('insumos', function (Blueprint $table) {
+        Schema::create('detalle_ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Nombre', 60);
-            $table->string('TipoCantidad', 60);
-            $table->double('Precio', 60);
-            $table->integer('cantidad')->default(0);
-            $table->string('Estado', 30);
+            $table->bigInteger('idVenta')->unsigned();
+            $table->foreign('idVenta')->references('id')->on('ventas');
+            $table->bigInteger('idProducto')->unsigned();
+            $table->foreign('idProducto')->references('id')->on('productos');
+            $table->bigInteger('Cantidad');
+
+
             $table->timestamps();
         });
     }
