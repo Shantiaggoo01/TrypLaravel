@@ -112,7 +112,7 @@
                 </a>
                 <div id="collapseProducción" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="nueva_venta.html">Gestión de Producción</a>
+                        <a class="collapse-item" href="{{route('produccion.index')}}">Gestión de Producción</a>
                     </div>
                 </div>
             </li>

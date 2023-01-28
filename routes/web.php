@@ -39,6 +39,7 @@ Route::resource('clientes', App\Http\Controllers\ClienteController::class)->midd
 Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::class)->middleware('auth');
 Route::resource('ventas', App\Http\Controllers\VentaController::class)->middleware('auth');
 Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
+Route::resource('produccion', App\Http\Controllers\ProduccionController::class)->middleware('auth');
 
 // Controladores de el video
 
