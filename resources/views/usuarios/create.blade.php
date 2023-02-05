@@ -15,6 +15,35 @@
         //onclick= "return confirmacionGuardar()"
     }
 </script>
+
+
+<script>
+    const input = document.getElementById("image");
+    const preview = document.getElementById("preview");
+
+    input.addEventListener("change", function() {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            preview.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+<style>
+    #preview {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 2px solid #333;
+
+        margin-left: 10px;
+    }
+</style>
+
 @endsection
 
 @section('content')
@@ -35,14 +64,15 @@
 
             <div class="row">
 
-
-
                 <div class="form-group">
-                    <label for="image">Image</label>
+                    <label for="image">Imagen de perfil</label>
+                    <img id="preview" style="width: 200px;">
                     <input type="file" name="image" id="image" class="form-control">
                     @error('documento')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
+                    <br>
+
                 </div>
 
                 <div class="col-md-12">
