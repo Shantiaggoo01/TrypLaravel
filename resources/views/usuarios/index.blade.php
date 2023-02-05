@@ -52,6 +52,8 @@ function confirmacion() {
 @section('content')
 
 
+
+
 <div class="card card-default">
     <div class="card-header">
         <span class="card-title">Usuarios</span>

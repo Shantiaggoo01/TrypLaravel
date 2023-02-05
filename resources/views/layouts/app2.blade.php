@@ -167,8 +167,7 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
                                 
-                                <!-- Asi se muestra la imagen pero no se cual controla el appblade
-                                src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }} -->
+                          
 
                             </a>
                             <!-- Dropdown - User Information -->
