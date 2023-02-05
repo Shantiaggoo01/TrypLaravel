@@ -69,123 +69,133 @@ Crear Usuarios
     @endif
 
 
-    {!!Form::model($user,['method'=>'PATCH','route'=>['usuarios.update',$user->id]] )!!}
+    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['usuarios.update', $user->id], 'enctype' => 'multipart/form-data']) !!}
 
-    
-    <div class="card card-default">
 
     <div class="card card-default">
-        <div class="card-header text-center">
-            <span class="card-title">
-            <label> <h4>Asignar Rol Al Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
-             </i>Rol Actual :   @if(!empty($user->getRoleNames()))
-                       <i style="color:red">  @foreach($user->getRoleNames() as $rolName)
-                        {{$rolName}}
-                        @endforeach
-                        @endif</i></h4>
-            </span>
-        </div>
-        
-        <br>
 
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for=""> Rol del Usuario</label>
-                {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione el Rol ---'))!!}
+        <div class="card card-default">
+            <div class="card-header text-center">
+                <span class="card-title">
+                    <label>
+                        <h4>Asignar Rol Al Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
+                            </i>Rol Actual : @if(!empty($user->getRoleNames()))
+                            <i style="color:red"> @foreach($user->getRoleNames() as $rolName)
+                                {{$rolName}}
+                                @endforeach
+                                @endif</i>
+                        </h4>
+                </span>
             </div>
-        </div>
 
-    </div>
-    <br>
-    <hr>
-    <br>
+            <br>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for=""> Rol del Usuario</label>
+                    {!!Form::select('roles[]',$roles,$selectedRoles,array('class'=>'form-control'))!!}
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <hr>
+        <br>
         <div class="card-header">
-        <div class="card-header text-center">
-        <img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
-            <span class="card-title">
-                <h3>Editar Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
-            </span>
-        </div>
-        <div class="card-body">
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="documento">Documento</label>
-                        {!!Form::text('documento',null,array('class'=>'form-control'))!!}
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        {!!Form::text('name',null,array('class'=>'form-control'))!!}
-                    </div>
+            <div class="card-header text-center">
+                <img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
+                <div class="form-group">
+                    <img id="preview" style="width: 200px;">
+                    <input type="file" name="image" id="image" class="form-control">
+                    @error('documento')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                    <br>
                 </div>
+                <span class="card-title">
+                    <h3>Informacion del Usuario : <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
+                </span>
+            </div>
+            <div class="card-body">
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="apellido">Apellidos</label>
-                        {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="documento">Documento</label>
+                            {!!Form::text('documento',null,array('class'=>'form-control'))!!}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            {!!Form::text('name',null,array('class'=>'form-control'))!!}
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="telefono">Telefono</label>
-                        {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="apellido">Apellidos</label>
+                            {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="direccion">Direccion</label>
-                        {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="telefono">Telefono</label>
+                            {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-12">
-                    <div class="form group">
-                        <label for="email">E-mail</label>
-                        {!!Form::text('email',null,array('class'=>'form-control'))!!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="direccion">Direccion</label>
+                            {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
+                        </div>
                     </div>
-                </div>
+
+                    <div class="col-md-12">
+                        <div class="form group">
+                            <label for="email">E-mail</label>
+                            {!!Form::text('email',null,array('class'=>'form-control'))!!}
+                        </div>
+                    </div>
 
 
-                <!-- <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                     <div class="form-group">
                         <label for=""> Rol del Usuario </label>
                         {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione Nuevo Rol ---'))!!}
                     </div>
                 </div> -->
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="password"> Cambiar Contraseña </label>
-                        {!!Form::password('password',array('class'=>'form-control'))!!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password"> Cambiar Contraseña </label>
+                            {!!Form::password('password',array('class'=>'form-control'))!!}
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="confirm-password"> Confirmar contraseña </label>
-                        {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="confirm-password"> Confirmar contraseña </label>
+                            {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
+                        </div>
                     </div>
+
+                    <div class="col-md-12">
+
+                        <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+                        <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar();" history.back()">Editar y Guardar </button>
+                    </div>
+
+
+
                 </div>
 
-                <div class="col-md-12">
-
-                    <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
-                    <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar();"history.back()">Editar y Guardar </button>
-                </div>
-
+                {!!Form::close()!!}
 
 
             </div>
-
-            {!!Form::close()!!}
-
-
         </div>
-    </div>
 
 </section>
 

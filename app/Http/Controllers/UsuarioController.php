@@ -14,6 +14,8 @@ use Illuminate\support\Facades\DB;
 use Illuminate\support\Facades\Host;
 use Illuminate\support\Arr;
 use App\Http\Models\User;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -67,10 +69,10 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'documento' => 'required|max:12|unique:users',
-            'name' => 'required',
-            'apellido' => 'required',
-            'telefono' => 'required',
+            'documento' => 'required|numeric|min:10|unique:users',
+            'name' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'telefono' => 'required|numeric',
             'direccion' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
@@ -83,42 +85,57 @@ class UsuarioController extends Controller
         $user = ModelsUser::create($input);
         $user->roles()->sync($request->input('roles'));
 
-// -----------------
+        // -----------------
 
-    // Get the image
-    $image = $request->file('image');
+        // Get the image
+        $image = $request->file('image');
 
-    // Generate a unique file name
-    $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+        // Generate a unique file name with current date and time
+        $fileName = uniqid() . '-' . date('Y-m-d-H-i-s') . '.' . $image->getClientOriginalExtension();
 
-    // Store the image
-    $path = $image->storeAs('public/images', $fileName);
+        // Store the image
+        $path = $image->storeAs('public/images', $fileName);
 
-    // Get the user
+        // Get the user
 
-    // Update the user image
-    $user->image = $fileName;
-    $user->save();
+        // Update the user image
+        $user->image = $fileName;
+        $user->save();
 
-        return redirect()->route('usuarios.index')->with('success', 'Se REGISTRO correctamente');
+        Session::flash('success', 'Se Registro correctamente');
+        return redirect()->route('usuarios.index');
     }
-   
+    
     public function edit($id)
     {
+
+        $user = ModelsUser::find($id);
+        // Verifica si el usuario es el superadministrador
+        if ($user->hasRole('Administrador')) {
+
+            return redirect()->back()->with('error', 'No puedes editar al super administrador');
+        }
+        $selectedRoles = $user->roles()->pluck('id')->toArray();
+
         $user = ModelsUser::find($id);
         $roles = Role::pluck('name', 'name')->all();
+
+        $selectedRoles = $user->roles()->pluck('name')->toArray();
+
         $userRole = $user->roles->pluck('name', 'roles', 'userRole');
 
-        return view('usuarios.edit', compact('user', 'roles', 'userRole'));
+        return view('usuarios.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
     }
 
-  
+
     public function update(Request $request, $id)
     {
+
         $user = ModelsUser::find($id);
-        //
+        // Continúa con la edición del usuario
         $this->validate($request, [
-            'name' => 'required',
+            'name' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
             'email' => 'required| email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
             'roles' => 'required',
@@ -138,24 +155,50 @@ class UsuarioController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('usuarios.index')->with('success', 'Se ACTUALIZO Correctamente');
+        if ($request->hasFile('image')) {
+            // Get the current image
+            $currentImage = $user->image;
+
+            // Get the new image
+            $image = $request->file('image');
+
+            // Generate a unique file name
+            $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+
+            // Store the new image
+            $path = $image->storeAs('public/images', $fileName);
+
+            // Update the user image
+            $user->image = $fileName;
+
+            // Delete the current image
+            Storage::delete("public/images/$currentImage");
+        }
+
+        $user->save();
+
+        Session::flash('success', 'Se Actualizó Correctamente');
+        return redirect()->route('usuarios.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
-        //
+        $user = ModelsUser::findOrFail($id);
 
-        /*ModelsUser::find($id);
-        return redirect()->route('usuarios.index');*/
+        // Verifica si el usuario es el superadministrador
+        if ($user->hasRole('Administrador')) {
+            return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
+        }
 
-        DB::table('users')->where('id', $id)->delete();
-        return redirect()->route('usuarios.index')->with('success', 'Se ELIMINO Correctamente');
+        // Elimina la asociación de roles del usuario
+        $user->roles()->detach();
+
+        // Elimina al usuario
+        $user->delete();
+
+        Session::flash('success', 'Se Eliminó Correctamente');
+        return redirect()->route('usuarios.index');
     }
 
     public function show($id)

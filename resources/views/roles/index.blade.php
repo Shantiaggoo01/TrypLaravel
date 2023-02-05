@@ -21,7 +21,8 @@ Roles
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@if ($message = Session::get('success') )
+
+@if  (Session::has('success'))
 <script>
     swal({
         title: "{{session::get('success')}}",
@@ -31,6 +32,15 @@ Roles
 </script>
 @endif
 
+@if(Session::has('error'))
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
+        button: "Aceptar",
+    });
+</script>
+@endif
 
 <script>
     //confirmacion de eliminar 

@@ -216,6 +216,8 @@
     </div>
     <!-- End of Page Wrapper -->
     <!-- Bootstrap core JavaScript-->
+
+    
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 

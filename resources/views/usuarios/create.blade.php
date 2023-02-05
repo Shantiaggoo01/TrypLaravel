@@ -44,6 +44,13 @@
     }
 </style>
 
+<style>
+    .center-label {
+        text-align: center;
+        display: block;
+    }
+</style>
+
 @endsection
 
 @section('content')
@@ -54,7 +61,7 @@
 
     <div class="card card-default">
         <div class="card-header">
-            <span class="card-title">Registrar Usuario</span>
+            <span class="card-title ">Registrar Usuario</span>
         </div>
         <div class="card-body">
 
@@ -63,17 +70,22 @@
             {!! Form::open(['route' => ['usuarios.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
 
             <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="image" class="center-label">Imagen de perfil</label>
+                        <img id="preview" style="width: 200px; display: block; margin: 0 auto;">
+                        <br>
 
-                <div class="form-group">
-                    <label for="image">Imagen de perfil</label>
-                    <img id="preview" style="width: 200px;">
-                    <input type="file" name="image" id="image" class="form-control">
-                    @error('documento')
-                    <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                    <br>
+                        <input type="file" name="image" id="image" class="form-control">
+                        @error('image')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <br>
 
+                    </div>
                 </div>
+
+                <hr>
 
                 <div class="col-md-12">
 
@@ -154,7 +166,6 @@
                     </div>
                 </div>
 
-
             </div>
 
             <br>
@@ -170,9 +181,6 @@
         </div>
 
         {!!Form::close()!!}
-
-
-    </div>
 
 </section>
 

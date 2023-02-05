@@ -72,7 +72,14 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-       $role = Role::find($id);
+        $role = Role::find($id);
+
+        $role = DB::table('roles')->where('id',$id)->first();
+        if ($role->name == 'Administrador') {
+            return redirect()->route('roles.index')->with('error', 'No se puede Editar el rol de administrador');
+        } 
+
+       
        $permission = Permission::get();
        $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
@@ -108,6 +115,11 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
+        $role = DB::table('roles')->where('id',$id)->first();
+    if ($role->name == 'Administrador') {
+        return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
+    }
+
         DB::table('roles')->where('id',$id)->delete();
         return redirect()->route('roles.index')->with('success', 'Se ELIMINO Con Exito');;
     }
