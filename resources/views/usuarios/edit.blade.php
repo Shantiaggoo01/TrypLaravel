@@ -71,8 +71,11 @@ Crear Usuarios
 
     {!!Form::model($user,['method'=>'PATCH','route'=>['usuarios.update',$user->id]] )!!}
 
+    
     <div class="card card-default">
-        <div class="card-header">
+
+    <div class="card card-default">
+        <div class="card-header text-center">
             <span class="card-title">
             <label> <h4>Asignar Rol Al Usuario:  <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
              </i>Rol Actual :   @if(!empty($user->getRoleNames()))
@@ -96,8 +99,9 @@ Crear Usuarios
     <br>
     <hr>
     <br>
-    <div class="card card-default">
         <div class="card-header">
+        <div class="card-header text-center">
+        <img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
             <span class="card-title">
                 <h3>Editar Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
             </span>

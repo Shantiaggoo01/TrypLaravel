@@ -29,8 +29,22 @@
         </div>
         <div class="card-body">
 
-            {!!Form::open(array('route'=>'usuarios.store','method'=>'POST'))!!}
+
+
+            {!! Form::open(['route' => ['usuarios.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+
             <div class="row">
+
+
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" name="image" id="image" class="form-control">
+                    @error('documento')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div class="col-md-12">
 
                     <div class="form-group">

@@ -41,21 +41,24 @@ Usuario
     <div class="row d-flex justify-content-center">
         <div class="col-md-8 col-lg-6 col-xl-5 col-xxl-12">
             <div class="card mb-5">
-                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png" width="160" height="160">
-                <h3 class="title mt-3"><b> {{ $user->name}} {{ $user->apellido }}</b></h3>
-                <hr>
+
+
+                <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
+                
+                    <h3 class="title mt-3"><b> {{ $user->name}} {{ $user->apellido }}</b></h3>
+                    <hr>
                     <div class="mb-3">
-                    <i class="title mt-3"><b>Documento&nbsp;:&nbsp;</b> </i> {{ $user->documento}}<br>
-                    <i class="title mt-3"><b>Telefono&nbsp;:&nbsp;</b></i>{{ $user->telefono }}<br>
-                    <i class="title mt-3"><b>Rol&nbsp;:&nbsp;</b></i> @if(!empty($user->getRoleNames()))
-                       <i style="color:red"> @foreach($user->getRoleNames() as $rolName)
-                        {{$rolName}}
-                        @endforeach
-                        @endif
-                       </i>
+                        <i class="title mt-3"><b>Documento&nbsp;:&nbsp;</b> </i> {{ $user->documento}}<br>
+                        <i class="title mt-3"><b>Telefono&nbsp;:&nbsp;</b></i>{{ $user->telefono }}<br>
+                        <i class="title mt-3"><b>Rol&nbsp;:&nbsp;</b></i> @if(!empty($user->getRoleNames()))
+                        <i style="color:red"> @foreach($user->getRoleNames() as $rolName)
+                            {{$rolName}}
+                            @endforeach
+                            @endif
+                        </i>
                         <br>
                         <i class="title mt-3"><b>Correo Electronico</b>&nbsp;:&nbsp;</i> {{ $user->email }}</i><br>
-                        
+
                         <h6 class="title mt-3"><b>Fecha De Creaccion&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
                     </div>
                     <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atras</button>
@@ -66,3 +69,41 @@ Usuario
 </div>
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Esta linea de codigo es para subnir la imagen -->
+                     <!-- <form action="/user/{{ $user->id }}/image" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Upload Image</button>
+                    </form> -->
