@@ -15,6 +15,42 @@
         //onclick= "return confirmacionGuardar()"
     }
 </script>
+
+
+<script>
+    const input = document.getElementById("image");
+    const preview = document.getElementById("preview");
+
+    input.addEventListener("change", function() {
+        const file = this.files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            preview.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+    });
+</script>
+
+<style>
+    #preview {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 2px solid #333;
+
+        margin-left: 10px;
+    }
+</style>
+
+<style>
+    .center-label {
+        text-align: center;
+        display: block;
+    }
+</style>
+
 @endsection
 
 @section('content')
@@ -25,12 +61,32 @@
 
     <div class="card card-default">
         <div class="card-header">
-            <span class="card-title">Registrar Usuario</span>
+            <span class="card-title ">Registrar Usuario</span>
         </div>
         <div class="card-body">
 
-            {!!Form::open(array('route'=>'usuarios.store','method'=>'POST'))!!}
+
+
+            {!! Form::open(['route' => ['usuarios.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+
             <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="image" class="center-label">Imagen de perfil</label>
+                        <img id="preview" style="width: 200px; display: block; margin: 0 auto;">
+                        <br>
+
+                        <input type="file" name="image" id="image" class="form-control">
+                        @error('image')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                        <br>
+
+                    </div>
+                </div>
+
+                <hr>
+
                 <div class="col-md-12">
 
                     <div class="form-group">
@@ -110,7 +166,6 @@
                     </div>
                 </div>
 
-
             </div>
 
             <br>
@@ -126,9 +181,6 @@
         </div>
 
         {!!Form::close()!!}
-
-
-    </div>
 
 </section>
 

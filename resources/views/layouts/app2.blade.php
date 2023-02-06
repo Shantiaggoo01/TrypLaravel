@@ -167,6 +167,9 @@
 
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                                 <img class="img-profile rounded-circle" src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
+                                
+                          
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -214,6 +217,8 @@
     </div>
     <!-- End of Page Wrapper -->
     <!-- Bootstrap core JavaScript-->
+
+    
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 

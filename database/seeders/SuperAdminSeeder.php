@@ -27,17 +27,17 @@ class SuperAdminSeeder extends Seeder
             'password'=>bcrypt('12345678')
 
         ]);
+// esto es para crear el empleado directamente sin asignarle un rol
+        // $empleado = User::create([
+        //     'name'=>'Empleado',
+        //     'documento'=>'1234567890',
+        //     'apellido'=>'Empleado',
+        //     'telefono'=>'Empleado',
+        //     'direccion'=>'Empleado',
+        //     'email'=>'empleado@gmail.com',
+        //     'password'=>bcrypt('12345678')
 
-        $empleado = User::create([
-            'name'=>'Empleado',
-            'documento'=>'1234567890',
-            'apellido'=>'Empleado',
-            'telefono'=>'Empleado',
-            'direccion'=>'Empleado',
-            'email'=>'empleado@gmail.com',
-            'password'=>bcrypt('12345678')
-
-        ]);
+        // ]);
 
        $rol = Role::create(['name'=>'Administrador']);
        
