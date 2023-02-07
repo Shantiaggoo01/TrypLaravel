@@ -58,6 +58,18 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
+        //validacion de los campos
+        $request->validate([
+            'nombre' => 'required|string',
+            'tamaño' => 'required|string',
+            'sabor' => 'required|string',
+            'invima' => 'required|numeric',
+            'peso' => 'required|numeric',
+            'cantidad' => 'required|numeric',
+            'precio' => 'required|numeric',
+            'id_insumo' => 'required',
+            'cantidades' => 'required',
+        ]);
         $input = $request->all();
         try {
             DB::beginTransaction();

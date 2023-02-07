@@ -64,6 +64,17 @@ class ProveedoreController extends Controller
      */
     public function store(Request $request)
     {
+        //validacion de los campos
+        $request->validate([
+            'nit' => 'required|numeric',
+            'nombre' => 'required|string',
+            'direccion' => 'required|string',
+            'telefono' => 'required|numeric',
+            'banco' => 'required|string',
+            'cuenta' => 'required|numeric',
+            'idtipo_proveedor' => 'required',
+            'estado' => 'required',
+        ]);
         request()->validate(Proveedore::$rules);
 
         $proveedore = new Proveedore();
