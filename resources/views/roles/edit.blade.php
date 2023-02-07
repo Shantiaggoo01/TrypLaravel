@@ -76,6 +76,9 @@ Crear Usuarios
                         <label for=""><h3>Nombre del rol</h3></label>
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
+                    @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                        @enderror
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
