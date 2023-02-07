@@ -21,11 +21,22 @@ Usuario
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@if ($message = Session::get('success') )
+@if  (Session::has('success'))
 <script>
     swal({
         title: "{{session::get('success')}}",
         icon: "success",
+        button: "Aceptar",
+    });
+</script>
+@endif
+
+
+@if(session('error'))
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
         button: "Aceptar",
     });
 </script>
@@ -46,10 +57,13 @@ function confirmacion() {
 }
 
 </script>
+
 @endsection
 
 
 @section('content')
+
+
 
 
 <div class="card card-default">

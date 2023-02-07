@@ -23,6 +23,8 @@ Route::get('/', function () {
     return view('/dashboard');
 })->middleware('auth');
 Route::get('/dashboard', [App\Http\Controllers\Dashboard::class,'index'])->middleware('auth');
+// Controladores de el video
+Route::post('/user/{id}/image', [App\Http\Controllers\UsuarioController::class, 'uploadImage'])->middleware('auth');
 
 
 Route::group(['middleware'=>['auth']],function(){
@@ -41,7 +43,7 @@ Route::resource('ventas', App\Http\Controllers\VentaController::class)->middlewa
 Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
 Route::resource('produccion', App\Http\Controllers\ProduccionController::class)->middleware('auth');
 
-// Controladores de el video
+
 
 Route::resource('compra_insumos', App\Http\Controllers\CompraInsumoController::class)->middleware('auth');
 
