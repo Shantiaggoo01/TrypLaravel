@@ -30,7 +30,8 @@ class Producto extends Model
 		'invima' => 'required',
 		'peso' => 'required',
 		'cantidad' => 'required',
-    'precio' => 'required'
+    'precio' => 'required',
+    'estado' => 'required'
     ];
 
     protected $perPage = 20;
@@ -40,7 +41,7 @@ class Producto extends Model
      *
      * @var array
      */
-    protected $fillable = ['idproducto','nombre','tamaño','sabor','invima','peso','cantidad','precio'];
+    protected $fillable = ['idproducto','nombre','tamaño','sabor','invima','peso','cantidad','precio','estado'];
 
 
 

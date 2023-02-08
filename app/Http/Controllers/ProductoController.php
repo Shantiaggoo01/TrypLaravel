@@ -127,6 +127,14 @@ class ProductoController extends Controller
 
         return $Total;
     }
+    public function updateStatus($id)
+{
+    $provider = Producto::findOrFail($id);
+    $provider->update(['estado' => ! $provider->estado]);
+
+    return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

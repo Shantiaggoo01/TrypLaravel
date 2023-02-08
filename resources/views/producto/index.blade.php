@@ -68,7 +68,8 @@
 										<th>Peso</th>
 										<th>Cantidad</th>
                                         <th>Precio</th>
-
+                                        <th>Estado</th>
+                                        <th>Cambiar Estado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -85,6 +86,18 @@
 											<td>{{ $producto->peso }}</td>
 											<td>{{ $producto->cantidad }}</td>
                                             <td>{{ $producto->precio }}</td>
+                                            <td>{{$producto->estado ? 'Activo' : 'Inactivo' }}</td>
+                                            <td>
+                                                <form action="{{ route('producto.updateStatus',$producto->id) }}" method="post">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button type="submit" class="btn btn-sm btn-{{ $producto->estado ? 'danger' : 'success' }}">
+                                                        {{ $producto->estado ? 'Desactivar' : 'Activar' }}
+                                                    </button> 
+                                                       
+                            
+                                                </form>  
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('productos.destroy',$producto->id) }}" method="POST">

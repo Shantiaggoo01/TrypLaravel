@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedoreController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\Producto;
 use Spatie\Permission\Commands\Show;
 
 /*
@@ -44,6 +46,8 @@ Route::resource('ventas', App\Http\Controllers\VentaController::class)->middlewa
 Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
 Route::resource('produccion', App\Http\Controllers\ProduccionController::class)->middleware('auth');
 Route::post('proveedor/{id}/estado', [ProveedoreController::class, 'updateStatus'])->name('provider.updateStatus');
+Route::post('producto/{id}/estado', [ProductoController::class, 'updateStatus'])->name('producto.updateStatus');
+
 
 
 

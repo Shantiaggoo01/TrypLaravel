@@ -35,7 +35,7 @@ class ProduccionController extends Controller
     public function create()
     {
         $produccion = new Produccion();
-        $productos = Producto::all();
+        $productos = Producto::where('estado', '1')->get();
         return view('produccion.create', compact('produccion', 'productos'));
     }
 
