@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\ProveedoreController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
@@ -42,6 +43,7 @@ Route::resource('tipo-clientes', App\Http\Controllers\TipoClienteController::cla
 Route::resource('ventas', App\Http\Controllers\VentaController::class)->middleware('auth');
 Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::class);
 Route::resource('produccion', App\Http\Controllers\ProduccionController::class)->middleware('auth');
+Route::post('proveedor/{id}/estado', [ProveedoreController::class, 'updateStatus'])->name('provider.updateStatus');
 
 
 

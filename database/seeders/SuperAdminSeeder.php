@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TipoProveedor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -27,6 +28,15 @@ class SuperAdminSeeder extends Seeder
             'password'=>bcrypt('12345678')
 
         ]);
+        $tipoproveedor= TipoProveedor::create([
+            'nombre'=>'Persona Natural',
+            'descripcion'=>'Persona Del Común',
+        ]);
+        $tipoproveedor= TipoProveedor::create([
+            'nombre'=>'Persona Juridica',
+            'descripcion'=>'Persona Del Común',
+        ]);
+        
 // esto es para crear el empleado directamente sin asignarle un rol
         // $empleado = User::create([
         //     'name'=>'Empleado',

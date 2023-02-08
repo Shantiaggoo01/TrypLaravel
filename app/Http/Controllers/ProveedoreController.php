@@ -75,6 +75,8 @@ class ProveedoreController extends Controller
             'idtipo_proveedor' => 'required',
             'estado' => 'required',
         ]);
+        //convertir el select a un booleano
+        $estado = $request->estado == 'on' ? 1 : 0;
         request()->validate(Proveedore::$rules);
 
         $proveedore = new Proveedore();
@@ -89,6 +91,14 @@ class ProveedoreController extends Controller
         $proveedore->save();
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
+    public function updateStatus($id)
+{
+    $provider = Proveedore::findOrFail($id);
+    $provider->update(['estado' => ! $provider->estado]);
+
+    return redirect()->route('proveedores.index')->with('success', 'Proveedor actualizado correctamente.');
+}
+
 
     /**
      * Display the specified resource.

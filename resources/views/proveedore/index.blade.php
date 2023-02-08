@@ -75,7 +75,8 @@
 										<th>Cuenta</th>
 										<th>Tipo proveedor</th>
                                         <th>Estado</th> <!-- agregue esto para el estado  -->
-                                        <th></th>
+                                        <th>Cambiar Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,7 +91,18 @@
 											<td>{{ $proveedore->banco }}</td>
 											<td>{{ $proveedore->cuenta }}</td>
 											<td>{{ $proveedore->tipoProveedor->nombre }}</td>
-                                            <td>{{ $proveedore->estado}}</td><!-- agregue esto para el estado  -->
+                                            <td>{{ $proveedore->estado ? 'Activo' : 'Inactivo' }}</td>
+                <td>
+                    <form action="{{ route('provider.updateStatus',$proveedore->id) }}" method="post">
+                        @csrf
+                        @method('post')
+                        <button type="submit" class="btn btn-sm btn-{{ $proveedore->estado ? 'danger' : 'success' }}">
+                            {{ $proveedore->estado ? 'Desactivar' : 'Activar' }}
+                        </button> 
+                           
+
+                    </form>  
+                </td>
 
                                             <td>
                                             
