@@ -52,7 +52,7 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:roles', 
+            'name' => 'required|unique:roles|regex:/^[\pL\s]+$/u',
             'permission' => 'required'
             ] );
         $role = Role::create(['name' => $request->input('name')]);
@@ -98,7 +98,8 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, ['name' => 'required', 'permission' => 'required'] );
+        $this->validate($request, ['name' => 'required|regex:/^[\pL\s]+$/u',
+        'permission' => 'required'] );
         $role = Role::find($id);
         $role -> name= $request->input('name');
         $role ->save();
