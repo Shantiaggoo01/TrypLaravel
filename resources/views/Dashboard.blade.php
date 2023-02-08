@@ -19,7 +19,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                Total de Ventas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">30</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">{{$cantidad}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-basket fa-2x text-gray-300"></i>
@@ -37,7 +37,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total de Ingresos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalIngresos">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalIngresos">{{$total}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -55,7 +55,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total de Productos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">50</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">{{$cproducto}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -74,8 +74,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Total de Categorias</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategorias">18</div>
+                                Total de Producciones</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategorias">0</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-tags fa-2x text-gray-300"></i>
