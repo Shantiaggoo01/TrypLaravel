@@ -97,7 +97,9 @@ Crear Usuarios
             <div class="col-md-12">
                 <div class="form-group">
                     <label for=""> Rol del Usuario</label>
-                    {!!Form::select('roles[]',$roles,$selectedRoles,array('class'=>'form-control'))!!}
+                    {{-- Add "Seleccione una opción" to the beginning of the roles array --}}
+                    <?php $roles = ['' => '--- Ninguno ---'] + $roles; ?>
+                    {!! Form::select('roles[]', $roles, $selectedRoles, ['class' => 'form-control']) !!}
                 </div>
             </div>
 
@@ -107,7 +109,7 @@ Crear Usuarios
         <br>
         <div class="card-header">
             <div class="card-header text-center">
-                <img class="rounded-circle mb-3 mt-4" src="{{asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
+                <img class="rounded-circle mb-3 mt-4" src="{{asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="180" height="160">
                 <div class="form-group">
                     <img id="preview" style="width: 200px;">
                     <input type="file" name="image" id="image" class="form-control">
@@ -187,8 +189,8 @@ Crear Usuarios
 
                     <div class="col-md-12">
 
-                        <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
-                        <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar();" history.back()">Editar y Guardar </button>
+                        <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
+                        <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar();" history.back()">Editar</button>
                     </div>
 
 
