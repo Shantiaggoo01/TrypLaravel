@@ -33,7 +33,7 @@ class SeederTablePermisos extends Seeder
 
             // tabla cliente
             'ver-cliente',
-            'editar-cliene',
+            'editar-cliente',
             'crear-cliente',
             'borrar-cliente',
 
@@ -66,7 +66,7 @@ class SeederTablePermisos extends Seeder
                'Ver-Menu-Reportes',
 
 
-               'Ver-usuario',
+               'ver-usuario',
                'editar-usuario',
                'crear-usuario',
                'borrar-usuario',

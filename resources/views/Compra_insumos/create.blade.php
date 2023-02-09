@@ -47,7 +47,7 @@ Crear Compra
                                                     <label for="">Codigo de Factura</label>
                                                     <input id="nFactura" type="text" class="form-control" name="nFactura" value="{{ old('nFactura') }}">
                                                     @error('nFactura')
-                                                    <div class="text-danger">{{ $message }}</div>
+                                                    <div class="text-danger">{{str_replace("nFactura", "Numero de Factura", $errors->first('nFactura')) }}</div>
                                                     @enderror
                                                 </div>
 

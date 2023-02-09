@@ -120,7 +120,7 @@ Crear Usuarios
                
             </table>
             @error('permission')
-                <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ str_replace("permission", "Permiso", $errors->first('permission')) }}</div>
                 @enderror
 
                 <br>

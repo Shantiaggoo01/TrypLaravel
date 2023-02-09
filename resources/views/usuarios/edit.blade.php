@@ -103,12 +103,12 @@ Crear Usuarios
         <br>
         <div class="card-header">
             <div class="card-header text-center">
-                <img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
+                <img class="rounded-circle mb-3 mt-4" src="{{asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="160" height="160">
                 <div class="form-group">
                     <img id="preview" style="width: 200px;">
                     <input type="file" name="image" id="image" class="form-control">
                     @error('documento')
-                    <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ str_replace("documento", "Contraseña", $errors->first('password')) }}</div>
                     @enderror
                     <br>
                 </div>

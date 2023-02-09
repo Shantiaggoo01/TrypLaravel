@@ -77,7 +77,7 @@ Crear Usuarios
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
                     @error('name')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ str_replace("permission", "Permiso", $errors->first('permission')) }}</div>
                         @enderror
                 </div>
                 <div class="col-md-12 ">
