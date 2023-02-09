@@ -80,10 +80,14 @@ Crear Usuarios
                     <label>
                         <h4>Asignar Rol Al Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
                             </i>Rol Actual : @if(!empty($user->getRoleNames()))
-                            <i style="color:red"> @foreach($user->getRoleNames() as $rolName)
+                            <strong style="color:red">
+                                @foreach($user->getRoleNames() as $rolName)
                                 {{$rolName}}
                                 @endforeach
-                                @endif</i>
+                            </strong>
+                            @else
+                            <em>No hay roles asignados</em>
+                            @endif</i>
                         </h4>
                 </span>
             </div>
