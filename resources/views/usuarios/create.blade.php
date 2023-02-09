@@ -75,10 +75,9 @@
                         <label for="image" class="center-label">Imagen de perfil</label>
                         <img id="preview" style="width: 200px; display: block; margin: 0 auto;">
                         <br>
-
                         <input type="file" name="image" id="image" class="form-control">
                         @error('image')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{ str_replace("image", "Imagen", $errors->first('image')) }}</div>
                         @enderror
                         <br>
 
@@ -93,7 +92,7 @@
                         <label for="">Documento</label>
                         {!!Form::text('documento',old('documento'),array('class'=>'form-control'))!!}
                         @error('documento')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("documento", "Documento", $errors->first('documento')) }}</div>
                         @enderror
                     </div>
 
@@ -101,7 +100,7 @@
                         <label for="name">Nombre</label>
                         {!!Form::text('name',old('name'),array('class'=>'form-control'))!!}
                         @error('name')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("name", "Nombre", $errors->first('name')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -111,7 +110,7 @@
                         <label for="apellido">Apellidos</label>
                         {!!Form::text('apellido',old('apellido'),array('class'=>'form-control'))!!}
                         @error('apellido')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("apellido", "Apellido", $errors->first('apellido')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -121,7 +120,7 @@
                         <label for="telefono">Telefono</label>
                         {!!Form::text('telefono',old('telefono'),array('class'=>'form-control'))!!}
                         @error('telefono')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("telefono", "Teléfono", $errors->first('telefono')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -131,7 +130,7 @@
                         <label for="direccion">Direccion</label>
                         {!!Form::text('direccion',old('direccion'),array('class'=>'form-control'))!!}
                         @error('direccion')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("direccion", "Dirección", $errors->first('direccion')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -141,7 +140,7 @@
                         <label for="email">E-mail</label>
                         {!!Form::text('email',old('email'),array('class'=>'form-control'))!!}
                         @error('email')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("email", "E-Mail", $errors->first('email')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -151,7 +150,7 @@
                         <label for="password"> Contraseña </label>
                         {!!Form::password('password',array('class'=>'form-control'))!!}
                         @error('password')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("password", "Contraseña", $errors->first('password')) }}</div>
                         @enderror
                     </div>
                 </div>
@@ -161,7 +160,7 @@
                         <label for="confirm-password"> Confirmar contraseña </label>
                         {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                         @error('confirm-password')
-                        <div class="text-danger">{{ $message }}</div>
+                        <div class="text-danger">{{  str_replace("confirm-password", "COnfirmar-Contraseña", $errors->first('confirm-password')) }}</div>
                         @enderror
                     </div>
                 </div>
