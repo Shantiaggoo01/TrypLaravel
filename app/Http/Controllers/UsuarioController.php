@@ -82,30 +82,19 @@ class UsuarioController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $input['image'] = $image->getClientOriginalName();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $input['image']);
+        }
+
         $user = ModelsUser::create($input);
         $user->roles()->sync($request->input('roles'));
 
-        // -----------------
-
-        // Get the image
-        $image = $request->file('image');
-
-        // Generate a unique file name with current date and time
-        $fileName = uniqid() . '-' . date('Y-m-d-H-i-s') . '.' . $image->getClientOriginalExtension();
-
-        // Store the image
-        $path = $image->storeAs('public/images', $fileName);
-
-        // Get the user
-
-        // Update the user image
-        $user->image = $fileName;
-        $user->save();
-
-        Session::flash('success', 'Se Registro correctamente');
-        return redirect()->route('usuarios.index');
+        return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     }
-    
+
     public function edit($id)
     {
 
@@ -181,7 +170,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.index');
     }
 
-   
+
     public function destroy($id)
     {
         $user = ModelsUser::findOrFail($id);
@@ -211,31 +200,34 @@ class UsuarioController extends Controller
         return view('usuarios.show', compact('user'));
     }
 
-    // Agregado para imagend e usuario 
+    // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
 
-    // public function uploadImage(Request $request, $id)
-    // {
-    //     // Validate the image
-    //     $request->validate([
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
+//     public function store(Request $request)
+// {
+//     $this->validate($request, [
+//         'documento' => 'required|numeric|min:10|unique:users',
+//         'name' => ['required', 'regex:/^[\pL\s]+$/u'],
+//         'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
+//         'telefono' => 'required|numeric',
+//         'direccion' => 'required',
+//         'email' => 'required|email|unique:users,email',
+//         'password' => 'required|same:confirm-password',
+//         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//     ]);
 
-    //     // Get the image
-    //     $image = $request->file('image');
+//     $input = $request->all();
+//     $input['password'] = Hash::make($input['password']);
 
-    //     // Generate a unique file name
-    //     $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
+//     if ($request->hasFile('image')) {
+//         $image = $request->file('image');
+//         $input['image'] = $image->getClientOriginalName();
+//         $destinationPath = public_path('/images');
+//         $image->move($destinationPath, $input['image']);
+//     }
 
-    //     // Store the image
-    //     $path = $image->storeAs('public/images', $fileName);
+//     $user = ModelsUser::create($input);
+//     $user->roles()->sync($request->input('roles'));
 
-    //     // Get the user
-    //     $user = ModelsUser::findOrFail($id);
-
-    //     // Update the user image
-    //     $user->image = $fileName;
-    //     $user->save();
-
-    //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
-    // }
+//     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
+// }
 }
