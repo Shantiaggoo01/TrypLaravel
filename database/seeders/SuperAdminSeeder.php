@@ -24,18 +24,8 @@ class SuperAdminSeeder extends Seeder
             'telefono' => 'Super_Administrador',
             'direccion' => 'Super_Administrador',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('12345678')
-
-        ]);
-        // // /* // esto es para crear el empleado directamente sin asignarle un rol
-        $empleado = User::create([
-            'name' => 'Empleado',
-            'documento' => '1234567890',
-            'apellido' => 'Empleado',
-            'telefono' => 'Empleado',
-            'direccion' => 'Empleado',
-            'email' => 'empleado@gmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'image' => null,
 
         ]);
 

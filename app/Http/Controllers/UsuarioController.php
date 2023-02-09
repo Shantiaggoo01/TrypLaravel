@@ -212,23 +212,28 @@ class UsuarioController extends Controller
 
 
     public function destroy($id)
-    {
-        $user = ModelsUser::findOrFail($id);
+{
+    $user = ModelsUser::findOrFail($id);
 
-        // Verifica si el usuario es el superadministrador
-        if ($user->hasRole('Administrador')) {
-            return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
-        }
-
-        // Elimina la asociación de roles del usuario
-        $user->roles()->detach();
-
-        // Elimina al usuario
-        $user->delete();
-
-        Session::flash('success', 'Se Eliminó Correctamente');
-        return redirect()->route('usuarios.index');
+    // Verifica si el usuario es el superadministrador
+    if ($user->hasRole('Administrador')) {
+        return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
     }
+
+    // Elimina la asociación de roles del usuario
+    $user->roles()->detach();
+
+    // Elimina al usuario
+    $deleteSuccessful = $user->delete();
+
+    if ($deleteSuccessful) {
+        Session::flash('success', 'Se eliminó correctamente');
+        return redirect()->route('usuarios.index');
+    } else {
+        Session::flash('error', 'Hubo un problema al eliminar');
+        return redirect()->back();
+    }
+}
 
     public function show($id)
     {
