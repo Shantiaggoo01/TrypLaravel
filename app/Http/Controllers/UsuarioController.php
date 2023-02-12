@@ -245,6 +245,18 @@ class UsuarioController extends Controller
         return view('usuarios.show', compact('user'));
     }
 
+   // esto es el visualizar perfil 
+   
+    public function showUser($id)
+    {
+
+        $user = ModelsUser::findOrFail($id);
+
+        //dd($user);
+
+        return view('usuarios.showPerfil', compact('user'));
+    }
+
     // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
 
     //     public function store(Request $request)

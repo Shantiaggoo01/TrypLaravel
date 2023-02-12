@@ -24,6 +24,11 @@ Crear Usuarios
                 "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
             }
         });
+
+        // Checkbox de selección "todos"
+        $('#select-all').click(function() {
+            $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+        });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -101,6 +106,8 @@ Crear Usuarios
                 @enderror
             </div>
 
+            <input type="checkbox" id="select-all"> Seleccionar todos
+            <hr>
 
             <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
@@ -117,13 +124,13 @@ Crear Usuarios
                     </tr>
                     @endforeach
                 </tbody>
-               
+
             </table>
             @error('permission')
-                <div class="text-danger">{{ $message }}</div>
-                @enderror
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
 
-                <br>
+            <br>
 
             <div class="col-md-12">
 
