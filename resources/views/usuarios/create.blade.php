@@ -171,9 +171,9 @@
 
             <div class="col-md-12">
 
-                <button type="submit" class="btn btn-primary float-left" onclick="return confirmacionGuardar()">Registrar Usuario</button>
+                <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar()">Registrar</button>
 
-                <button onclick="history.back()" type="button" class="btn btn-primary float-right">Cancelar</button>
+                <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
 
 
             </div>

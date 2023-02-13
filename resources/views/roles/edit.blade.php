@@ -17,15 +17,13 @@ Crear Usuarios
 <script src="https://cdn.datatables.net/select/1.5.0/js/dataTables.select.min.js"></script>
 
 <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
         $('#example').DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
             }
         });
     });
-
-
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -73,17 +71,19 @@ Crear Usuarios
                 <div class="col-md-12">
 
                     <div class="form-group">
-                        <label for=""><h3>Nombre del rol</h3></label>
+                        <label for="">
+                            <h3>Nombre del rol</h3>
+                        </label>
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
                     @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
 
-                    <table id="example" class="table table-striped table-hover">
+                        <table id="example" class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
                                     <th class="col-md-1 "><label>Seleccione</label> </th>
@@ -91,10 +91,13 @@ Crear Usuarios
                                 </tr>
                             </thead>
                             <tbody>
-                                
                                 @foreach($permission as $value)
                                 <tr>
-                                    <td><label>{{Form::checkbox('permission[]',$value->id,in_array($value->id,$rolePermissions))}}</label> </td>
+                                    <td>
+                                        <label>
+                                            {{Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions))}}
+                                        </label>
+                                    </td>
                                     <td><label> {{$value->name}}</label></td>
                                 </tr>
                                 @endforeach

@@ -58,6 +58,18 @@ function confirmacion() {
 
 </script>
 
+<style>
+  .role-label {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    font-size: 0.8em;
+    text-align: center;
+  }
+</style>
+
 @endsection
 
 
@@ -104,7 +116,7 @@ function confirmacion() {
                     <td>{{ $user->apellido }}</td>
                     <td> @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $rolName)
-                        <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
+                        <h5><span class="role-label">{{$rolName}}</span></h5>
                         @endforeach
                         @endif
                     </td>
