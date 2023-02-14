@@ -29,9 +29,12 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::paginate();
+        $tipos = TipoCliente::pluck('Nombre','id');
+
+        return view('cliente.index', compact('clientes','tipos'))
        
 
-        return view('cliente.index', compact('clientes'))
+       
             ->with('i', (request()->input('page', 1) - 1) * $clientes->perPage());
     }
 
@@ -55,12 +58,28 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'NIT' => 'required|numeric|min:10|unique:clientes',
+            'Nombre' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'Apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'idTipoCliente' => 'required',
+            'Telefono' => 'required|numeric',
+            'Direccion' => 'required',
+            
+        ]);
         request()->validate(Cliente::$rules);
 
         $cliente = Cliente::create($request->all());
 
         return redirect()->route('clientes.index')
             ->with('success', 'Cliente created successfully.');
+    }
+    public function updateStatus($id)
+    {
+        $provider = Cliente::findOrFail($id);
+        $provider->update(['Estado' => ! $provider->Estado]);
+    
+        return redirect()->route('clientes.index')->with('success', 'Proveedor actualizado correctamente.');
     }
 
     /**

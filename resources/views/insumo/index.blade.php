@@ -45,7 +45,7 @@
                              <div class="float-right">
                              @can('crear-insumos')
                                 <a href="{{ route('insumos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Agregar Insumo') }}
                                 </a>
                                 @endcan
                               </div>
@@ -57,7 +57,7 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-hover">
-                                <thead class="thead">
+                            <thead class="thead">
                                     <tr>
                                         <th>No</th>
                                         
@@ -65,9 +65,12 @@
 										<th>Precio</th>
 										<th>Tipo de cantidad</th>
                                         <th>Cantidad</th>
+                                        
 										<th>Estado</th>
+                                        <th>Cambiar estado</th>
+                                        <th>Acciones</th>
 
-                                        <th></th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +83,19 @@
 											<td>{{ $insumo->Precio }}</td>
 											<td>{{ $insumo->TipoCantidad }}</td>
                                             <td>{{ $insumo->cantidad }}</td>
-											<td>{{ $insumo->Estado }}</td>
+                                            
+                                            <td>{{ $insumo->Estado ? 'Activo' : 'Inactivo' }}</td>
+                                            <td>
+                                                <form action="{{ route('insumo.updateStatus',$insumo->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button type="submit" class="btn btn-sm btn-{{ $insumo->Estado ? 'danger' : 'success' }}">
+                                                        {{ $insumo->Estado ? 'Desactivar' : 'Activar' }}
+                                                    </button> 
+                                                    
+
+                                                </form>  
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('insumos.destroy',$insumo->id) }}" method="POST">
@@ -90,10 +105,7 @@
                                                     @endcan
                                                     @csrf
                                                     
-                                                    @method('DELETE')
-                                                    @can('borrar-insumos')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                                    @endcan
+                                                   
                                                 </form>
                                             </td>
                                         </tr>

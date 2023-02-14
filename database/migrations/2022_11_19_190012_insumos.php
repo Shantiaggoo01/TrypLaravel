@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('TipoCantidad', 60);
             $table->double('Precio', 60);
             $table->integer('cantidad')->default(0);
-            $table->string('Estado', 30);
+            $table->string('Estado', 30)->default('Activo');
             $table->timestamps();
         });
     }

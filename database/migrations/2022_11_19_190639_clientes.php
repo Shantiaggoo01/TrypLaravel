@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('idTipoCliente')->references('id')->on('tipo_clientes');
             $table->string('Telefono', 60);
             $table->string('Direccion', 60);
+            $table->string('Estado', 30)->default('Activo');
             $table->timestamps();
         });
     }

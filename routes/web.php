@@ -47,6 +47,9 @@ Route::resource('detalle_ventas', App\Http\Controllers\DetalleVentasController::
 Route::resource('produccion', App\Http\Controllers\ProduccionController::class)->middleware('auth');
 Route::post('proveedor/{id}/estado', [ProveedoreController::class, 'updateStatus'])->name('provider.updateStatus');
 Route::post('producto/{id}/estado', [ProductoController::class, 'updateStatus'])->name('producto.updateStatus');
+Route::post('insumo/{id}/Estado', 'App\Http\Controllers\InsumoController@updateStatus')->name('insumo.updateStatus');
+Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updateStatus')->name('cliente.updateStatus');
+
 
 
 

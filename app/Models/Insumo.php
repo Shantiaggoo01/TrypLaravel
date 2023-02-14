@@ -26,6 +26,7 @@ class Insumo extends Model
 		'Precio' => 'required',
 		'TipoCantidad' => 'required',
 		'Estado' => 'required',
+    'Estado' => 'in:Activo,Inactivo',
     ];
 
     protected $perPage = 20;

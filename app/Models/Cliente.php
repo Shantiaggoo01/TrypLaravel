@@ -32,6 +32,8 @@ class Cliente extends Model
 		'Telefono' => 'required',
 		'Direccion' => 'required',
 		'NIT' => 'required',
+        'Estado' => 'in:Activo,Inactivo',
+    
     ];
 
     protected $perPage = 20;
@@ -41,7 +43,7 @@ class Cliente extends Model
      *
      * @var array
      */
-    protected $fillable = ['idTipoCliente','Nombre','Apellido','Telefono','Direccion','NIT'];
+    protected $fillable = ['idTipoCliente','Nombre','Apellido','Telefono','Direccion','NIT','Estado'];
 
 
     /**

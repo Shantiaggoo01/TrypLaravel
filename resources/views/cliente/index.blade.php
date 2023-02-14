@@ -64,32 +64,47 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-hover">
-                                <thead class="thead">
+                            <thead class="thead">
                                     <tr>
                                         <th>No</th>
                                         
                                         <th>Nit</th>
-										<th>Cliente</th>
+										<th>Tipo de Cliente</th>
 										<th>Nombre</th>
 										<th>Apellido</th>
 										<th>Telefono</th>
 										<th>Direccion</th>
+                                        <th>Estado</th>
+                                        <th>Cambiar estado</th>
+                                        <th>Acciones</th>
 										
 
-                                        <th></th>
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($clientes as $cliente)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $cliente->idTipoCliente }}</td>
+                                            <td>{{ $cliente->NIT }}</td>
+											<td>{{ $cliente->tipoCliente->Nombre }}</td>
 											<td>{{ $cliente->Nombre }}</td>
 											<td>{{ $cliente->Apellido }}</td>
 											<td>{{ $cliente->Telefono }}</td>
 											<td>{{ $cliente->Direccion }}</td>
-											<td>{{ $cliente->NIT }}</td>
+                                            <td>{{ $cliente->Estado ? 'Activo' : 'Inactivo' }}</td>
+											
+                                            <td>
+                                                <form action="{{ route('cliente.updateStatus',$cliente->id) }}" method="post">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button type="submit" class="btn btn-sm btn-{{ $cliente->Estado ? 'danger' : 'success' }}">
+                                                        {{ $cliente->Estado ? 'Desactivar' : 'Activar' }}
+                                                    </button> 
+                                                    
+
+                                                </form>  
+                                            </td>
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">
@@ -99,10 +114,7 @@
                                                     @endcan
                                                     @csrf
                                                     
-                                                    @method('DELETE')
-                                                    @can('borrar-cliente')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar</button>
-                                                    @endcan
+                                                   
                                                 </form>
                                             </td>
                                         </tr>

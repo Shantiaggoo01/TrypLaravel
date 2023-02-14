@@ -42,8 +42,7 @@ class InsumoController extends Controller
     {
        
         $insumo = new Insumo();
-        $estados= $this->estados();
-        return view('insumo.create', compact('insumo', 'estados'));
+        return view('insumo.create', compact('insumo'));
     }
 
     /**
@@ -54,12 +53,25 @@ class InsumoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            
+            'Nombre' => 'required|string',
+            'TipoCantidad' => 'required|string',
+            'Precio' => 'required|numeric',
+        ]);
         request()->validate(Insumo::$rules);
 
         $insumo = Insumo::create($request->all());
 
         return redirect()->route('insumos.index')
             ->with('success', 'Insumo created successfully.');
+    }
+    public function updateStatus($id)
+    {
+        $provider = Insumo::findOrFail($id);
+        $provider->update(['Estado' => ! $provider->Estado]);
+    
+        return redirect()->route('insumos.index')->with('success', 'Insumo actualizado correctamente.');
     }
 
     /**
@@ -84,9 +96,7 @@ class InsumoController extends Controller
     public function edit($id)
     {
         $insumo = Insumo::find($id);
-        $estados= $this->estados();
-
-        return view('insumo.edit', compact('insumo', 'estados'));
+        return view('insumo.edit', compact('insumo'));
     }
 
     /**
@@ -119,11 +129,5 @@ class InsumoController extends Controller
             ->with('success', 'Insumo deleted successfully');
     }
 
-    public function estados(){
-        return[
-            '',
-            'Activo',
-            'Inactivo'
-        ];
-    }
+   
 }
