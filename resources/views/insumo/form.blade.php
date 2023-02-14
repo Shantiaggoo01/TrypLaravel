@@ -32,17 +32,11 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('TipoCantidad') }}
-            {{ Form::text('TipoCantidad', $insumo->TipoCantidad, ['class' => 'form-control' . ($errors->has('TipoCantidad') ? ' is-invalid' : ''), 'placeholder' => 'Tipocantidad']) }}
+            {{ Form::label('Tipo Cantidad') }}
+            {{ Form::select('TipoCantidad',['Kilogramo' => 'Kilogramos', 'Gramo' => 'Gramos', 'Unidades' => 'Unidades', 'Litros' => 'Litros',  'Mililitros' => 'Mililitros'], $insumo->TipoCantidad, ['class' => 'form-control' . ($errors->has('TipoCantidad') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Cantidad']) }}
             {!! $errors->first('TipoCantidad', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group">
-            {{ Form::label('Estado') }}
-            {{ Form::select('Estado', $estados , $insumo->Estado, ['class' => 'form-control' . ($errors->has('Estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
-            {!! $errors->first('Estado', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
         
-
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">Guardar</button>
