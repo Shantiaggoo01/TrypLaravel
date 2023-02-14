@@ -23,6 +23,11 @@ Crear Usuarios
                 "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
             }
         });
+
+        // Checkbox de selección "todos"
+        $('#select-all').click(function() {
+            $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+        });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -66,6 +71,8 @@ Crear Usuarios
         </div>
         <div class="card-body">
 
+
+
             {!!Form::model($role,['method'=>'PATCH','route'=>['roles.update',$role->id]])!!}
             <div class="row">
                 <div class="col-md-12">
@@ -82,6 +89,9 @@ Crear Usuarios
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
+
+                        <input type="checkbox" id="select-all"> Seleccionar todos
+                        <hr>
 
                         <table id="example" class="table table-striped table-hover">
                             <thead class="thead">
