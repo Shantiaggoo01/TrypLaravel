@@ -73,7 +73,6 @@ class ProveedoreController extends Controller
             'banco' => 'required|string',
             'cuenta' => 'required|numeric',
             'idtipo_proveedor' => 'required',
-            'estado' => 'required',
         ]);
         //convertir el select a un booleano
         $estado = $request->estado == 'on' ? 1 : 0;
@@ -87,7 +86,6 @@ class ProveedoreController extends Controller
         $proveedore->banco = $request->banco;
         $proveedore->cuenta = $request->cuenta;
         $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
-        $proveedore->estado = $request->estado; //<!-- agregue esto para el estado  : esto valida los campos que van ala base de datos al crear el estado -->
         $proveedore->save();
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }

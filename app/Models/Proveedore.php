@@ -33,7 +33,7 @@ class Proveedore extends Model
 		'banco' => 'required',
 		'cuenta' => 'required',
 		'idtipo_proveedor' => 'required',
-    'estado' => 'required|in:Activo,Inactivo' //<!-- agregue esto para el estado  se debe agregar aqui y en fillable-->
+    'estado' => 'required' //<!-- agregue esto para el estado  se debe agregar aqui y en fillable-->
     ];
 
     protected $perPage = 20;

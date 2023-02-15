@@ -101,7 +101,7 @@ class ProductoController extends Controller
 
 
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Producto creado con exito');
+            return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
             
 
         } catch (Exception $e) {

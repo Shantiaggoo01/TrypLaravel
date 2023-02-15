@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('peso');
             $table->double('precio', 60);
             $table->integer('cantidad')->default(0);
-            $table->string('estado')->default('Activo');
+            $table->boolean('estado')->default('1');
             $table->timestamps();
         });
 
