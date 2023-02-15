@@ -50,12 +50,16 @@
             {{ Form::select('idtipo_proveedor',$tipo_proveedors, $proveedore->idtipo_proveedor, ['class' => 'form-control' . ($errors->has('idtipo_proveedor') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un tipo de proveedor']) }}
             {!! $errors->first('idtipo_proveedor', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
+        @if ($proveedore->estado == 1)
+           {{$estado = 'Activo';}} 
+        @else
+           {{ $estado = 'Inactivo';}}
+        @endif
 
         <div class="form-group"><!-- agregue esto para el estado  -->
             {{ Form::label('Estado') }}
             {{ //campo texto solo de lectura
-            Form::text('estado', 'Activo', ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado', 'readonly' => 'readonly']) }}
+            Form::text('estado', $estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado', 'readonly' => 'readonly']) }}
             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
         </div>
   

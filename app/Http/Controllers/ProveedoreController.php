@@ -86,6 +86,7 @@ class ProveedoreController extends Controller
         $proveedore->banco = $request->banco;
         $proveedore->cuenta = $request->cuenta;
         $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
+
         $proveedore->save();
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
@@ -133,11 +134,25 @@ class ProveedoreController extends Controller
      */
     public function update(Request $request, $id)
 {
-    request()->validate(Proveedore::$rules);
+    $request->validate([
+        'nit' => 'required|numeric',
+        'nombre' => 'required|string',
+        'direccion' => 'required|string',
+        'telefono' => 'required|numeric',
+        'banco' => 'required|string',
+        'cuenta' => 'required|numeric',
+        'idtipo_proveedor' => 'required',
+    ]);
 
     $proveedore = Proveedore::find($id);
-    $proveedore->update($request->all());
-    $proveedore->estado = $request->estado;// <!-- agregue esto para el estado  valida el estado al actualizar el estado-->
+    $proveedore->nit = $request->nit;
+    $proveedore->nombre = $request->nombre;
+    $proveedore->direccion = $request->direccion;
+    $proveedore->telefono = $request->telefono;
+    $proveedore->banco = $request->banco;
+    $proveedore->cuenta = $request->cuenta;
+    $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
+    //$proveedore->estado = $request->estado;// <!-- agregue esto para el estado  valida el estado al actualizar el estado-->
     $proveedore->save();
     return redirect()->route('proveedores.index')
         ->with('success', 'Proveedor actualizado correctamente.');
