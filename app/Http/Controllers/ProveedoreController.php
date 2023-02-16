@@ -66,7 +66,7 @@ class ProveedoreController extends Controller
     {
         //validacion de los campos
         $request->validate([
-            'nit' => 'required|numeric',
+            'nit' => 'required|numeric|unique:proveedores,nit,except,id',
             'nombre' => 'required|string',
             'direccion' => 'required|string',
             'telefono' => 'required|numeric',
@@ -135,7 +135,7 @@ class ProveedoreController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'nit' => 'required|numeric',
+        'nit' => 'required|numeric|unique:proveedores,nit,except,id',
         'nombre' => 'required|string',
         'direccion' => 'required|string',
         'telefono' => 'required|numeric',

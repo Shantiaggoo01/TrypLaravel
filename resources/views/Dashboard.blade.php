@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.app2')
 @section('content')
 <!-- Begin Page Content -->
@@ -19,7 +22,9 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                Total de Ventas</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">
+                                0
+                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-basket fa-2x text-gray-300"></i>
