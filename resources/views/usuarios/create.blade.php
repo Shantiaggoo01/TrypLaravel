@@ -129,7 +129,7 @@
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="direccion">Direccion</label>
+                        <label for="direccion">Dirección</label>
                         {!!Form::text('direccion',old('direccion'),array('class'=>'form-control'))!!}
                         @error('direccion')
                         <div class="text-danger">{{ str_replace("direccion", "Dirección", $errors->first('direccion')) }}</div>

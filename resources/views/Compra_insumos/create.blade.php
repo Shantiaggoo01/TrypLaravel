@@ -35,9 +35,9 @@ Crear Compra
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Proveedor</label>
-                                                    <select class="form-control" name="id_proveedor" id="proveedor" onchange="colocar_proveedor(this)">
-                                                        <option>Seleccione el proveedor </option>
-                                                        @foreach ($proveedores as $proveedor)<!-- agregue esto para el estado  -->
+                                                    <select class="form-control" name="id_proveedor" id="proveedor" onchange="colocar_proveedor(this)" required>
+                                                        <option value="">Seleccione el proveedor</option>
+                                                        @foreach ($proveedores as $proveedor)
                                                         <option Nit="{{$proveedor->nit}}" value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
                                                         @endforeach
                                                     </select>
@@ -59,6 +59,9 @@ Crear Compra
                                                 <div class="form-group col-6">
                                                     <label for="">Fecha de compra</label>
                                                     <input type="date" class="form-control" name="FechaCompra" }}" required>
+                                                    @error('date')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
 
                                                 </div>
 
@@ -77,8 +80,8 @@ Crear Compra
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Insumo</label>
-                                                    <select class="form-control" name="id_insumos" id="insumos" onchange="colocar_precio(this)">
-                                                        <option value="0">Seleccione el insumo</option>
+                                                    <select class="form-control" name="id_insumos" id="insumos" onchange="colocar_precio(this)" required>
+                                                        <option value="">Seleccione el insumo</option>
                                                         @foreach ($insumos as $insumo)
                                                         <option Precio="{{$insumo->Precio}}" value="{{$insumo->id}}">{{$insumo->Nombre}}</option>
                                                         @endforeach

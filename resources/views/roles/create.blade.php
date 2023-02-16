@@ -101,34 +101,38 @@ Crear Usuarios
                     <h3>Nombre del Rol</h3>
                 </label>
                 {!!Form::text('name',null,array('class'=>'form-control'))!!}
+
                 @error('name')
-                <div class="text-danger">{{ $message }}</div>
+                <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
                 @enderror
+
             </div>
 
-            <input type="checkbox" id="select-all"> Seleccionar todos
+            <input  type="checkbox" id="select-all"> Seleccionar todos
             <hr>
 
             <table id="example" class="table table-striped table-hover">
                 <thead class="thead">
                     <tr>
                         <th class="col-md-1 "><label>Seleccione</label></th>
-                        <th> <label for="">Permisos para este Rol:</label></th>
+                        <th><label for="">Permisos para este Rol:</label></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($permission as $value)
                     <tr>
                         <td>{{Form::checkbox('permission[]',$value->id,false,array('class'=>'name'))}}</td>
-                        <td>{{$value->name}}</td>
+                        <td>{{ ucwords(str_replace('-', ' ', $value->name)) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
 
             </table>
+
             @error('permission')
-            <div class="text-danger">{{ $message }}</div>
+            <div class="text-danger">{{ str_replace("permission", "Seleccione", $errors->first('permission')) }}</div>
             @enderror
+
 
             <br>
 

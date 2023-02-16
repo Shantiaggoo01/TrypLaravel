@@ -75,7 +75,9 @@
 										<th>Telefono</th>
 										<th>Direccion</th>
                                         <th>Estado</th>
+                                        @can('cambiar-estado')
                                         <th>Cambiar estado</th>
+                                        @endcan
                                         <th>Acciones</th>
 										
 
@@ -93,7 +95,7 @@
 											<td>{{ $cliente->Telefono }}</td>
 											<td>{{ $cliente->Direccion }}</td>
                                             <td>{{ $cliente->Estado ? 'Activo' : 'Inactivo' }}</td>
-											
+                                            @can('cambiar-estado')
                                             <td>
                                                 <form action="{{ route('cliente.updateStatus',$cliente->id) }}" method="post">
                                                     @csrf
@@ -105,6 +107,7 @@
 
                                                 </form>  
                                             </td>
+                                            @endcan
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">

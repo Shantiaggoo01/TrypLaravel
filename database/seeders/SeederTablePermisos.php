@@ -30,12 +30,14 @@ class SeederTablePermisos extends Seeder
             'crear-proveedor',
             'editar-proveedor',
             'borrar-proveedor',
+            
 
             // tabla cliente
             'ver-cliente',
-            'editar-cliene',
+            'editar-cliente',
             'crear-cliente',
             'borrar-cliente',
+            
 
             // tabla compras
             'Crear-Compra',
@@ -45,12 +47,14 @@ class SeederTablePermisos extends Seeder
               'editar-insumos',
               'crear-insumos',
               'borrar-insumos',
+           
 
                // tabla producto
                'ver-producto',
                'editar-producto',
                'crear-producto',
                'borrar-producto',
+       
 
                // tabla roles
                'ver-roles',
@@ -58,24 +62,22 @@ class SeederTablePermisos extends Seeder
                'crear-roles',
                'borrar-roles',
 
-               // tabla usuario
+               // Tabla botones
                'Ver-Menu-Configuracion',
                'Ver-Menu-Compras',
                'Ver-Menu-Ventas',
                'Ver-Menu-Produccion',
                'Ver-Menu-Reportes',
+               'cambiar-estado',
 
 
-               'Ver-usuario',
+               'ver-usuario',
                'editar-usuario',
                'crear-usuario',
                'borrar-usuario',
 
                 // tabla tipo-cliente
-                'ver-tipocliente',
-                'editar-tipocliente',
-                'crear-tipocliente',
-                'borrar-tipocliente',
+               
 
                 // tabla tipo-proveedor
                 'ver-tipoproveedor',
@@ -96,6 +98,11 @@ class SeederTablePermisos extends Seeder
                  'crear-venta',
                  'borrar-venta',
   
+                 // Tabla Produccion
+                    'crear-produccion',
+                    'editar-produccion',
+                    'eliminar-produccion',
+                    'ver-produccion',
 
 
 

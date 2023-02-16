@@ -19,46 +19,74 @@ class SuperAdminSeeder extends Seeder
     public function run()
     {
         $admin = User::create([
-            'name'=>'Super_Administrador',
-            'documento'=>'1017253837',
-            'apellido'=>'Super_Administrador',
-            'telefono'=>'Super_Administrador',
-            'direccion'=>'Super_Administrador',
-            'email'=>'admin@gmail.com',
-            'password'=>bcrypt('12345678'),
+            'name' => 'Super_Administrador',
+            'documento' => '1017253837',
+            'apellido' => 'Super_Administrador',
+            'telefono' => 'Super_Administrador',
+            'direccion' => 'Super_Administrador',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('12345678'),
             'image' => null,
 
         ]);
-        $tipoproveedor= TipoProveedor::create([
-            'nombre'=>'Persona Natural',
-            'descripcion'=>'Persona Del Común',
+
+        $empleado = new User;
+        $empleado->name = 'Empleado';
+        $empleado->documento = '1234567890';
+        $empleado->apellido = 'Empleado';
+        $empleado->telefono = 'Empleado';
+        $empleado->direccion = 'Empleado';
+        $empleado->email = 'empleado@gmail.com';
+        $empleado->password = bcrypt('12345678');
+        $empleado->image = null;
+        $empleado->save();
+
+        $empleadoRol = Role::create(['name' => 'Empleado']);
+
+        $permisos = Permission::whereIn('name', [
+            'ver-proveedor',
+            'crear-proveedor',
+            'ver-insumos',
+            'Crear-Compra',
+            'ver-venta',
+            'crear-venta',
+            'ver-cliente',
+            'editar-cliente',
+            'ver-producto',
+            'crear-producto',
+            'editar-producto',
+            'ver-produccion',
+            'crear-produccion',
+            'Ver-Menu-Compras',
+            'Ver-Menu-Ventas',
+            'Ver-Menu-Produccion',
+            'Ver-Menu-Reportes',
+        ])->get();
+
+        $empleadoRol->syncPermissions($permisos);
+
+        $empleado->assignRole($empleadoRol);
+
+        $rol = Role::create(['name' => 'Administrador']);
+
+        $permisos = Permission::pluck('id', 'id')->all();
+
+        $rol->syncPermissions($permisos);
+
+        $admin->assignRole(['Administrador']);
+
+
+        // codigod e santi 
+
+
+        $tipoproveedor = TipoProveedor::create([
+            'nombre' => 'Persona Natural',
+            'descripcion' => 'Persona del común',
         ]);
-        $tipoproveedor= TipoProveedor::create([
-            'nombre'=>'Persona Juridica',
-            'descripcion'=>'Persona Del Común',
+
+        $tipoproveedor = TipoProveedor::create([
+            'nombre' => 'Persona Jurídica',
+            'descripcion' => 'Persona jurídica',
         ]);
-        
-// esto es para crear el empleado directamente sin asignarle un rol
-         $empleado = User::create([
-             'name'=>'Empleado',
-            'documento'=>'1234567890',
-            'apellido'=>'Empleado',
-            'telefono'=>'Empleado',
-            'direccion'=>'Empleado',
-             'email'=>'empleado@gmail.com',
-             'password'=>bcrypt('12345678'),
-             'image' => null,
-
-         ]);
-
-       $rol = Role::create(['name'=>'Administrador']);
-       
-
-       $permisos = Permission::pluck('id','id')->all();
-
-       $rol->syncPermissions($permisos);
-
-        $admin -> assignRole(['Administrador']);
-
     }
 }
