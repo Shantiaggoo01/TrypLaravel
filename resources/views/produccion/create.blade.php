@@ -4,6 +4,8 @@
     Crear venta
 @endsection
 
+
+
 @section('content')
     <section class="content container-fluid">
         <div class="row">
@@ -30,7 +32,7 @@
                     </div>
                     @endif
         
-        <form method="POST" action="{{ route('produccion.store') }}">
+        <form method="POST" action="{{ route('produccion.store') }}" id="form-produccion">
             @csrf
                 <div class="row">
                         <div class="col-6">
@@ -117,7 +119,7 @@
                 </div>
                 <div class="row text-center">
                     <div class="box-footer mt20">
-                       <button type="submit" class="btn btn-primary">Guardar</button>
+                       <button type="submit" class="btn btn-primary"  onclick="confirmacion()">Guardar</button>
                     </div>
                 </div>    
     </div>
@@ -126,6 +128,38 @@
     
 
 @section("script")
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-produccion').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                title: "¿Estás seguro?",
+                text: "Una vez agregada la producción, no podrás editarla.",
+                icon: "warning",
+                buttons: ["Cancelar", "Agregar"],
+                dangerMode: true,
+            })
+            .then((willAdd) => {
+                if (willAdd) {
+                    // Envía el formulario
+                    this.submit();
+                } else {
+                    swal("La producción no se ha agregado.", {
+                        icon: "info",
+                    });
+                }
+            });
+        });
+    });
+</script>
+Asegúrate también de que no haya errores de sintaxis o de referencia en tu vista o en tu archivo de configuración de SweetAlert.
+
+
+
+
+
 <script>
     function colocar_precio(){
         
@@ -161,7 +195,8 @@
             $("#precio_total").val( parseInt(cantidad) + parseInt(precio_total));
 
         }else{
-            alert("se debe ingresar una cantidad o precio valido");
+            //mostrar error con sweet alert
+            swal("Error", "Ingrese una cantidad valida", "error");
         }
 
 

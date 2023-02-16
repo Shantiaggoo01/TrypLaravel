@@ -81,11 +81,7 @@
 
                                             <td>
                                                 <form action="{{ route('produccion.destroy',$produccion->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('produccion.show',$produccion->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('produccion.edit',$produccion->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('produccion.show',$produccion->id) }}"><i class="fa fa-fw fa-eye"></i> Ver Detalle</a>
                                                 </form>
                                             </td>
                                         </tr>
