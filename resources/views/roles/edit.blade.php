@@ -84,7 +84,7 @@ Crear Usuarios
                         {!!Form::text('name',null,array('class'=>'form-control'))!!}
                     </div>
                     @error('name')
-                    <div class="text-danger">{{ $message }}</div>
+                    <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
                     @enderror
                 </div>
                 <div class="col-md-12 ">
@@ -108,9 +108,13 @@ Crear Usuarios
                                             {{Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions))}}
                                         </label>
                                     </td>
-                                    <td><label> {{$value->name}}</label></td>
+                                    <td><label>{{ ucwords(str_replace('-', ' ', $value->name)) }}</label></td>
                                 </tr>
+
                                 @endforeach
+                                @error('permission')
+                                <div class="text-danger">{{ str_replace("permission", "Seleccione", $errors->first('permission')) }}</div>
+                                @enderror
                             </tbody>
                         </table>
 

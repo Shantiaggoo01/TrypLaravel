@@ -27,10 +27,10 @@ class CompraInsumoController extends Controller
 
         //$compras = Compra::all();
 
-        $compras = Compra::select("compras.*","proveedores.nombre as nombreProveedor")
-        ->join("proveedores","proveedores.id","=","compras.id_proveedor")
-        ->get();
-        
+        $compras = Compra::select("compras.*", "proveedores.nombre as nombreProveedor")
+            ->join("proveedores", "proveedores.id", "=", "compras.id_proveedor")
+            ->get();
+
 
         $insumos = Insumo::all();
         $proveedores = Proveedore::all();
@@ -48,9 +48,9 @@ class CompraInsumoController extends Controller
     {
         $compraInsumo = new CompraInsumo();
         $compras = Compra::all();
-        $insumos = Insumo::all();
-        $proveedores = Proveedore::where('estado', '1')->get();//<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
-
+        //$insumos = Insumo::all();
+        $proveedores = Proveedore::where('estado', '1')->get(); //<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
+        $insumos = Insumo::where('estado', '0')->get();//<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
         return view('compra_insumos.create', compact('compraInsumo', 'compras', 'insumos', 'proveedores'));
     }
 
@@ -66,8 +66,11 @@ class CompraInsumoController extends Controller
 
         $this->validate($request, [
             'nFactura' => 'required|unique:compras',
+            'id_proveedor' => 'required',
+            'id_insumo' => 'required',
+            'FechaCompra' => 'required',
         ]);
-        
+
         try {
             DB::beginTransaction();
             $compra = Compra::create([
@@ -79,32 +82,28 @@ class CompraInsumoController extends Controller
 
             ]);
 
-            foreach($input["id_insumo"] as $key => $value){
+            foreach ($input["id_insumo"] as $key => $value) {
                 CompraInsumo::create([
-                    "id_insumo"=>$value,
-                   /* "id_proveedor"=>$input["proveedor"][$key],*/
-                    "id_compra"=>$compra->id,
+                    "id_insumo" => $value,
+                    /* "id_proveedor"=>$input["proveedor"][$key],*/
+                    "id_compra" => $compra->id,
                     "cantidad" => $input["cantidades"][$key],
                 ]);
 
-               $ins = Insumo::find($value);
-               $ins-> update(["cantidad"=>$ins->cantidad - $input["cantidades"][$key]]);
+                $ins = Insumo::find($value);
+               $ins->update(["cantidad" => $ins->cantidad - $input["cantidades"][$key]]);
 
             }
-            
+
 
 
             DB::commit();
             return redirect("compra_insumos")->with('success', 'Compra REALIZADA Con Exito');
-            
-
         } catch (Exception $e) {
             DB::rollback();
 
-            return redirect("compra_insumos")->with('status',$e->getMessage());
+            return redirect("compra_insumos")->with('status', $e->getMessage());
         }
-
-
     }
 
 
@@ -114,7 +113,7 @@ class CompraInsumoController extends Controller
         $Total = 0;
 
         foreach ($insumos as $key => $value) {
-        
+
             $insumo = Insumo::find($value);
             $Total += ($insumo->Precio * $cantidades[$key]);
         }
@@ -132,23 +131,22 @@ class CompraInsumoController extends Controller
 
 
         $id = $request->input("id");
-        $insumos=[];
-        if($id != null){
-            $insumos = Insumo::select("insumos.*","compra_insumos.cantidad")
-            ->join("compra_insumos","insumos.id","=","compra_insumos.id_insumo")
-            ->where("compra_insumos.id_compra", $id)
-            ->get();
+        $insumos = [];
+        if ($id != null) {
+            $insumos = Insumo::select("insumos.*", "compra_insumos.cantidad")
+                ->join("compra_insumos", "insumos.id", "=", "compra_insumos.id_insumo")
+                ->where("compra_insumos.id_compra", $id)
+                ->get();
         }
-        $compras=[];
-        if($id != null){
-        $compras = Compra::select("compras.*")
-        ->join("compra_insumos","compras.id","=","compra_insumos.id_compra")
-        ->where("compra_insumos.id_compra", $id)
-        ->get();
+        $compras = [];
+        if ($id != null) {
+            $compras = Compra::select("compras.*")
+                ->join("compra_insumos", "compras.id", "=", "compra_insumos.id_compra")
+                ->where("compra_insumos.id_compra", $id)
+                ->get();
         }
 
-        return view("compra_insumos.show", compact("insumos","compras"));
-        
+        return view("compra_insumos.show", compact("insumos", "compras"));
     }
 
 

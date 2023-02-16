@@ -119,6 +119,7 @@ Compra_insumos
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

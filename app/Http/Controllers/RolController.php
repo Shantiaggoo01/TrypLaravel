@@ -79,6 +79,10 @@ class RolController extends Controller
             return redirect()->route('roles.index')->with('error', 'No se puede Editar el rol de administrador');
         } 
 
+        if ($role->name == 'Empleado') {
+            return redirect()->route('roles.index')->with('error', 'No se puede Editar el Rol Empleado Predeterminado');
+        } 
+
        
        $permission = Permission::get();
        $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
@@ -120,6 +124,10 @@ class RolController extends Controller
     if ($role->name == 'Administrador') {
         return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
     }
+
+    if ($role->name == 'Empleado') {
+        return redirect()->route('roles.index')->with('error', 'No se puede Eliminar el Rol Empleado Predeterminado');
+    } 
 
         DB::table('roles')->where('id',$id)->delete();
         return redirect()->route('roles.index')->with('success', 'Se ELIMINO Con Exito');;

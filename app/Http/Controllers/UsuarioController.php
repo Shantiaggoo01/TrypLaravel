@@ -76,7 +76,7 @@ class UsuarioController extends Controller
             'direccion' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $input = $request->all();
@@ -101,12 +101,21 @@ class UsuarioController extends Controller
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
 
-            return redirect()->back()->with('error', 'No puedes editar al super administrador');
+            return redirect()->back()->with('error', 'No puedes editar al super Administrador');
         }
+
+        if ($user->hasRole('Empleado')) {
+
+            return redirect()->back()->with('error', 'No puedes editar al Empleado Predetermindado');
+        }
+
         $selectedRoles = $user->roles()->pluck('id')->toArray();
 
         $user = ModelsUser::find($id);
         $roles = Role::pluck('name', 'name')->all();
+
+
+
         unset($roles['Administrador']);
         $selectedRoles = $user->roles()->pluck('name')->toArray();
 
@@ -212,28 +221,36 @@ class UsuarioController extends Controller
 
 
     public function destroy($id)
-{
-    $user = ModelsUser::findOrFail($id);
+    {
+        $user = ModelsUser::findOrFail($id);
 
-    // Verifica si el usuario es el superadministrador
-    if ($user->hasRole('Administrador')) {
-        return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
+        // Verifica si el usuario es el superadministrador
+        if ($user->hasRole('Administrador')) {
+            return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
+        } else
+
+        
+
+        if ($user->hasRole('Empleado')) {
+
+            return redirect()->back()->with('error', 'No puedes Eliminar al Empleado Predetermindado');
+        } else {
+
+            // Elimina la asociación de roles del usuario
+            $user->roles()->detach();
+
+            // Elimina al usuario
+            $deleteSuccessful = $user->delete();
+
+            if ($deleteSuccessful) {
+                Session::flash('success', 'Se eliminó correctamente');
+                return redirect()->route('usuarios.index');
+            } else {
+                Session::flash('error', 'Hubo un problema al eliminar');
+                return redirect()->back();
+            }
+        }
     }
-
-    // Elimina la asociación de roles del usuario
-    $user->roles()->detach();
-
-    // Elimina al usuario
-    $deleteSuccessful = $user->delete();
-
-    if ($deleteSuccessful) {
-        Session::flash('success', 'Se eliminó correctamente');
-        return redirect()->route('usuarios.index');
-    } else {
-        Session::flash('error', 'Hubo un problema al eliminar');
-        return redirect()->back();
-    }
-}
 
     public function show($id)
     {
@@ -245,8 +262,8 @@ class UsuarioController extends Controller
         return view('usuarios.show', compact('user'));
     }
 
-   // esto es el visualizar perfil 
-   
+    // esto es el visualizar perfil 
+
     public function showUser($id)
     {
 
