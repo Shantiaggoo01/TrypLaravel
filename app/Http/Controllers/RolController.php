@@ -58,7 +58,7 @@ class RolController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')->with('success', 'Se REGISTRO Con Exito');;
+        return redirect()->route('roles.index')->with('success', 'Se registro con éxito');;
 
     }
 
@@ -76,11 +76,11 @@ class RolController extends Controller
 
         $role = DB::table('roles')->where('id',$id)->first();
         if ($role->name == 'Administrador') {
-            return redirect()->route('roles.index')->with('error', 'No se puede Editar el rol de administrador');
+            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol de administrador');
         } 
 
         if ($role->name == 'Empleado') {
-            return redirect()->route('roles.index')->with('error', 'No se puede Editar el Rol Empleado Predeterminado');
+            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol empleado predeterminado');
         } 
 
        
@@ -109,7 +109,7 @@ class RolController extends Controller
         $role ->save();
 
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index')->with('success', 'Se ACTUALIZO  Con Exito');
+        return redirect()->route('roles.index')->with('success', 'Se actulizó con éxito');
     }
 
     /**
@@ -126,10 +126,10 @@ class RolController extends Controller
     }
 
     if ($role->name == 'Empleado') {
-        return redirect()->route('roles.index')->with('error', 'No se puede Eliminar el Rol Empleado Predeterminado');
+        return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado');
     } 
 
         DB::table('roles')->where('id',$id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Se ELIMINO Con Exito');;
+        return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');;
     }
 }

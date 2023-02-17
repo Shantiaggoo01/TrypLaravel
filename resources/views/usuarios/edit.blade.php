@@ -33,7 +33,7 @@ Crear Usuarios
 <script>
     //confirmacion de Guardar 
     function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para EDITAR y GUARDAR la informacion!");
+        var respuesta = confirm("¡Confirme para editar y guardar la información!");
 
         if (respuesta == true) {
             return true;
@@ -78,8 +78,8 @@ Crear Usuarios
             <div class="card-header text-center">
                 <span class="card-title">
                     <label>
-                        <h4>Asignar Rol Al Usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
-                            </i>Rol Actual : @if(!empty($user->getRoleNames()))
+                        <h4>Asignar rol al usuario: <i style="color:RED">{{$user->name}} {{$user->apellido}}&nbsp;&nbsp;&nbsp;
+                            </i>Rol actual : @if(!empty($user->getRoleNames()))
                             <strong style="color:red">
                                 @foreach($user->getRoleNames() as $rolName)
                                 {{$rolName}}
@@ -96,7 +96,7 @@ Crear Usuarios
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for=""> Rol del Usuario</label>
+                    <label for=""> Rol del usuario</label>
                     {{-- Add "Seleccione una opción" to the beginning of the roles array --}}
                     <?php $roles = ['' => '--- Ninguno ---'] + $roles; ?>
                     {!! Form::select('roles[]', $roles, $selectedRoles, ['class' => 'form-control']) !!}
@@ -119,7 +119,7 @@ Crear Usuarios
                     <br>
                 </div>
                 <span class="card-title">
-                    <h3>Informacion del Usuario : <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
+                    <h3>Informacion del usuario : <i style="color:RED">{{$user->name}} {{$user->apellido}}</i></h3>
                 </span>
             </div>
             <div class="card-body">
@@ -139,21 +139,21 @@ Crear Usuarios
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="apellido">Apellidos</label>
+                            <label for="apellido">Apellido</label>
                             {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="telefono">Telefono</label>
+                            <label for="telefono">Teléfono</label>
                             {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="direccion">Direccion</label>
+                            <label for="direccion">Dirección</label>
                             {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
                         </div>
                     </div>

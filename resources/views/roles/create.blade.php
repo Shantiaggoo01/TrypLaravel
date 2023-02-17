@@ -98,7 +98,7 @@ Crear Usuarios
 
             <div class="form-group">
                 <label for="">
-                    <h3>Nombre del Rol</h3>
+                    <h3>Nombre del rol</h3>
                 </label>
                 {!!Form::text('name',null,array('class'=>'form-control'))!!}
 

@@ -29,6 +29,7 @@ Roles
         icon: "success",
         button: "Aceptar",
     });
+    {{ session()->forget('success') }}
 </script>
 @endif
 
@@ -39,13 +40,14 @@ Roles
         icon: "error",
         button: "Aceptar",
     });
+    {{ session()->forget('success') }}
 </script>
 @endif
 
 <script>
     //confirmacion de eliminar 
 function confirmacion() {
-    var respuesta=confirm("¿Seguro que desea eliminar este ROL?");
+    var respuesta=confirm("¿Seguro que desea eliminar este rol?");
 
     if(respuesta==true){
         return true;

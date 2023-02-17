@@ -20,24 +20,21 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Insumo extends Model
 {
-    
-    static $rules = [
-		'Nombre' => 'required',
-		'Precio' => 'required',
-		'TipoCantidad' => 'required',
-		'Estado' => 'required',
+
+  static $rules = [
+    'Nombre' => 'required',
+    'Precio' => 'required',
+    'TipoCantidad' => 'required',
+    'cantidad',
     'Estado' => 'in:Activo,Inactivo',
-    ];
+  ];
 
-    protected $perPage = 20;
+  protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['Nombre','Precio','TipoCantidad','Estado'];
-
-
-
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad'];
 }

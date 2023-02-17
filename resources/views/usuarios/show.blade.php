@@ -49,7 +49,7 @@ Usuario
                     <hr>
                     <div class="mb-3">
                         <i class="title mt-3"><b>Documento&nbsp;:&nbsp;</b> </i> {{ $user->documento}}<br>
-                        <i class="title mt-3"><b>Telefono&nbsp;:&nbsp;</b></i>{{ $user->telefono }}<br>
+                        <i class="title mt-3"><b>Teléfono&nbsp;:&nbsp;</b></i>{{ $user->telefono }}<br>
                         <i class="title mt-3"><b>Rol&nbsp;:&nbsp;</b></i> @if(!empty($user->getRoleNames()))
                         <i style="color:red"> @foreach($user->getRoleNames() as $rolName)
                             {{$rolName}}
@@ -57,11 +57,11 @@ Usuario
                             @endif
                         </i>
                         <br>
-                        <i class="title mt-3"><b>Correo Electronico</b>&nbsp;:&nbsp;</i> {{ $user->email }}</i><br>
+                        <i class="title mt-3"><b>Correo electrónico</b>&nbsp;:&nbsp;</i> {{ $user->email }}</i><br>
 
-                        <h6 class="title mt-3"><b>Fecha De Creaccion&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
+                        <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
                     </div>
-                    <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atras</button>
+                    <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atrás</button>
                 </div>
             </div>
         </div>

@@ -45,7 +45,7 @@ Crear Usuarios
 <script>
     //confirmacion de Guardar 
     function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para EDITAR y GUARDAR la informacion!");
+        var respuesta = confirm("¡Confirme para editar y guardar la información!");
 
         if (respuesta == true) {
             return true;
@@ -97,7 +97,7 @@ Crear Usuarios
                             <thead class="thead">
                                 <tr>
                                     <th class="col-md-1 "><label>Seleccione</label> </th>
-                                    <th> <label for="">Permisos para este Rol:</label></th>
+                                    <th> <label for="">Permisos para este rol:</label></th>
                                 </tr>
                             </thead>
                             <tbody>

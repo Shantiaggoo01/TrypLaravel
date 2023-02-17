@@ -3,7 +3,7 @@
 <script>
     //confirmacion de Guardar 
     function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+        var respuesta = confirm("¡Confirme para guardar la información!");
 
         if (respuesta == true) {
             return true;
@@ -119,7 +119,7 @@
 
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="telefono">Telefono</label>
+                        <label for="telefono">Teléfono</label>
                         {!!Form::text('telefono',old('telefono'),array('class'=>'form-control'))!!}
                         @error('telefono')
                         <div class="text-danger">{{ str_replace("telefono", "Teléfono", $errors->first('telefono')) }}</div>

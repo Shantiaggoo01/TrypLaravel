@@ -28,8 +28,21 @@ Compra_insumos
         icon: "success",
         button: "Aceptar",
     });
+    {{ session()->forget('success') }}
 </script>
 @endif
+
+@if(Session::has('error'))
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
+        button: "Aceptar",
+    });
+    {{ session()->forget('success') }}
+</script>
+@endif
+
 @endsection
 @section('content')
 
