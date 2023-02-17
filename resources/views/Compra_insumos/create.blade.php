@@ -30,7 +30,7 @@ Crear Compra
                                         <div class="card">
                                             <br>
                                             <div class="card-head">
-                                                <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la Compra</i></h4>
+                                                <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de la compra</i></h4>
                                             </div>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
@@ -44,7 +44,7 @@ Crear Compra
                                                 </div>
 
                                                 <div class="form-group col-6">
-                                                    <label for="">Codigo de Factura</label>
+                                                    <label for="">Código de factura</label>
                                                     <input id="nFactura" type="text" class="form-control" name="nFactura" value="{{ old('nFactura') }}">
                                                     @error('nFactura')
                                                     <div class="text-danger">{{ $message }}</div>
@@ -144,7 +144,7 @@ Crear Compra
                     <script>
                         //confirmacion de Guardar 
                         function confirmacionGuardar() {
-                            var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
+                            var respuesta = confirm("¡Confirme para guardar la informacion!");
 
                             if (respuesta == true) {
                                 return true;

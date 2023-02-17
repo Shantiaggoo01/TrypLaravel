@@ -50,7 +50,7 @@ class CompraInsumoController extends Controller
         $compras = Compra::all();
         //$insumos = Insumo::all();
         $proveedores = Proveedore::where('estado', '1')->get(); //<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
-        $insumos = Insumo::where('estado', '0')->get();//<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
+        $insumos = Insumo::where('estado', '1')->get();//<!-- agregue esto para el estado  la consulta para el select , que solo muestre los que estan con l a palabra activos-->
         return view('compra_insumos.create', compact('compraInsumo', 'compras', 'insumos', 'proveedores'));
     }
 
@@ -91,14 +91,14 @@ class CompraInsumoController extends Controller
                 ]);
 
                 $ins = Insumo::find($value);
-               $ins->update(["cantidad" => $ins->cantidad - $input["cantidades"][$key]]);
+               $ins->update(["cantidad" => $ins->cantidad + $input["cantidades"][$key]]);
 
             }
 
 
 
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Compra REALIZADA Con Exito');
+            return redirect("compra_insumos")->with('success', 'Compra realizada con exitó');
         } catch (Exception $e) {
             DB::rollback();
 
@@ -150,11 +150,4 @@ class CompraInsumoController extends Controller
     }
 
 
-    public function destroy($id)
-    {
-        $compraInsumo = CompraInsumo::find($id)->delete();
-
-        return redirect()->route('compra_insumos.index')
-            ->with('success', 'CompraInsumo deleted successfully');
-    }
 }

@@ -14,21 +14,23 @@ Usuario
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-        "language":{
-            "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
-        }
-    });
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            }
+        });
     });
 </script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@if  (Session::has('success'))
-<script>
-    swal({
-        title: "{{session::get('success')}}",
-        icon: "success",
-        button: "Aceptar",
-    });
-</script>
+
+@if(Session::has('success'))
+    <script>
+        swal({
+            title: "{{ Session::get('success') }}",
+            icon: "success",
+            button: "Aceptar",
+        });
+        {{ session()->forget('success') }}
+    </script>
 @endif
 
 
@@ -39,35 +41,35 @@ Usuario
         icon: "error",
         button: "Aceptar",
     });
+    {{ session()->forget('success') }}
 </script>
 @endif
 
 <script>
     //confirmacion de eliminar 
-function confirmacion() {
-    var respuesta=confirm("¿Seguro que desea eliminar este USUARIO?");
+    function confirmacion() {
+        var respuesta = confirm("¿Seguro que desea eliminar este usuario?");
 
-    if(respuesta==true){
-        return true;
-    }else {
-        return false;
+        if (respuesta == true) {
+            return true;
+        } else {
+            return false;
+        }
+
+        //'onclick'=>'return confirmacion()'
     }
-
-    //'onclick'=>'return confirmacion()'
-}
-
 </script>
 
 <style>
-  .role-label {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 8px;
-    background-color: red;
-    color: white;
-    font-size: 0.8em;
-    text-align: center;
-  }
+    .role-label {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 8px;
+        background-color: red;
+        color: white;
+        font-size: 0.8em;
+        text-align: center;
+    }
 </style>
 
 @endsection
@@ -95,15 +97,10 @@ function confirmacion() {
                 <tr>
 
                     <th>ID</th>
-                     
+
                     <th>Nombre</th>
                     <th>Apellido</th>
-
                     <th>Rol</th>
-
-
-
-
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -124,7 +121,7 @@ function confirmacion() {
 
                     <td>
 
-                    <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
+                        <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
 
                         @can('editar-usuario')
                         <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar / Asignar Rol </a>

@@ -65,7 +65,7 @@ detalle de el proveedor
                     <b><tr>
                         <th>Nombre Insumo </th>
                         <th>Cantidad Compradas </th>
-                        <th>Precio unitario</th>
+                        <th>Precio Unitario</th>
                         <th>Sub Total </th>
                     </tr>
                     </b>
@@ -88,15 +88,15 @@ detalle de el proveedor
                     @endforelse
                     <tr>
                         <th colspan="3"></th>
-                       <th><h3>Total De La Compra</h3></th>
-                        <th><h3 style="color:red">{{$total}}</h3></th>
+                       <th><h3>Total de la compra</h3></th>
+                        <th><h3>{{$total}}</h3></th>
                     </tr>
                 </tbody>
             </table>
 
         </div>
         <br>
-        <button onclick="history.back()" type="button" class="btn btn-primary col">Volver</button>
+        <button onclick="history.back()" type="button" class="btn btn-primary col">Atrás</button>
 
         @endif
     </div>

@@ -92,7 +92,7 @@ class UsuarioController extends Controller
         $user = ModelsUser::create($input);
         $user->roles()->sync($request->input('roles'));
 
-        return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Se agregó correctamente');
     }
 
     public function edit($id)
@@ -101,12 +101,12 @@ class UsuarioController extends Controller
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
 
-            return redirect()->back()->with('error', 'No puedes editar al super Administrador');
+            return redirect()->back()->with('error', 'No puedes editar al super administrador');
         }
 
         if ($user->hasRole('Empleado')) {
 
-            return redirect()->back()->with('error', 'No puedes editar al Empleado Predetermindado');
+            return redirect()->back()->with('error', 'No puedes editar al empleado predetermindado');
         }
 
         $selectedRoles = $user->roles()->pluck('id')->toArray();
@@ -161,7 +161,7 @@ class UsuarioController extends Controller
 
         $user->save();
 
-        Session::flash('success', 'Se Actualizó Correctamente');
+        Session::flash('success', 'Se actualizó correctamente');
         return redirect()->route('usuarios.index');
     }
 
@@ -226,14 +226,14 @@ class UsuarioController extends Controller
 
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
-            return redirect()->back()->with('error', 'No puedes eliminar al superadministrador');
+            return redirect()->back()->with('error', 'No puedes eliminar al super administrador');
         } else
 
         
 
         if ($user->hasRole('Empleado')) {
 
-            return redirect()->back()->with('error', 'No puedes Eliminar al Empleado Predetermindado');
+            return redirect()->back()->with('error', 'No puedes eliminar al empleado predetermindado');
         } else {
 
             // Elimina la asociación de roles del usuario
