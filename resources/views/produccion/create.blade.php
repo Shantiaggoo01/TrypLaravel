@@ -34,11 +34,13 @@
         
         <form method="POST" action="{{ route('produccion.store') }}" id="form-produccion">
             @csrf
+            <input type="hidden" name="detalles" value="">
+            @csrf
                 <div class="row">
                         <div class="col-6">
                             <div class="card">
                                 <div class="card-head">
-                                 <h4>Informacion de la producción</h4>
+                                 <h4>Información de la producción</h4>
                                 </div>
                                 <div class="row card-body">
                                     <div class="form-group col-6">
@@ -68,7 +70,7 @@
                             
                             <div class="card">
                                 <div class="card-head">
-                                  <h4>Informacion de productos</h4>
+                                  <h4>Información de productos</h4>
                                 </div>
                                 <div class="row card-body">
                                     <div class="form-group col-6">
@@ -169,10 +171,17 @@ Asegúrate también de que no haya errores de sintaxis o de referencia en tu vis
     }
 
     function agregar_producto(){
+        let detalles = [];
         let producto_id = $("#producto option:selected").val();
-        let producto_text = $("#producto option:selected").text();
-        let cantidad = $("#cantidad").val();
-        let precio = $("#precio").val();
+let producto_text = $("#producto option:selected").text();
+let cantidad = $("#cantidad").val();
+let precio = $("#precio").val();
+let detalle = {
+    producto_id: producto_id,
+    cantidad: cantidad
+};
+detalles.push(detalle);
+
 
         if(cantidad > 0 && precio > 0){
             $("#tblproductos").append(`

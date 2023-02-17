@@ -74,4 +74,4 @@ Route::resource('ventas', App\Http\Controllers\VentaController::class)->middlewa
 */
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/', [App\Http\Controllers\Dashboard::class, 'index'])->name('home')->middleware('auth');

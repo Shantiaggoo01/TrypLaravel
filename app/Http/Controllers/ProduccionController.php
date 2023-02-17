@@ -57,6 +57,7 @@ class ProduccionController extends Controller
                 'producto' => 'required',
                 'cantidad' => 'required',
             ]);
+            $detalles = $request->input('detalles');
          try {
             Log::debug('Creando nueva producción');
              DB::beginTransaction();
@@ -68,27 +69,18 @@ class ProduccionController extends Controller
              ]);
              
              // Verificar si el producto es una matriz y luego recorrerla
-             if (is_array($input['producto'])) {
-                 foreach ($input['producto'] as $key => $value) {
+             if (is_array($input['producto_id'])) {
+                 foreach ($input['producto_id'] as $key => $value) {
                      $detalle_produccion = Detalle_produccion::create([
                          'id_produccion' => $produccion->id,
                          'id_producto' => $value,
-                         'cantidad' => $input['cantidad'][$key],
+                         'cantidad' => $input['cantidades'][$key],
                      ]);
                      $ins = Producto::find($value);
-                     $ins->cantidad = $ins->cantidad + $input['cantidad'][$key];
+                     $ins->update(['cantidad' => $ins->cantidad + $input['cantidades'][$key]]);
                  }
-             } else {
-                 // Si el producto es una cadena, simplemente crear el detalle de producción
-                 $detalle_produccion = Detalle_produccion::create([
-                     'id_produccion' => $produccion->id,
-                     'id_producto' => $input['producto'],
-                     'cantidad' => $input['cantidad'],
-                 ]);
-                 $ins = Producto::find($input['producto']);
-                 $ins->cantidad = $ins->cantidad + $input['cantidad'];
-             }
-     
+                 
+             } 
              $ins->save();
              
              DB::commit();

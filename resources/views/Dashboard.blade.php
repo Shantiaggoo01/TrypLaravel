@@ -1,4 +1,67 @@
+@section('script')
+<script>
+    var ctx = document.getElementById('ventas-chart').getContext('2d');
+    var ventasData = {!! $ventas !!};
 
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ventasData.map(v => v.fecha),
+            datasets: [{
+                label: 'Ventas',
+                data: ventasData.map(v => v.total),
+                backgroundColor: 'rgba(0, 119, 204, 0.3)',
+                borderColor: 'rgba(0, 119, 204, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        callback: function(value, index, values) {
+                            return '$' + value;
+                        }
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('productos-chart').getContext('2d');
+    var productosData = {!! $productos !!};
+
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: productosData.map(p => p.nombre),
+            datasets: [{
+                data: productosData.map(p => p.cantidad),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ],
+                borderColor: 'white',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+                position: 'right',
+                labels: {
+                    boxWidth: 12
+                }
+            }
+        }
+    });
+</script>
+
+@endsection
 
 
 @extends('layouts.app2')
@@ -23,7 +86,7 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                Total de Ventas</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalVenta">
-                                0
+                                {{$cantidad}}
                             </div>
                         </div>
                         <div class="col-auto">
@@ -42,7 +105,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total de Ingresos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalIngresos">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800 fas fa-dollar-sign fa-2x text-gray-300" id="totalIngresos">{{$total}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,7 +123,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Total de Productos</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProductos">{{$cproducto}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -80,7 +143,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Total de Producciones</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategorias">0</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategorias">{{$cproduccion}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-tags fa-2x text-gray-300"></i>
@@ -105,7 +168,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-area" style="height: 350px !important;">
-                        <canvas id="charVentas"></canvas>
+                        <canvas id="ventas-chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -121,7 +184,7 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-pie" style="height: 350px !important ;">
-                        <canvas id="charProductos"></canvas>
+                        <canvas id="productos-chart"></canvas>
                     </div>
                 </div>
             </div>

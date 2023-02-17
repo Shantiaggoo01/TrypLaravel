@@ -46,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Idtipo Proveedor:</strong>
-                            {{ $proveedore->idtipo_proveedor }}
+                            {{ $proveedore->idtipo_proveedor->nombre }}
                         </div>
 
                     </div>

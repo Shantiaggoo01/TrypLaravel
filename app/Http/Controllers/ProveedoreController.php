@@ -134,8 +134,9 @@ class ProveedoreController extends Controller
      */
     public function update(Request $request, $id)
 {
+    $proveedore = Proveedore::find($id);
     $request->validate([
-        'nit' => 'required|numeric|unique:proveedores,nit,except,id',
+        'nit' => 'required|unique:proveedores,nit,'.$proveedore->id,
         'nombre' => 'required|string',
         'direccion' => 'required|string',
         'telefono' => 'required|numeric',

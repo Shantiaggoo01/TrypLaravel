@@ -26,12 +26,12 @@
             {!! $errors->first('nombre', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('direccion') }}
+            {{ Form::label('dirección') }}
             {{ Form::text('direccion', $proveedore->direccion, ['class' => 'form-control' . ($errors->has('direccion') ? ' is-invalid' : ''), 'placeholder' => 'Direccion']) }}
             {!! $errors->first('direccion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('telefono') }}
+            {{ Form::label('teléfono') }}
             {{ Form::text('telefono', $proveedore->telefono, ['class' => 'form-control' . ($errors->has('telefono') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
             {!! $errors->first('telefono', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -41,7 +41,7 @@
             {!! $errors->first('banco', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('cuenta') }}
+            {{ Form::label('cuenta bancaria') }}
             {{ Form::text('cuenta', $proveedore->cuenta, ['class' => 'form-control' . ($errors->has('cuenta') ? ' is-invalid' : ''), 'placeholder' => 'Cuenta']) }}
             {!! $errors->first('cuenta', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -50,20 +50,7 @@
             {{ Form::select('idtipo_proveedor',$tipo_proveedors, $proveedore->idtipo_proveedor, ['class' => 'form-control' . ($errors->has('idtipo_proveedor') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione un tipo de proveedor']) }}
             {!! $errors->first('idtipo_proveedor', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        @if ($proveedore->estado == 1)
-           {{$estado = 'Activo';}} 
-        @else
-           {{ $estado = 'Inactivo';}}
-        @endif
-
-        <div class="form-group"><!-- agregue esto para el estado  -->
-            {{ Form::label('Estado') }}
-            {{ //campo texto solo de lectura
-            Form::text('estado', $estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado', 'readonly' => 'readonly']) }}
-            {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-  
-
+        {{ Form::hidden('estado', 1) }}
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">Submit</button>

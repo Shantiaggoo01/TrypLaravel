@@ -33,7 +33,7 @@ Crear Producto
                     <div class="box box-info padding-1">
                         <div class="box-body">
 
-                            <form method="POST" action="{{ route('productos.store') }}">
+                            <form method="POST" action="{{ route('productos.store') }}" id="form-producto">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6">
@@ -84,7 +84,7 @@ Crear Producto
 
                                         <div class="card">
                                             <br>
-                                        <h4>&nbsp;&nbsp;&nbsp;<i>Informacion de los Insumos</i></h4>
+                                        <h4>&nbsp;&nbsp;&nbsp;<i>Información de los Insumos</i></h4>
                                             <div class="row card-body">
                                                 <div class="form-group col-6">
                                                     <label for="">Insumo</label>
@@ -146,22 +146,34 @@ Crear Producto
                     </div>
 
 
-                    @section("js")
-
+                    @section('script')
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                     <script>
-                        //confirmacion de Guardar 
-                        function confirmacionGuardar() {
-                            var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
-
-                            if (respuesta == true) {
-                                return true;
-                            } else {
-                                return false;
-                            }
-
-                            //'onclick'=>'return confirmacionGuardar()'
-                        }
+                        $(document).ready(function() {
+                            // Agrega el Sweet Alert cuando se envía el formulario
+                            $('#form-producto').on('submit', function(event) {
+                                event.preventDefault();
+                                swal({
+                                    title: "¿Estás seguro?",
+                                    text: "Una vez agregado el producto, no podrás editarlo.",
+                                    icon: "warning",
+                                    buttons: ["Cancelar", "Agregar"],
+                                    dangerMode: true,
+                                })
+                                .then((willAdd) => {
+                                    if (willAdd) {
+                                        // Envía el formulario
+                                        this.submit();
+                                    } else {
+                                        swal("El producto no se ha agregado.", {
+                                            icon: "info",
+                                        });
+                                    }
+                                });
+                            });
+                        });
                     </script>
 
                     <script>

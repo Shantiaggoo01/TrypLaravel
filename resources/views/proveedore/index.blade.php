@@ -110,7 +110,7 @@ Proveedores
                                     <td>
 
                                         <form action="{{ route('proveedores.destroy',$proveedore->id) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary " href="{{ route('proveedores.show',$proveedore->id) }}"><i class="fa fa-fw fa-eye"></i> Ver detalle</a>
+                                            {{-- <a class="btn btn-sm btn-primary " href="{{ route('proveedores.show',$proveedore->id) }}"><i class="fa fa-fw fa-eye"></i> Ver detalle</a> --}}
                                             @can('editar-proveedor')
                                             <a class="btn btn-sm btn-success" href="{{ route('proveedores.edit',$proveedore->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                             @endcan
