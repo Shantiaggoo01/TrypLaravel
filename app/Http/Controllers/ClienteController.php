@@ -72,14 +72,14 @@ class ClienteController extends Controller
         $cliente = Cliente::create($request->all());
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente created successfully.');
+            ->with('success', 'Cliente creado correctamente');
     }
     public function updateStatus($id)
     {
         $provider = Cliente::findOrFail($id);
         $provider->update(['Estado' => ! $provider->Estado]);
     
-        return redirect()->route('clientes.index')->with('success', 'Proveedor actualizado correctamente.');
+        return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
 
     /**
@@ -123,7 +123,7 @@ class ClienteController extends Controller
         $cliente->update($request->all());
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente updated successfully');
+            ->with('success', 'Cliente actualizado correctamente');
     }
 
     /**
@@ -136,6 +136,6 @@ class ClienteController extends Controller
         $cliente = Cliente::find($id)->delete();
 
         return redirect()->route('clientes.index')
-            ->with('success', 'Cliente deleted successfully');
+            ->with('success', 'Cliente borrado correctamente');
     }
 }

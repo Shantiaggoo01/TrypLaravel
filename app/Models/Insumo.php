@@ -22,9 +22,10 @@ class Insumo extends Model
 {
 
   static $rules = [
-    'Nombre' => 'required',
+    'Nombre' => ['required', 'regex:/^[\pL\s]+$/u'],
     'Precio' => 'required',
     'TipoCantidad' => 'required',
+    'Medida'=>'required',
     'cantidad',
     'Estado' => 'in:Activo,Inactivo',
   ];
@@ -36,5 +37,5 @@ class Insumo extends Model
    *
    * @var array
    */
-  protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad'];
+  protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad','Medida'];
 }

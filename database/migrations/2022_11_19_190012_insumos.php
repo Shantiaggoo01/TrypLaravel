@@ -18,6 +18,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('Nombre', 60);
             $table->string('TipoCantidad', 60);
+            $table->integer('Medida');
             $table->double('Precio', 60);
             $table->integer('cantidad')->default(0);
             $table->string('Estado', 30)->default('Activo');

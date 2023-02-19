@@ -15,8 +15,9 @@ class DetalleVentasController extends Controller
 {
     public function index(Request $request)
     {
-        $ventas = Venta::select("ventas.*", "clientes.nombre as cliente")
+        $ventas = Venta::select("ventas.*", "clientes.nombre as cliente", "clientes.NIT","tipo_clientes.nombre as nombre_tipo")
         ->join("clientes", "clientes.id", "=", "ventas.idCliente")
+        ->join("tipo_clientes", "clientes.id", "=", "tipo_clientes.id")
         ->get();
 
 
@@ -42,8 +43,9 @@ class DetalleVentasController extends Controller
 
        $ventas=[];
         if($venta !=null){
-            $ventas = Venta::select("ventas.*", "clientes.nombre as cliente")
+            $ventas = Venta::select("ventas.*", "clientes.nombre as cliente", "clientes.NIT","tipo_clientes.nombre as nombre_tipo")
             ->join("clientes", "clientes.id", "=", "ventas.idCliente")
+            ->join("tipo_clientes", "clientes.id", "=", "tipo_clientes.id")
             ->where("ventas.id", $id)
             ->get();
         } 
@@ -64,6 +66,11 @@ class DetalleVentasController extends Controller
 
     public function store(Request $request){
         $input = $request->all();
+        $this->validate($request, [
+            'FechaVenta'=>'required',
+            'cantidad'=>'required',
+            'producto_id'=>'required',
+        ]);
         try{
             DB::beginTransaction();
             $ventas = Venta::create([
@@ -87,7 +94,7 @@ class DetalleVentasController extends Controller
 
 
             DB::commit();
-            return redirect("/detalle_ventas")->With('status', '1');
+            return redirect("/detalle_ventas")->With('status', 'Venta realizada correctamente');
         }catch(\Exeption $e){
             DB::rollBack();
             return redirect("/detalle_ventas")->With('status', $e->getMessage());

@@ -16,8 +16,10 @@
 @foreach ($ventas as $venta)
 
 <p>ID de venta: {{$venta->id}}</p>
-<p>Nombre del Cliente: {{ $venta->cliente }}</p>
-<p>Fecha de Venta: {{ $venta->FechaVenta }}</p>
+<p>NIT del cliente: {{$venta->NIT}}</p>
+<p>Nombre del cliente: {{ $venta->cliente }}</p>
+<p>Tipo de cliente: {{ $venta->nombre_tipo }}</p>
+<p>Fecha de venta: {{ $venta->FechaVenta }}</p>
 <p>Total de venta: {{ $venta->Total }}</p>                                  
 
 @endforeach
@@ -30,7 +32,9 @@
             <thead class="thead">
                 <tr>
                     <th>Nombre</th>
-                                        
+                    <th>Sabor</th>
+                    <th>Tamaño</th>
+                    <th>Peso</th>            
 					<th>Cantidad</th>
 					<th>Precio</th>
 					<th>SubTotal</th>
@@ -42,7 +46,9 @@
                     @foreach ($productos as $producto)
                         <tr>
                             <td>{{$producto->nombre}}</td>
-                                            
+                            <td>{{$producto->sabor}}</td>
+                            <td>{{$producto->tamaño}}</td>  
+                            <td>{{$producto->peso}}</td>         
 							<td>{{ $producto->cantidad_c }}</td>
 							<td>{{ $producto->precio }}</td>
 							<td>{{ $producto->precio * $producto->cantidad_c }}</td>

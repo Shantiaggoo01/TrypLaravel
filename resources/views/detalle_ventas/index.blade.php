@@ -57,9 +57,10 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+                                        <th>NIT</th>
 										<th>Cliente</th>
-										<th>Fechaventa</th>
+                                        <th>Tipo de cliente</th>
+										<th>Fecha de venta</th>
 										<th>Total</th>
 
                                         <th></th>
@@ -69,10 +70,13 @@
                                     @foreach ($ventas as $venta)
                                         <tr>
                                             <td>{{$venta->id}}</td>
-                                            
+                                            <td>{{ $venta->NIT }}</td>
 											<td>{{ $venta->cliente }}</td>
+                                            <td>{{ $venta->nombre_tipo }}</td>
 											<td>{{ $venta->FechaVenta }}</td>
 											<td>{{ $venta->Total }}</td>
+                                            
+                                            
                                             <td>
                                             <a class="btn btn-sm btn-primary " href="{{ route('detalle_ventas.show',$venta->id) }}"><i class="fa fa-fw fa-eye"></i> Detalles</a>
                                             </td>
