@@ -17,6 +17,8 @@ use App\Http\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -27,7 +29,16 @@ class UsuarioController extends Controller
     {
         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario|Ver-Menu-Configuracion|Ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-usuario', ['only' => ['create', 'store']]);
-        $this->middleware('permission:editar-usuario', ['only' => ['edit', 'update']]);
+        $this->middleware(function ($request, $next) {
+
+            $usuario = ModelsUser::findOrFail($request->route('usuarios.index'))->id;
+
+            if (Auth::user()->id == $usuario->id) {
+                return $next($request);
+            }
+            abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
+        })->only('edit', 'update');
+
         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
     }
     /**
@@ -304,4 +315,15 @@ class UsuarioController extends Controller
 
     //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     // }
+
+    public function showperfil($id)
+    {
+
+        $user = ModelsUser::findOrFail($id);
+
+        //dd($user);
+
+        return view('usuarios.showperfil', compact('user'));
+    }
+
 }
