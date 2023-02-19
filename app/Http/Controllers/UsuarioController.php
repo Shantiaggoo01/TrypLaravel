@@ -29,16 +29,7 @@ class UsuarioController extends Controller
     {
         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario|Ver-Menu-Configuracion|Ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-usuario', ['only' => ['create', 'store']]);
-        $this->middleware(function ($request, $next) {
-
-            $usuario = ModelsUser::findOrFail($request->route('usuarios.index'))->id;
-
-            if (Auth::user()->id == $usuario->id) {
-                return $next($request);
-            }
-            abort(403, 'USER DOES NOT HAVE THE RIGHT PERMISSIONS');
-        })->only('edit', 'update');
-
+        $this->middleware('permission:editar-usuario', ['only' => ['edit', 'update']]);
         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
     }
     /**

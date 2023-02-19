@@ -52,6 +52,8 @@ Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updat
 
 Route::get('/usuarios/{usuario}', [UsuarioController::class, 'showperfil'])->name('usuarios.showperfil');
 
+Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
+
 
 
 
