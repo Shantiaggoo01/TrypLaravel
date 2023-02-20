@@ -31,19 +31,29 @@ Crear Usuarios
 </script>
 @endif
 <script>
-    //confirmacion de Guardar 
-    function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para editar y guardar la información!");
-
-        if (respuesta == true) {
-            return true;
-        } else {
-            return false;
-        }
-
-        //'onclick'=>'return confirmacionGuardar()'
-        //onclick= "return confirmacionGuardar()"
-    }
+    $(document).ready(function() {
+        // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-usuario').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                    title: "¿Estás seguro?",
+                    text: "¿Seguro que desea editar este usuario ?",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Guardar"],
+                    dangerMode: true,
+                })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        // Envía el formulario
+                        this.submit();
+                    } else {
+                        swal("El usuario no se ha editado.", {
+                            icon: "info",
+                        });
+                    }
+                });
+        });
+    });
 </script>
 
 @endsection
@@ -69,7 +79,7 @@ Crear Usuarios
     @endif
 
 
-    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['usuarios.update', $user->id], 'enctype' => 'multipart/form-data']) !!}
+    {!! Form::model($user, ['method' => 'PATCH', 'route' => ['usuarios.update', $user->id], 'enctype' => 'multipart/form-data', 'id' => 'form-usuario']) !!}
 
 
     <div class="card card-default">

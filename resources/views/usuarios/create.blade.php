@@ -1,19 +1,33 @@
 @extends('layouts.app2')
 @section('js')
+@section('script')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
-    //confirmacion de Guardar 
-    function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para guardar la información!");
-
-        if (respuesta == true) {
-            return true;
-        } else {
-            return false;
-        }
-
-        //'onclick'=>'return confirmacionGuardar()'
-        //onclick= "return confirmacionGuardar()"
-    }
+    $(document).ready(function() {
+        // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-usuario').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                    title: "¿Estás seguro?",
+                    text: "¿Seguro que desea guardar este usuario ?",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Guardar"],
+                    dangerMode: true,
+                })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        // Envía el formulario
+                        this.submit();
+                    } else {
+                        swal("El usuario no se ha agregado.", {
+                            icon: "info",
+                        });
+                    }
+                });
+        });
+    });
 </script>
 
 
@@ -69,7 +83,7 @@
 
 
 
-            {!! Form::open(['route' => ['usuarios.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::open(['route' => ['usuarios.store'], 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => 'form-usuario']) !!}
 
             <div class="row">
                 <div class="col-md-12">
