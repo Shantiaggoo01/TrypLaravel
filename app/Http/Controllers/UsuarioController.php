@@ -17,6 +17,8 @@ use App\Http\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -304,4 +306,15 @@ class UsuarioController extends Controller
 
     //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     // }
+
+    public function showperfil($id)
+    {
+
+        $user = ModelsUser::findOrFail($id);
+
+        //dd($user);
+
+        return view('usuarios.showperfil', compact('user'));
+    }
+
 }

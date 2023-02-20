@@ -44,19 +44,29 @@ Crear Usuarios
 @endif
 
 <script>
-    //confirmacion de Guardar 
-    function confirmacionGuardar() {
-        var respuesta = confirm("¡Confirme para GUARDAR la informacion!");
-
-        if (respuesta == true) {
-            return true;
-        } else {
-            return false;
-        }
-
-        //'onclick'=>'return confirmacionGuardar()'
-        //onclick= "return confirmacionGuardar()"
-    }
+    $(document).ready(function() {
+        // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-roles').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                    title: "¿Estás seguro?",
+                    text: "¿Seguro que desea crear este rol ?",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Guardar"],
+                    dangerMode: true,
+                })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        // Envía el formulario
+                        this.submit();
+                    } else {
+                        swal("El rol no se ha creado.", {
+                            icon: "info",
+                        });
+                    }
+                });
+        });
+    });
 </script>
 
 
@@ -73,7 +83,8 @@ Crear Usuarios
         </div>
         <div class="card-body">
 
-            {!!Form::open(array('route'=>'roles.store','method'=>'POST'))!!}
+        {!! Form::open(array('route' => 'roles.store', 'method' => 'POST', 'id' => 'form-roles')) !!}
+
             <!-- <div class="row">
                 <div class="col-md-12">
 
@@ -140,7 +151,7 @@ Crear Usuarios
 
                 <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
 
-                <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar()">Guardar</button>
+                <button type="submit" class="btn btn-primary float-right">Guardar</button>
             </div>
         </div>
         {!!Form::close()!!}
