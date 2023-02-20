@@ -98,7 +98,7 @@ Crear Producto
 
                                                 <div class="form-group col-3">
                                                     <label for="">Cantidad</label>
-                                                    <input id="cantidad" type="number" class="form-control" name="cantidad">
+                                                    <input id="ccantidad" type="number" class="form-control" name="cantidad">
                                                 </div>
                                                 <div class="form-group col-3">
                                                     <label for="">Precio</label>
@@ -195,7 +195,7 @@ Crear Producto
                         function agregar_insumo() {
                             let id_insumo = $("#insumos option:selected").val();
                             let insumo_text = $("#insumos option:selected").text();
-                            let cantidad = $("#cantidad").val();
+                            let cantidad = $("#ccantidad").val();
                             let Precio = $("#Precio").val();
 
                             if (cantidad > 0 && Precio > 0) {
