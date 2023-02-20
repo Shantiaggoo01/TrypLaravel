@@ -19,32 +19,46 @@
                     <div class="box box-info padding-1">
     <div class="box-body">
         
-        <form method="POST" action="{{ route('detalle_ventas.store') }}">
+        <form id="form-venta" method="POST" action="{{ route('detalle_ventas.store') }}">
             @csrf
                 <div class="row">
                         <div class="col-6">
                             <div class="card">
                                 <div class="card-head">
-                                 <h4>Informacion de la venta</h4>
+                                 <h4>Información de la venta</h4>
                                 </div>
                                 <div class="row card-body">
                                     <div class="form-group col-6">
                                         <label for="">Cliente</label>
-                                        <select class="form-control" name="Cliente" id="Cliente" placeholder="Seleccion">
+                                        <select class="form-control" name="Cliente" id="Cliente" placeholder="Seleccion" onchange="colocar()">
                                             <option value="0">Seleccion</option>
                                             @foreach ($clientes as $cliente)
-                                            <option value="{{$cliente->id}}">{{$cliente->Nombre}}</option>
+                                            <option NIT="{{$cliente->NIT}}" TipoCliente="{{$cliente->tipoCliente->Nombre}}" value="{{$cliente->id}}">{{$cliente->Nombre}}</option>
                                             @endforeach
 
                                         </select>
                                     </div>
-                                
-                                    
+
                                     <div class="form-group col-6">
                                         <label for="">Fecha de venta</label>
                                         <input type="date" class="form-control" name="FechaVenta">
-                                                
+                                            @error('FechaVenta') 
+                                               <small class="text-danger">{{$message}}</small>
+                                            @enderror 
                                     </div>
+
+                                    <div class="form-group col-6">
+                                    <label for="">NIT</label>
+                                        <input id="NIT" type="text" value="0" class="form-control" readonly >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                    <label for="">Tipo de cliente</label>
+                                        <input id="TipoCliente" type="text" value="" class="form-control" readonly >
+                                    </div>
+                                
+                                    
+                                    
 
                                     <div class="form-group col-6">
                                         <label for="">Total</label>
@@ -69,7 +83,7 @@
                                         <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
                                         <option value="0">Seleccion</option>
                                         @foreach ($productos as $producto)
-                                            <option precio="{{$producto->precio}}" value="{{$producto->id}}">{{$producto->nombre}}</option>
+                                            <option tamaño="{{$producto->tamaño}}" peso="{{$producto->peso}}" sabor="{{$producto->sabor}}" precio="{{$producto->precio}}" value="{{$producto->id}}">{{$producto->nombre}}</option>
                                             @endforeach
 
                                         </select>
@@ -80,10 +94,28 @@
                                     <div class="form-group col-3">
                                         <label for="">Cantidad</label>
                                         <input id="cantidad" type="number" class="form-control" name="cantidad">
-                                                
+                                            @error('cantidad') 
+                                               <small class="text-danger">{{$message}}</small>
+                                            @enderror
+                                    </div>
+                                    <div class="form-group col-3">
+                                    <label for="">Peso</label>
+                                        <input id="peso" type="text" value="0" class="form-control" readonly >
                                     </div>
 
-                                    <div class="form-group col-3">
+                                    <div class="form-group col-6">
+                                    <label for="">Sabor</label>
+                                        <input id="sabor" type="text" value="" class="form-control" readonly >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                    <label for="">Tamaño</label>
+                                        <input id="tamaño" type="text" value="" class="form-control" readonly >
+                                    </div>
+
+                                   
+
+                                    <div class="form-group col-6">
                                     <label for="">Precio</label>
                                         <input id="precio" type="text" value="0" class="form-control" readonly >
                                     </div>
@@ -123,12 +155,63 @@
     
 
 @section("script")
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
+    $(document).ready(function() {
+                            // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-venta').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                title: "¿Estás seguro?",
+                text: "Una vez agregada la venta, no podrás editarlo.",
+                icon: "warning",
+                buttons: ["Cancelar", "Agregar"],
+                dangerMode: true,
+            })
+                .then((willAdd) => {
+                    if (willAdd) {
+                                        // Envía el formulario
+                    this.submit();
+                } else {
+                    swal("La venta no se ha agregado.", {
+                        icon: "info",
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    function colocar(){
+        let nit=$("#Cliente option:selected").attr("NIT");
+        let tipo=$("#Cliente option:selected").attr("TipoCliente");
+        $("#NIT").val(nit);
+        console.log(nit);
+        $("#TipoCliente").val(tipo);
+        console.log(tipo);
+    }
+     
     function colocar_precio(){
         
         let precio = $("#producto option:selected").attr("precio");
         $("#precio").val(precio);
         console.log(precio);
+
+        let sabor = $("#producto option:selected").attr("sabor");
+        $("#sabor").val(sabor);
+        console.log(sabor);
+
+
+        let peso = $("#producto option:selected").attr("peso");
+        $("#peso").val(peso);
+        console.log(peso);
+
+        let tamaño = $("#producto option:selected").attr("tamaño");
+        $("#tamaño").val(tamaño);
+        console.log(tamaño);
     }
 
     function agregar_producto(){

@@ -32,9 +32,21 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('Tipo Cantidad') }}
-            {{ Form::select('TipoCantidad',['Kilogramo' => 'Kilogramos', 'Gramo' => 'Gramos', 'Unidades' => 'Unidades', 'Litros' => 'Litros',  'Mililitros' => 'Mililitros'], $insumo->TipoCantidad, ['class' => 'form-control' . ($errors->has('TipoCantidad') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Cantidad']) }}
-            {!! $errors->first('TipoCantidad', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('Tipo de unidad de medida') }}
+            {{ Form::select('TipoCantidad',['Kilogramo' => 'Kilogramos', 'Gramo' => 'Gramos', 'Unidades' => 'Unidades', 'Litros' => 'Litros',  'Mililitros' => 'Mililitros'], $insumo->TipoCantidad, ['class' => 'form-control' . ($errors->has('TipoCantidad') ? ' is-invalid' : ''), 'placeholder' => 'Selección']) }}
+            {!! $errors->first('TipoCantidad', '<div class="invalid-feedback"></div>') !!}
+            @error('TipoCantidad')
+                <small class="text-danger">{{ str_replace("tipo cantidad","tipo de unidad de medida",$errors->first('TipoCantidad')) }}</small>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            {{ Form::label('Cantidad De Medida') }}
+            {{ Form::number('Medida', $insumo->Medida, ['class' => 'form-control' . ($errors->has('Medida') ? ' is-invalid' : ''), 'placeholder' => 'cantidad de medida']) }}
+            {!! $errors->first('Medida', '<div class="invalid-feedback"></div>') !!}
+            @error('Medida')
+                <small class="text-danger">{{ str_replace("medida","cantidad de medida",$errors->first('Medida')) }}</small>
+            @enderror
         </div>
         
     </div>

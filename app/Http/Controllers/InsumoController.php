@@ -59,13 +59,14 @@ class InsumoController extends Controller
             'Nombre' => 'required|string',
             'TipoCantidad' => 'required|string',
             'Precio' => 'required|numeric',
+            'Medida' => 'required|numeric',
         ]);
         request()->validate(Insumo::$rules);
 
         $insumo = Insumo::create($request->all());
 
         return redirect()->route('insumos.index')
-            ->with('success', 'Insumo created successfully.');
+            ->with('success', 'Insumo creado correctamente');
     }
     public function updateStatus($id)
     {
@@ -114,7 +115,7 @@ class InsumoController extends Controller
         $insumo->update($request->all());
 
         return redirect()->route('insumos.index')
-            ->with('success', 'Insumo updated successfully');
+            ->with('success', 'Insumo actualizado correctamente');
     }
 
     /**
@@ -127,7 +128,7 @@ class InsumoController extends Controller
         $insumo = Insumo::find($id)->delete();
 
         return redirect()->route('insumos.index')
-            ->with('success', 'Insumo deleted successfully');
+            ->with('success', 'Insumo borrado correctamente');
     }
 
    

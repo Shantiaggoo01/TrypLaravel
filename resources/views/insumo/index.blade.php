@@ -65,7 +65,8 @@ Insumo
 
                                     <th>Nombre</th>
                                     <th>Precio</th>
-                                    <th>Tipo de cantidad</th>
+                                    <th>Tipo de cantidad de medida</th>
+                                    <th>Cantidad de medida</th>
                                     <th>Cantidad</th>
 
                                     <th>Estado</th>
@@ -86,6 +87,7 @@ Insumo
                                     <td>{{ $insumo->Nombre }}</td>
                                     <td>{{ $insumo->Precio }}</td>
                                     <td>{{ $insumo->TipoCantidad }}</td>
+                                    <td>{{ $insumo->Medida}}</td>
                                     <td>{{ $insumo->cantidad }}</td>
 
                                     <td>{{ $insumo->Estado ? 'Activo' : 'Inactivo' }}</td>
@@ -106,7 +108,7 @@ Insumo
 
                                     <td>
                                         <form action="{{ route('insumos.destroy',$insumo->id) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary " href="{{ route('insumos.show',$insumo->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                            
                                             @can('editar-insumos')
                                             <a class="btn btn-sm btn-success" href="{{ route('insumos.edit',$insumo->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                             @endcan

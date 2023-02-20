@@ -72,8 +72,8 @@
 										<th>Tipo de Cliente</th>
 										<th>Nombre</th>
 										<th>Apellido</th>
-										<th>Telefono</th>
-										<th>Direccion</th>
+										<th>Teléfono</th>
+										<th>Dirección</th>
                                         <th>Estado</th>
                                         @can('cambiar-estado')
                                         <th>Cambiar estado</th>
@@ -111,7 +111,7 @@
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy',$cliente->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('clientes.show',$cliente->id) }}"><i class="fa fa-fw fa-eye"></i> Mostrar</a>
+                                                    
                                                     @can('editar-cliente')
                                                     <a class="btn btn-sm btn-success" href="{{ route('clientes.edit',$cliente->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @endcan

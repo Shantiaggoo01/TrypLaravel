@@ -31,8 +31,8 @@
 
 
         <div class="form-group">
-            {{ Form::label('Tipo Cliente') }}
-            {{ Form::select('idTipoCliente', $tipos , $cliente->idTipoCliente, ['class' => 'form-control' . ($errors->has('idTipoCliente') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Cliente']) }}
+            {{ Form::label('Tipo de cliente') }}
+            {{ Form::select('idTipoCliente', $tipos , $cliente->idTipoCliente, ['class' => 'form-control' . ($errors->has('idTipoCliente') ? ' is-invalid' : ''), 'placeholder' => 'Tipo de cliente']) }}
             {!! $errors->first('idTipoCliente', '<div class="invalid-feedback"></div>') !!}
             @error('idTipoCliente')
                 <small class="text-danger">{{ str_replace("id tipo cliente","Tipo de Cliente",$errors->first('idTipoCliente')) }}</small>
@@ -55,16 +55,16 @@
             @enderror
         </div>
         <div class="form-group">
-            {{ Form::label('Telefono') }}
-            {{ Form::text('Telefono', $cliente->Telefono, ['class' => 'form-control' . ($errors->has('Telefono') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
+            {{ Form::label('Teléfono') }}
+            {{ Form::text('Telefono', $cliente->Telefono, ['class' => 'form-control' . ($errors->has('Telefono') ? ' is-invalid' : ''), 'placeholder' => 'Teléfono']) }}
             {!! $errors->first('Telefono', '<div class="invalid-feedback"></div>') !!}
             @error('Telefono')
                 <small class="text-danger">{{ str_replace("telefono","Telefono",$errors->first('Telefono')) }}</small>
             @enderror
         </div>
         <div class="form-group">
-            {{ Form::label('Direccion') }}
-            {{ Form::text('Direccion', $cliente->Direccion, ['class' => 'form-control' . ($errors->has('Direccion') ? ' is-invalid' : ''), 'placeholder' => 'Direccion']) }}
+            {{ Form::label('Dirección') }}
+            {{ Form::text('Direccion', $cliente->Direccion, ['class' => 'form-control' . ($errors->has('Direccion') ? ' is-invalid' : ''), 'placeholder' => 'Dirección']) }}
             {!! $errors->first('Direccion', '<div class="invalid-feedback"></div>') !!}
             @error('Direccion')
                 <small class="text-danger">{{ str_replace("direccion","Direccion",$errors->first('Direccion')) }}</small>
