@@ -29,7 +29,17 @@ class UsuarioController extends Controller
     {
         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario|Ver-Menu-Configuracion|Ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-usuario', ['only' => ['create', 'store']]);
-        $this->middleware('permission:editar-usuario', ['only' => ['edit', 'update']]);
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $userId = $request->route()->parameter('id');
+            $user = Auth::user();
+    
+            if ($user->id != $userId) {
+                abort(403, 'User does not have the right permissions.');
+            }
+    
+            return $next($request);
+        })->only('edit', 'update');
         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
     }
     /**
@@ -99,6 +109,21 @@ class UsuarioController extends Controller
 
     public function edit($id)
     {
+
+        $user = Auth::user();
+
+        if (Auth::check()) {
+            $user = ModelsUser::findOrFail($id);
+            if (Auth::user()->id == $user->id) {
+                return view('usuarios.edit', compact('user'));
+            } else {
+                abort(403, 'User does not have the right permissions.');
+            }
+        } else {
+            return redirect('login');
+        }
+
+        
         $user = ModelsUser::find($id);
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
