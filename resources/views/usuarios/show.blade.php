@@ -61,7 +61,7 @@ Usuario
 
                         <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
                     </div>
-                    
+                    <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atrás</button>
                 </div>
 
             </div>
