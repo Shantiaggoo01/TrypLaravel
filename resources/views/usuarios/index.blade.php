@@ -74,7 +74,7 @@ Usuario
 
 @endsection
 
-
+@can('ver-usuario')
 @section('content')
 
 
@@ -142,3 +142,4 @@ Usuario
 
 
     @endsection
+    @endcan
