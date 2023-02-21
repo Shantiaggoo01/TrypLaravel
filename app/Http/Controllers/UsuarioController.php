@@ -267,15 +267,12 @@ class UsuarioController extends Controller
 
     // esto es el visualizar perfil 
 
-    public function showUser($id)
-    {
+    public function showPerfil()
+{
+    $user = Auth::user();
 
-        $user = ModelsUser::findOrFail($id);
-
-        //dd($user);
-
-        return view('usuarios.showPerfil', compact('user'));
-    }
+    return view('usuarios.showperfil', compact('user'));
+}
 
     // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
 
@@ -308,14 +305,6 @@ class UsuarioController extends Controller
     //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     // }
 
-    public function showperfil($id)
-    {
-
-        $user = ModelsUser::findOrFail($id);
-
-        //dd($user);
-
-        return view('usuarios.showperfil', compact('user'));
-    }
+    
 
 }

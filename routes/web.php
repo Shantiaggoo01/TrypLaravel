@@ -51,7 +51,7 @@ Route::post('insumo/{id}/Estado', 'App\Http\Controllers\InsumoController@updateS
 Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updateStatus')->name('cliente.updateStatus');
 
 
-
+Route::get('/perfil', 'App\Http\Controllers\UsuarioController@showPerfil')->name('perfil');
 
 
 
