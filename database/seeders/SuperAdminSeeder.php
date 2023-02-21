@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\TipoProveedor;
+use App\Models\TipoCliente;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -88,5 +89,16 @@ class SuperAdminSeeder extends Seeder
             'nombre' => 'Persona Jurídica',
             'descripcion' => 'Persona jurídica',
         ]);
+
+        $tipoCliente = TipoCliente::create([
+            'Nombre'=>'Persona Natural',
+            
+        ]);
+
+        $tipoCliente = TipoCliente::create([
+            'Nombre'=>'Persona Jurídica',
+           
+        ]);
+
     }
 }
