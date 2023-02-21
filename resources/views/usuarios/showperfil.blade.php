@@ -62,15 +62,100 @@ Usuario
                         <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ Auth::user()->created_at }}</b></h6>
                     </div>
 
-
-
-
-
                 </div>
 
-            </div>
-        </div>
-    </div>
-</div>
 
-@endsection
+                {!! Form::model( Auth::user(), ['method' => 'PATCH', 'route' => ['usuarios.update', Auth::user()->id], 'enctype' => 'multipart/form-data']) !!}
+
+                <div class="card card-default">
+                    <div class="card-header">
+                        <div class="card-header text-center">
+
+                            <div class="form-group">
+                                <img id="preview" style="width: 200px;">
+                                <input type="file" name="image" id="image" class="form-control">
+                                @error('image')
+                                <div class="text-danger">{{ str_replace("image", "Imagen", $errors->first('image')) }}</div>
+                                @enderror
+                                <br>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="documento">Documento</label>
+                                        {!!Form::text('documento',null,array('class'=>'form-control'))!!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        {!!Form::text('name',null,array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="apellido">Apellidos</label>
+                                        {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="telefono">Telefono</label>
+                                        {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="direccion">Direccion</label>
+                                        {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form group">
+                                        <label for="email">E-mail</label>
+                                        {!!Form::text('email',null,array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="password"> Cambiar Contraseña </label>
+                                        {!!Form::password('password',array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="confirm-password"> Confirmar contraseña </label>
+                                        {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+
+                                    <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar();" history.back()">Editar</button>
+                                </div>
+
+
+
+                            </div>
+
+                            {!!Form::close()!!}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @endsection
