@@ -29,11 +29,6 @@ Usuario
         icon: "success",
         button: "Aceptar",
     });
-    {
-        {
-            session() - > forget('success')
-        }
-    }
 </script>
 @endif
 
@@ -45,11 +40,6 @@ Usuario
         icon: "error",
         button: "Aceptar",
     });
-    {
-        {
-            session() - > forget('success')
-        }
-    }
 </script>
 @endif
 

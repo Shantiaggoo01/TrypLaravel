@@ -108,13 +108,18 @@ Crear Usuarios
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for=""> Rol del usuario</label>
+                    <label for="roles">Rol del usuario</label>
                     <?php
-                    // establece el valor seleccionado en el menú desplegable como el rol actual del usuario
+                    // Establece el valor seleccionado en el menú desplegable como el rol actual del usuario
                     $selectedRole = !empty($selectedRoles) ? $selectedRoles[0] : null;
                     $roles = array_merge(['' => '--- Ninguno ---'], $roles);
                     ?>
+                    @if(Auth::user()->hasRole('Administrador'))
                     {!! Form::select('roles[]', $roles, $selectedRole, ['class' => 'form-control']) !!}
+                    @else
+                    {!! Form::text('roles[]', 'Empleado', ['class' => 'form-control', 'readonly' => 'readonly']) !!}
+                    {!! Form::hidden('roles[]', 'Empleado') !!}
+                    @endif
                 </div>
             </div>
 
