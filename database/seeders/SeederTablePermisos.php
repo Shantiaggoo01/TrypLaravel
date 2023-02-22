@@ -30,79 +30,65 @@ class SeederTablePermisos extends Seeder
             'crear-proveedor',
             'editar-proveedor',
             'borrar-proveedor',
-            
+
 
             // tabla cliente
             'ver-cliente',
             'editar-cliente',
             'crear-cliente',
             'borrar-cliente',
-            
+
 
             // tabla compras
             'Crear-Compra',
 
-              // tabla insumos
-              'ver-insumos',
-              'editar-insumos',
-              'crear-insumos',
-              'borrar-insumos',
-           
-
-               // tabla producto
-               'ver-producto',
-               'editar-producto',
-               'crear-producto',
-               'borrar-producto',
-       
-
-               // tabla roles
-               'ver-roles',
-               'editar-roles',
-               'crear-roles',
-               'borrar-roles',
-
-               // Tabla botones
-               'Ver-Menu-Configuracion',
-               'Ver-Menu-Compras',
-               'Ver-Menu-Ventas',
-               'Ver-Menu-Produccion',
-               'Ver-Menu-Reportes',
-               'cambiar-estado',
+            // tabla insumos
+            'ver-insumos',
+            'editar-insumos',
+            'crear-insumos',
+            'borrar-insumos',
 
 
-               'ver-usuario',
-               'editar-usuario',
-               'crear-usuario',
-               'borrar-usuario',
-
-                // tabla tipo-cliente
-               
-
-                // tabla tipo-proveedor
-                'ver-tipoproveedor',
-                'editar-tipoproveedor',
-                'crear-tipoproveedor',
-                'borrar-tipoproveedor',
-
-                 // tabla usuarios
-               'ver-usuarios',
-               'editar-usuarios',
-               'crear-usuarios',
-               'borrar-usuarios',
+            // tabla producto
+            'ver-producto',
+            'editar-producto',
+            'crear-producto',
+            'borrar-producto',
 
 
-                 // tabla venta
-                 'ver-venta',
-                 'editar-venta',
-                 'crear-venta',
-                 'borrar-venta',
-  
-                 // Tabla Produccion
-                    'crear-produccion',
-                    'editar-produccion',
-                    'eliminar-produccion',
-                    'ver-produccion',
+            // tabla roles
+            'ver-roles',
+            'editar-roles',
+            'crear-roles',
+            'borrar-roles',
+
+            // Tabla botones
+            'Ver-Menu-Configuracion',
+            'Ver-Menu-Compras',
+            'Ver-Menu-Ventas',
+            'Ver-Menu-Produccion',
+            'Ver-Menu-Reportes',
+            'cambiar-estado',
+
+            // tabla usuarios
+            'ver-usuario',
+            'editar-usuario',
+            'crear-usuario',
+            'borrar-usuario',
+
+
+
+            // tabla venta
+            'ver-venta',
+            'editar-venta',
+            'crear-venta',
+            'borrar-venta',
+
+            // Tabla Produccion
+            'crear-produccion',
+            'editar-produccion',
+            'eliminar-produccion',
+            'ver-produccion',
 
 
 
