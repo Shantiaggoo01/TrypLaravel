@@ -70,27 +70,13 @@ class SeederTablePermisos extends Seeder
                'Ver-Menu-Reportes',
                'cambiar-estado',
 
-
+                // tabla usuarios
                'ver-usuario',
                'editar-usuario',
                'crear-usuario',
                'borrar-usuario',
 
-                // tabla tipo-cliente
                
-
-                // tabla tipo-proveedor
-                'ver-tipoproveedor',
-                'editar-tipoproveedor',
-                'crear-tipoproveedor',
-                'borrar-tipoproveedor',
-
-                 // tabla usuarios
-               'ver-usuarios',
-               'editar-usuarios',
-               'crear-usuarios',
-               'borrar-usuarios',
-
 
                  // tabla venta
                  'ver-venta',
