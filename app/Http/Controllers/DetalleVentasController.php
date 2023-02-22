@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Cliente;
 use App\Models\Venta;
 use App\Models\detalle_ventas;
@@ -13,6 +12,7 @@ use PDF;
 
 class DetalleVentasController extends Controller
 {
+    //
     public function index(Request $request)
     {
         $ventas = Venta::select("ventas.*", "clientes.nombre as cliente", "clientes.NIT","tipo_clientes.nombre as nombre_tipo")
@@ -24,7 +24,7 @@ class DetalleVentasController extends Controller
 
         return view("detalle_ventas.index", compact("ventas"));
     }
-
+   
     public function create()
     {
         $detalle_ventas = detalle_ventas::paginate();
@@ -55,7 +55,7 @@ class DetalleVentasController extends Controller
         $productos = [];
         if($venta !=null){
             $productos = Producto::select("productos.*", "detalle_ventas.cantidad as cantidad_c")
-            ->join("detalle_ventas", "productos.id", "=", "detalle_ventas.id")
+            ->join("detalle_ventas", "productos.id", "=", "detalle_ventas.idProducto")
             ->where("detalle_ventas.idVenta", $id )
             ->get();
         }
@@ -105,7 +105,6 @@ class DetalleVentasController extends Controller
 
 
     }
-
     public function calcular_precio($producto, $cantidades){
         $precio=0;
         foreach($producto as $key => $value){
@@ -114,5 +113,4 @@ class DetalleVentasController extends Controller
         }
         return $precio;
     }
-
 }
