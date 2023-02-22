@@ -85,6 +85,7 @@ Crear Usuarios
     <div class="card card-default">
 
         <div class="card card-default">
+
             <div class="card-header text-center">
                 <span class="card-title">
                     <label>
@@ -102,14 +103,18 @@ Crear Usuarios
                 </span>
             </div>
 
+
             <br>
 
             <div class="col-md-12">
                 <div class="form-group">
                     <label for=""> Rol del usuario</label>
-                    {{-- Add "Seleccione una opción" to the beginning of the roles array --}}
-                    <?php $roles = ['' => '--- Ninguno ---'] + $roles; ?>
-                    {!! Form::select('roles[]', $roles, $selectedRoles, ['class' => 'form-control']) !!}
+                    <?php
+                    // establece el valor seleccionado en el menú desplegable como el rol actual del usuario
+                    $selectedRole = !empty($selectedRoles) ? $selectedRoles[0] : null;
+                    $roles = array_merge(['' => '--- Ninguno ---'], $roles);
+                    ?>
+                    {!! Form::select('roles[]', $roles, $selectedRole, ['class' => 'form-control']) !!}
                 </div>
             </div>
 
@@ -117,14 +122,15 @@ Crear Usuarios
         <br>
         <hr>
         <br>
+
         <div class="card-header">
             <div class="card-header text-center">
                 <img class="rounded-circle mb-3 mt-4" src="{{asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="180" height="160">
                 <div class="form-group">
                     <img id="preview" style="width: 200px;">
                     <input type="file" name="image" id="image" class="form-control">
-                    @error('documento')
-                    <div class="text-danger">{{ str_replace("documento", "Contraseña", $errors->first('password')) }}</div>
+                    @error('image')
+                    <div class="text-danger">{{ str_replace("image", "Imagen", $errors->first('image')) }}</div>
                     @enderror
                     <br>
                 </div>
@@ -174,14 +180,6 @@ Crear Usuarios
                             {!!Form::text('email',null,array('class'=>'form-control'))!!}
                         </div>
                     </div>
-
-
-                    <!-- <div class="col-md-12">
-                    <div class="form-group">
-                        <label for=""> Rol del Usuario </label>
-                        {!!Form::select('roles[]',$roles,[],array('class'=>'form-control','placeholder' => '---Seleccione Nuevo Rol ---'))!!}
-                    </div>
-                </div> -->
 
                     <div class="col-md-12">
                         <div class="form-group">

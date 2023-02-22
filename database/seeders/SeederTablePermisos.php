@@ -69,6 +69,7 @@ class SeederTablePermisos extends Seeder
             'Ver-Menu-Produccion',
             'Ver-Menu-Reportes',
             'cambiar-estado',
+            'asignar-roles',
 
             // tabla usuarios
             'ver-usuario',

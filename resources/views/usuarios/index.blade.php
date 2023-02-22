@@ -23,14 +23,18 @@ Usuario
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 @if(Session::has('success'))
-    <script>
-        swal({
-            title: "{{ Session::get('success') }}",
-            icon: "success",
-            button: "Aceptar",
-        });
-        {{ session()->forget('success') }}
-    </script>
+<script>
+    swal({
+        title: "{{ Session::get('success') }}",
+        icon: "success",
+        button: "Aceptar",
+    });
+    {
+        {
+            session() - > forget('success')
+        }
+    }
+</script>
 @endif
 
 
@@ -41,7 +45,11 @@ Usuario
         icon: "error",
         button: "Aceptar",
     });
-    {{ session()->forget('success') }}
+    {
+        {
+            session() - > forget('success')
+        }
+    }
 </script>
 @endif
 
@@ -74,7 +82,7 @@ Usuario
 
 @endsection
 
-@can('ver-usuario')
+
 @section('content')
 
 
@@ -95,9 +103,7 @@ Usuario
         <table id="example" class="table table-striped table-hover">
             <thead class="thead">
                 <tr>
-
                     <th>ID</th>
-
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Rol</th>
@@ -107,33 +113,32 @@ Usuario
             <tbody>
                 @foreach ($users as $user)
                 <tr>
-
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name}}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td> @if(!empty($user->getRoleNames()))
+                    <td>
+                        @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $rolName)
                         <h5><span class="role-label">{{$rolName}}</span></h5>
                         @endforeach
                         @endif
                     </td>
-
-
                     <td>
-
-                        <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
-
+                        @if(auth()->user()->hasRole('Empleado') && auth()->user()->id == $user->id)
+                        <a class="btn btn-primary" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
+                        @else
+                        <a class="btn btn-primary" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
+                        @endif
 
                         @can('editar-usuario')
-                        <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar / Asignar Rol </a>
+                        <a class="btn btn-primary" href="{{ route('usuarios.edit', $user->id) }}">Editar / Asignar Rol</a>
                         @endcan
 
                         @can('borrar-usuario')
-                        {!!Form::open(['method'=>'DELETE','onclick'=>'return confirmacion()','route'=>['usuarios.destroy',$user->id],'style'=>'display:inline'])!!}
-                        {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
-                        {!!Form::close()!!}
+                        {!! Form::open(['method' => 'DELETE', 'onclick' => 'return confirmacion()', 'route' => ['usuarios.destroy', $user->id], 'style' => 'display:inline']) !!}
+                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
+                        {!! Form::close() !!}
                         @endcan
-
                     </td>
                 </tr>
                 @endforeach
@@ -143,4 +148,3 @@ Usuario
 
 
     @endsection
-    @endcan

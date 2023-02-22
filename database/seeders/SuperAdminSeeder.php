@@ -45,6 +45,7 @@ class SuperAdminSeeder extends Seeder
 
         $permisos = Permission::whereIn('name', [
             'ver-proveedor',
+            'editar-usuario',
             'crear-proveedor',
             'ver-insumos',
             'Crear-Compra',

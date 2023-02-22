@@ -22,15 +22,18 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+
+
+
 class UsuarioController extends Controller
 {
-
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario|Ver-Menu-Configuracion|Ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-usuario', ['only' => ['create', 'store']]);
-        $this->middleware('permission:editar-usuario',['only' => ['edit', 'update']]);
+        $this->middleware('permission:editar-usuario', ['only' => ['edit', 'update']]);
         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
+        $this->middleware('permission:asignar-roles', ['only' => ['index']]);
     }
     /**
      * Display a listing of the resource.
@@ -38,15 +41,17 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    { {
-            $users = ModelsUser::paginate();
+    {
+        $user = auth()->user();
 
-            return view('usuarios.index', compact('users'))
-                ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        if ($user->hasRole('Empleado')) {
+            $users = ModelsUser::where('id', $user->id)->paginate();
+        } else {
+            $users = ModelsUser::paginate();
         }
 
-
-        return view('usuarios.index');
+        return view('usuarios.index', compact('users'))
+            ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
 
@@ -107,11 +112,6 @@ class UsuarioController extends Controller
             return redirect()->back()->with('error', 'No puedes editar al super administrador');
         }
 
-        if ($user->hasRole('Empleado')) {
-
-            return redirect()->back()->with('error', 'No puedes editar al empleado predetermindado');
-        }
-
         $selectedRoles = $user->roles()->pluck('id')->toArray();
 
         $user = ModelsUser::find($id);
@@ -123,6 +123,17 @@ class UsuarioController extends Controller
         $selectedRoles = $user->roles()->pluck('name')->toArray();
 
         $userRole = $user->roles->pluck('name', 'roles', 'userRole');
+        // Verifica si el usuario es el superadministrador o un empleado
+        if ($user->hasRole('Administrador') || $user->hasRole('Empleado')) {
+            // si es empleado, establece el rol disponible en un array que solo contenga el rol "Empleado"
+            $roles = ['Empleado' => 'Empleado'];
+            $selectedRoles = $user->roles()->pluck('name')->toArray();
+        } else {
+            // si es administrador, establece los roles disponibles en el array `$roles` que se pasa a la vista
+            $roles = Role::pluck('name', 'name')->except('Administrador')->all();
+            $selectedRoles = $user->roles()->pluck('id')->toArray();
+        }
+
 
         return view('usuarios.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
     }
@@ -135,7 +146,7 @@ class UsuarioController extends Controller
         $this->validate($request, [
             'name' => ['required', 'regex:/^[\pL\s]+$/u'],
             'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
-            'email' => 'required| email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
             //'roles' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -157,15 +168,18 @@ class UsuarioController extends Controller
             $input['image'] = $name;
         }
 
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id', $id)->delete();
-
-        $user->assignRole($request->input('roles'));
-
-        $user->save();
-
-        Session::flash('success', 'Se actualizó correctamente');
-        return redirect()->route('usuarios.index');
+        // Verifica si el usuario es el superadministrador
+        if ($user->hasRole('Administrador')) {
+            // Si el usuario es el superadministrador, no se puede editar su rol
+            $input = Arr::except($input, array('roles'));
+            return redirect()->route('usuarios.index')->with('error', 'No puedes editar al super administrador');
+        } else {
+            // Si el usuario no es el superadministrador, se puede editar su rol
+            $user->syncRoles($request->input('roles'));
+            $user->update($input);
+            Session::flash('success', 'Se actualizó correctamente');
+            return redirect()->route('usuarios.show', $id);
+        }
     }
 
     // Codigo Original 
@@ -268,11 +282,11 @@ class UsuarioController extends Controller
     // esto es el visualizar perfil 
 
     public function showPerfil()
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    return view('usuarios.showperfil', compact('user'));
-}
+        return view('usuarios.showperfil', compact('user'));
+    }
 
     // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
 
@@ -305,6 +319,6 @@ class UsuarioController extends Controller
     //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     // }
 
-    
+
 
 }
