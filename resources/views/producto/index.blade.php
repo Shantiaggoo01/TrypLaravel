@@ -28,6 +28,15 @@
     });
 </script>
 @endif
+@if ($message = Session::get('error') )
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
+        button: "Aceptar",
+    });
+</script>
+@endif
 @endsection
 
 

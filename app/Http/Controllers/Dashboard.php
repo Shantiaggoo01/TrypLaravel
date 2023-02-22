@@ -6,8 +6,11 @@ use App\Models\Produccion;
 use Illuminate\Http\Request;
 use App\Models\Venta;
 use App\Models\Producto;
+use App\Models\Compra;
 use Carbon\Carbon;
 use DB;
+use Charts;
+
 
 
 class Dashboard extends Controller
@@ -34,9 +37,28 @@ class Dashboard extends Controller
                 ->orderBy('cantidad', 'desc')
                 ->take(5)
                 ->get();
+                $ventasA = DB::table('ventas')
+                ->select(DB::raw('MONTH(FechaVenta) as mes, SUM(Total) as total_ventas'))
+                ->whereYear('FechaVenta', date('Y'))
+                ->groupBy('mes')
+                ->get();
 
+    // Obtenemos las compras del año actual
+    $comprasA = DB::table('compras')
+                ->select(DB::raw('MONTH(FechaCompra) as mes, SUM(Total) as total_compras'))
+                ->whereYear('FechaCompra', date('Y'))
+                ->groupBy('mes')
+                ->get();
+                $meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                $clientes = DB::table('ventas')
+                ->join('clientes', 'ventas.idCliente', '=', 'clientes.id')
+                ->select('clientes.Nombre', DB::raw('SUM(Total) as TotalVentas'))
+                ->groupBy('clientes.Nombre')
+                ->orderBy('TotalVentas', 'desc')
+                ->take(10)
+                ->get();
 
-    return view('dashboard', compact('ventas', 'cantidad', 'total', 'productos', 'cproducto', 'produccion', 'cproduccion'));
+    return view('dashboard', compact('ventas', 'cantidad', 'total', 'productos', 'cproducto', 'produccion', 'cproduccion', 'ventas', 'productos', 'comprasA', 'ventasA', 'meses', 'clientes'));
 }
 
 }

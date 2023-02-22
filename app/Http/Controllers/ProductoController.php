@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detalle_produccion;
+use App\Models\detalle_ventas;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Models\Insumo;
@@ -60,7 +62,7 @@ class ProductoController extends Controller
     {
         //validacion de los campos
         $request->validate([
-            'nombre' => 'required|string',
+            'nombre' => 'required|string|unique:productos',
             'tamaño' => 'required|string',
             'sabor' => 'required|string',
             'invima' => 'required|numeric',
@@ -70,6 +72,8 @@ class ProductoController extends Controller
             'id_insumo' => 'required',
             'cantidades' => 'required',
         ]);
+        //validar que un producto no tenga el mismo nombre
+        
         $input = $request->all();
         try {
             DB::beginTransaction();
@@ -130,6 +134,10 @@ class ProductoController extends Controller
     public function updateStatus($id)
 {
     $provider = Producto::findOrFail($id);
+    $producciones = Detalle_produccion::where('id_producto', $id)->first();
+    if ($producciones) {
+        return redirect()->route('productos.index')->with('error', 'No se puede desactivar el producto porque está asociado a una producción.');
+    }
     $provider->update(['estado' => ! $provider->estado]);
 
     return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');

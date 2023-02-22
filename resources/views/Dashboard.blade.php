@@ -1,4 +1,6 @@
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 <script>
     var ctx = document.getElementById('ventas-chart').getContext('2d');
     var ventasData = {!! $ventas !!};
@@ -59,8 +61,165 @@
             }
         }
     });
+    
 </script>
+<script>
+    var ctx = document.getElementById('VeCo').getContext('2d');
 
+var ventasData = @json($ventasA);
+var comprasData = @json($comprasA);
+
+var meses = [];
+var ventas = [];
+var compras = [];
+
+ventasData.forEach(function(item) {
+    meses.push('Mes ' + item.mes );
+    ventas.push(item.total_ventas);
+});
+
+comprasData.forEach(function(item) {
+    compras.push(item.total_compras);
+});
+
+var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: meses,
+        datasets: [{
+            label: 'Ventas',
+            data: ventas,
+            backgroundColor: 'green',
+            borderColor: 'green',
+            fill: false,
+        },
+        {
+            label: 'Compras',
+            data: compras,
+            backgroundColor: 'red',
+            borderColor: 'red',
+            fill: false,
+        }]
+    },
+    options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Ventas vs Compras del año actual'
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+</script>
+<script>
+    var ctx = document.getElementById('clientes-chart').getContext('2d');
+
+    var nombres = @json($clientes->pluck('Nombre'));
+    var ventas = @json($clientes->pluck('TotalVentas'));
+
+    var chart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: nombres,
+            datasets: [{
+                label: 'Total de ventas',
+                data: ventas,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Clientes que generan mayor ingreso'
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+<script>
+    function downloadPDFC() {
+    // Obtener la referencia del canvas de la gráfica
+    var canvas = document.getElementById('VeCo');
+
+    // Convertir el canvas en una imagen base64
+    var imgData = canvas.toDataURL('image/png');
+
+    // Crear un objeto jsPDF y agregar la imagen
+    var doc = new jsPDF();
+    doc.addImage(imgData, 'PNG', 10, 10);
+
+    // Descargar el archivo PDF
+    doc.save('Compras-Vs-Ventas.pdf');
+}
+
+</script>
+<script>
+    function downloadPDF3() {
+    // Obtener la referencia del canvas de la gráfica
+    var canvas = document.getElementById('clientes-chart');
+
+    // Convertir el canvas en una imagen base64
+    var imgData = canvas.toDataURL('image/png');
+
+    // Crear un objeto jsPDF y agregar la imagen
+    var doc = new jsPDF();
+    doc.addImage(imgData, 'PNG', 10, 10);
+
+    // Descargar el archivo PDF
+    doc.save('Mejores-Clientes.pdf');
+}
+
+</script>
+<script>
+    function downloadPDF2() {
+    // Obtener la referencia del canvas de la gráfica
+    var canvas = document.getElementById('productos-chart');
+
+    // Convertir el canvas en una imagen base64
+    var imgData = canvas.toDataURL('image/png');
+
+    // Crear un objeto jsPDF y agregar la imagen
+    var doc = new jsPDF();
+    doc.addImage(imgData, 'PNG', 10, 10);
+
+    // Descargar el archivo PDF
+    doc.save('Productos-Mas-Vendidos.pdf');
+}
+
+</script>
+<script>
+    function downloadPDF1() {
+    // Obtener la referencia del canvas de la gráfica
+    var canvas = document.getElementById('ventas-chart');
+
+    // Convertir el canvas en una imagen base64
+    var imgData = canvas.toDataURL('image/png');
+
+    // Crear un objeto jsPDF y agregar la imagen
+    var doc = new jsPDF();
+    doc.addImage(imgData, 'PNG', 10, 10);
+
+    // Descargar el archivo PDF
+    doc.save('Ventas-Semanales.pdf');
+}
+
+</script>
 @endsection
 
 
@@ -164,6 +323,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Ventas de los ultimos 7 días</h6>
+                    <button onclick="downloadPDF1()">Descargar gráfica en PDF</button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -180,11 +340,42 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Productos más vendidos</h6>
+                    <button onclick="downloadPDF2()">Descargar gráfica en PDF</button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="chart-pie" style="height: 350px !important ;">
                         <canvas id="productos-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8 col-lg-7">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 bg-second-primary">
+                    <h6 class="m-0 font-weight-bold text-white">Ventas y compras del año</h6>
+                    <button onclick="downloadPDFC()">Descargar gráfica en PDF</button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie" style="height: 350px !important ;">
+                        <canvas id="VeCo"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 bg-second-primary">
+                    <h6 class="m-0 font-weight-bold text-white">Clientes que generan mayores ingresos</h6>
+                    <button onclick="downloadPDF3()">Descargar gráfica en PDF</button>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="chart-pie" style="height: 350px !important ;">
+                        <canvas id="clientes-chart"></canvas>
                     </div>
                 </div>
             </div>
