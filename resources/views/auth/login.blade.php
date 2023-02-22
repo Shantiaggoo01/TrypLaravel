@@ -9,7 +9,7 @@
             <div class="card shadow-lg o-hidden border-0 my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-flex"><img src="https://mybrandlegal.com/wp-content/uploads/2019/05/papas-fritas-1184x888.jpg" width="480" height="480"></div>
+                        <div class="col-lg-6 d-none d-lg-flex"><img src="{{ asset('images/TRYP.jpg') }}" width="480" height="480"></div>
                      
                         <div class="col-lg-6">
                             <div class="p-5">

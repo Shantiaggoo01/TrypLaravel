@@ -12,7 +12,7 @@
             <div class="card shadow-lg o-hidden border-0 my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-flex"><img src="https://p4.wallpaperbetter.com/wallpaper/416/986/391/potato-chips-snack-wallpaper-preview.jpg" width="490" height="360"></div>
+                        <div class="col-lg-6 d-none d-lg-flex"><img src="{{ asset('images/TRYP.jpg') }}" width="490" height="360"></div>
                      
                         <div class="col-lg-6">
                             <div class="p-5">
