@@ -123,6 +123,7 @@ Usuario
 
                         <a class="btn btn-primary" href="{{route('usuarios.show', $user->id)}}"> Ver Perfil </a>
 
+
                         @can('editar-usuario')
                         <a class="btn btn-primary" href="{{route('usuarios.edit',$user->id)}}"> Editar / Asignar Rol </a>
                         @endcan
