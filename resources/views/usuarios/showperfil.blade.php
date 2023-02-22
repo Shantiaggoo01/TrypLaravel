@@ -62,33 +62,24 @@ Usuario
                         <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ Auth::user()->created_at }}</b></h6>
                     </div>
 
-
-
-
-
                 </div>
-
-                <br>
-                <hr>
 
 
                 {!! Form::model( Auth::user(), ['method' => 'PATCH', 'route' => ['usuarios.update', Auth::user()->id], 'enctype' => 'multipart/form-data']) !!}
 
-
                 <div class="card card-default">
                     <div class="card-header">
                         <div class="card-header text-center">
+
                             <div class="form-group">
                                 <img id="preview" style="width: 200px;">
                                 <input type="file" name="image" id="image" class="form-control">
-                                @error('documento')
-                                <div class="text-danger">{{ str_replace("documento", "Contraseña", $errors->first('password')) }}</div>
+                                @error('image')
+                                <div class="text-danger">{{ str_replace("image", "Imagen", $errors->first('image')) }}</div>
                                 @enderror
                                 <br>
                             </div>
-                            <span class="card-title">
-                                <h3>Informacion del Usuario : <i style="color:RED">{{ Auth::user()->name}} {{ Auth::user()->apellido}}</i></h3>
-                            </span>
+
                         </div>
                         <div class="card-body">
 
@@ -152,8 +143,7 @@ Usuario
 
                                 <div class="col-md-12">
 
-                                    <button onclick="history.back()" type="button" class="btn btn-primary float-left">Atrás</button>
-
+                                    <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
                                     <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar();" history.back()">Editar</button>
                                 </div>
 

@@ -50,9 +50,8 @@ Route::post('producto/{id}/estado', [ProductoController::class, 'updateStatus'])
 Route::post('insumo/{id}/Estado', 'App\Http\Controllers\InsumoController@updateStatus')->name('insumo.updateStatus');
 Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updateStatus')->name('cliente.updateStatus');
 
-Route::get('usuarios/{usuario}', 'App\Http\Controllers\UsuarioController@show')->name('usuarios.show');
-Route::get('usuarios/{usuario}/edit', 'UsuarioController@edit')->name('usuarios.edit');
-Route::put('usuarios/{usuario}', 'UsuarioController@update')->name('usuarios.update');
+
+Route::get('/perfil', 'App\Http\Controllers\UsuarioController@showPerfil')->name('perfil');
 
 
 

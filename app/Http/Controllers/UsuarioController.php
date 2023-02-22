@@ -29,17 +29,7 @@ class UsuarioController extends Controller
     {
         $this->middleware('permission:ver-usuario|crear-usuario|editar-usuario|borrar-usuario|Ver-Menu-Configuracion|Ver-Menu-Compras|Ver-Menu-Produccion|ver-Menu-Reportes|Ver-Menu-Ventas')->only('index');
         $this->middleware('permission:crear-usuario', ['only' => ['create', 'store']]);
-        $this->middleware('auth');
-        $this->middleware(function ($request, $next) {
-            $userId = $request->route()->parameter('id');
-            $user = Auth::user();
-    
-            if ($user->id != $userId) {
-                abort(403, 'User does not have the right permissions.');
-            }
-    
-            return $next($request);
-        })->only('edit', 'update');
+        $this->middleware('permission:editar-usuario',['only' => ['edit', 'update']]);
         $this->middleware('permission:borrar-usuario', ['only' => ['destroy']]);
     }
     /**
@@ -110,20 +100,6 @@ class UsuarioController extends Controller
     public function edit($id)
     {
 
-        $user = Auth::user();
-
-        if (Auth::check()) {
-            $user = ModelsUser::findOrFail($id);
-            if (Auth::user()->id == $user->id) {
-                return view('usuarios.edit', compact('user'));
-            } else {
-                abort(403, 'User does not have the right permissions.');
-            }
-        } else {
-            return redirect('login');
-        }
-
-        
         $user = ModelsUser::find($id);
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
@@ -291,15 +267,12 @@ class UsuarioController extends Controller
 
     // esto es el visualizar perfil 
 
-    public function showUser($id)
-    {
+    public function showPerfil()
+{
+    $user = Auth::user();
 
-        $user = ModelsUser::findOrFail($id);
-
-        //dd($user);
-
-        return view('usuarios.showPerfil', compact('user'));
-    }
+    return view('usuarios.showperfil', compact('user'));
+}
 
     // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
 
@@ -332,14 +305,6 @@ class UsuarioController extends Controller
     //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
     // }
 
-    public function showperfil($id)
-    {
-
-        $user = ModelsUser::findOrFail($id);
-
-        //dd($user);
-
-        return view('usuarios.showperfil', compact('user'));
-    }
+    
 
 }
