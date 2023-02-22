@@ -116,6 +116,11 @@ Crear Usuarios
                     ?>
                     @if(Auth::user()->hasRole('Administrador'))
                     {!! Form::select('roles[]', $roles, $selectedRole, ['class' => 'form-control']) !!}
+                    @if ($errors->has('roles'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('roles') }}</strong>
+                    </span>
+                    @endif
                     @else
                     {!! Form::text('roles[]', 'Empleado', ['class' => 'form-control', 'readonly' => 'readonly']) !!}
                     {!! Form::hidden('roles[]', 'Empleado') !!}

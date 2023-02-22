@@ -124,17 +124,17 @@ class UsuarioController extends Controller
 
         $userRole = $user->roles->pluck('name', 'roles', 'userRole');
 
-        // Verifica si el usuario es el superadministrador o un empleado
-        if ($user->hasRole('Administrador')) {
-            // si es administrador, establece los roles disponibles en el array `$roles` que se pasa a la vista
+        // Establece el valor seleccionado en el menú desplegable como el rol actual del usuario
+        $selectedRole = $user->roles()->pluck('name')->first();
+
+        // Si el usuario es administrador, agrega todos los roles disponibles al array de roles
+        if (auth()->user()->hasRole('Administrador')) {
             $roles = Role::pluck('name', 'name')->all();
-            $selectedRoles = $user->roles()->pluck('id')->toArray();
-        } else if ($user->hasRole('Empleado')) {
-            // si es empleado, establece el rol disponible en un array que solo contenga el rol "Empleado"
+        } else {
             $roles = ['Empleado' => 'Empleado'];
-            $selectedRoles = $user->roles()->pluck('name')->toArray();
-        } 
-        
+        }
+
+
 
 
         return view('usuarios.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
