@@ -144,7 +144,7 @@ Crear Compra
                     <script>
                         //confirmacion de Guardar 
                         function confirmacionGuardar() {
-                            var respuesta = confirm("¡Confirme para guardar la informacion!");
+                            var respuesta = confirm("¡Confirme para guardar la información!");
 
                             if (respuesta == true) {
                                 return true;

@@ -28,7 +28,6 @@ Compra_insumos
         icon: "success",
         button: "Aceptar",
     });
-    {{ session()->forget('success') }}
 </script>
 @endif
 
@@ -39,7 +38,6 @@ Compra_insumos
         icon: "error",
         button: "Aceptar",
     });
-    {{ session()->forget('success') }}
 </script>
 @endif
 
@@ -91,11 +89,6 @@ Compra_insumos
                     </div>
                 </div>
 
-                <!-- @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-                @endif -->
 
                 <div class="card-body">
                     <div class="table-responsive">

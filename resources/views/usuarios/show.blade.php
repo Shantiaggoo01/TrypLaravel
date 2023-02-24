@@ -44,7 +44,7 @@ Usuario
 
 
                 <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="{{ asset('images/' . $user->image) }}" alt="{{ $user->name }}" width="180" height="160">
-                
+
                     <h3 class="title mt-3"><b> {{ $user->name}} {{ $user->apellido }}</b></h3>
                     <hr>
                     <div class="mb-3">
@@ -61,7 +61,12 @@ Usuario
 
                         <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
                     </div>
+                    
                     <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atrás</button>
+
+                    @can('editar-usuario')
+                    <a class="btn btn-primary float-center" href="{{ route('usuarios.edit', Auth::user()->id) }}">Editar</a>
+                    @endcan
                 </div>
 
             </div>
@@ -97,8 +102,8 @@ Usuario
 
 
 
-  <!-- Esta linea de codigo es para subnir la imagen -->
-                     <!-- <form action="/user/{{ $user->id }}/image" method="post" enctype="multipart/form-data">
+<!-- Esta linea de codigo es para subnir la imagen -->
+<!-- <form action="/user/{{ $user->id }}/image" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
