@@ -6,9 +6,9 @@
     <div class="box-body">
         
 
-    <div class="form-group">
+        <div class="form-group">
             {{ Form::label('NIT') }}
-            {{ Form::number('NIT', $cliente->NIT, ['class' => 'form-control' . ($errors->has('NIT') ? ' is-invalid' : ''), 'placeholder' => 'Nit']) }}
+            {{ Form::number('NIT', $cliente->NIT, ['class' => 'form-control' . ($errors->has('NIT') ? ' is-invalid' : ''), 'placeholder' => 'Nit', 'readonly' => 'readonly']) }}
             {!! $errors->first('NIT', '<div class="invalid-feedback"></div>') !!}
             @error('NIT')
              <small class="text-danger">{{ str_replace("n i t","NIT",$errors->first('NIT')) }}</small>
@@ -68,4 +68,3 @@
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
 </div>
-

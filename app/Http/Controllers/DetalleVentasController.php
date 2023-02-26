@@ -94,7 +94,8 @@ class DetalleVentasController extends Controller
 
 
             DB::commit();
-            return redirect("/detalle_ventas")->With('status', 'Venta realizada correctamente');
+            return redirect("/detalle_ventas")->With('success', 'Venta realizada correctamente');
+            
         }catch(\Exeption $e){
             DB::rollBack();
             return redirect("/detalle_ventas")->With('status', $e->getMessage());
