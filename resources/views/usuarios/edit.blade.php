@@ -66,18 +66,7 @@ Crear Usuarios
 
 
 
-    @if($errors->any())
-    <div class="alert alert-dark alert-dismissible fade show" role="alert">
-        <strong>¡Revise los campos !</strong>
-        @foreach($errors->all() as $error)
-        <span class="badge badge-danger">{{$error}}</span>
-        @endforeach
-        <button type="button" class="close" data-dismiss="alert" aria-label="close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-
+    
 
     {!! Form::model($user, ['method' => 'PATCH', 'route' => ['usuarios.update', $user->id], 'enctype' => 'multipart/form-data', 'id' => 'form-usuario']) !!}
 
@@ -155,11 +144,17 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="documento">Documento</label>
                             {!!Form::text('documento',null,array('class'=>'form-control'))!!}
+                            @error('documento')
+                    <div class="text-danger">{{ str_replace("documento", "Documento", $errors->first('documento')) }}</div>
+                    @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             {!!Form::text('name',null,array('class'=>'form-control'))!!}
+                            @error('name')
+                    <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -167,6 +162,9 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
+                            @error('apellido')
+                    <div class="text-danger">{{ str_replace("apellido", "Apellido", $errors->first('apellido')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -174,6 +172,9 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
                             {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
+                            @error('telefono')
+                    <div class="text-danger">{{ str_replace("telefono", "Teléfono", $errors->first('telefono')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -181,6 +182,9 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="direccion">Dirección</label>
                             {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
+                            @error('direccion')
+                    <div class="text-danger">{{ str_replace("direccion", "Dirección", $errors->first('direccion')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -188,6 +192,9 @@ Crear Usuarios
                         <div class="form group">
                             <label for="email">E-mail</label>
                             {!!Form::text('email',null,array('class'=>'form-control'))!!}
+                            @error('email')
+                    <div class="text-danger">{{ str_replace("email", "E-Mail", $errors->first('email')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -195,6 +202,9 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="password"> Cambiar Contraseña </label>
                             {!!Form::password('password',array('class'=>'form-control'))!!}
+                            @error('password')
+                    <div class="text-danger">{{ str_replace("password", "Contraseña", $errors->first('password')) }}</div>
+                    @enderror
                         </div>
                     </div>
 
@@ -202,6 +212,9 @@ Crear Usuarios
                         <div class="form-group">
                             <label for="confirm-password"> Confirmar contraseña </label>
                             {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
+                            @error('confirm-password')
+                    <div class="text-danger">{{ str_replace("confirm-password", "Confirmar Contraseña", $errors->first('confir-password')) }}</div>
+                    @enderror
                         </div>
                     </div>
 

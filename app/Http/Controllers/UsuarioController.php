@@ -246,13 +246,6 @@ class UsuarioController extends Controller
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
             return redirect()->back()->with('error', 'No puedes eliminar al super administrador');
-        } else
-
-        
-
-        if ($user->hasRole('Empleado')) {
-
-            return redirect()->back()->with('error', 'No puedes eliminar al empleado predetermindado');
         } else {
 
             // Elimina la asociación de roles del usuario

@@ -58,7 +58,7 @@ Crear Compra
 
                                                 <div class="form-group col-6">
                                                     <label for="">Fecha de compra</label>
-                                                    <input type="date" class="form-control" name="FechaCompra" }}" required>
+                                                    <input type="date" class="form-control" name="FechaCompra" required>
                                                     @error('date')
                                                     <div class="text-danger">{{ $message }}</div>
                                                     @enderror

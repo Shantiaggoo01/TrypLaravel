@@ -120,16 +120,24 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
+        // Verificar si hay usuarios con este rol
+        $usersWithRole = DB::table('users')->where('id', $id)->count();
+    
+        if ($usersWithRole > 0) {
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol porque hay usuarios asignados a él. Si desea eliminar el rol, debe eliminar el usuario primero.');
+        }
+    
         $role = DB::table('roles')->where('id',$id)->first();
-    if ($role->name == 'Administrador') {
-        return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
-    }
-
-    if ($role->name == 'Empleado') {
-        return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado');
-    } 
-
+    
+        if ($role->name == 'Administrador') {
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
+        }
+    
+        if ($role->name == 'Empleado') {
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado');
+        } 
+    
         DB::table('roles')->where('id',$id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');;
+        return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');
     }
 }

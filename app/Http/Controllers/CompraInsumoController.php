@@ -69,6 +69,9 @@ class CompraInsumoController extends Controller
             'id_proveedor' => 'required',
             'id_insumo' => 'required',
             'FechaCompra' => 'required',
+        ], [
+            'nFactura.required' => 'El campo Número de Factura es obligatorio.',
+            'nFactura.unique' => 'El Número de Factura ya existe.',
         ]);
 
         try {
