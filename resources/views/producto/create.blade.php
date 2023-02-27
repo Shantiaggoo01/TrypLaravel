@@ -69,10 +69,7 @@ Crear Producto
                                                     <label for=""><i>Peso</i></label>
                                                     <input id="peso" type="text" class="form-control" name="peso">
                                                 </div>
-                                                <div class="form-group col-6">
-                                                    <label for=""><i>Cantidad</i></label>
-                                                    <input id="cantidad" type="text" class="form-control" name="cantidad">
-                                                </div>
+                                                {{ Form::hidden('cantidad', 0) }}
                                                 <div class="form-group col-6">
                                                     <label for=""><i>Precio</i></label>
                                                     <input id="precio" type="text" class="form-control" name="precio">

@@ -33,8 +33,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon">
-                    <i class="fas fa-desktop"></i>
-                </div>
+                    <img src="{{asset('images/TRYP-1.jpg')}}" style="width: 50px" alt="">
+                </div>  
                 <div class="sidebar-brand-text mx-3">The Tryp</div>
             </a>
 
