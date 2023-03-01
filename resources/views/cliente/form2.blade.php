@@ -4,20 +4,20 @@
 
 
     <div class="box-body">
-        
 
-    <div class="form-group">
+
+        <div class="form-group">
             {{ Form::label('NIT') }}
-            {{ Form::number('NIT', $cliente->NIT, ['class' => 'form-control' . ($errors->has('NIT') ? ' is-invalid' : ''), 'placeholder' => 'Nit']) }}
+            {{ Form::number('NIT', $cliente->NIT, ['class' => 'form-control' . ($errors->has('NIT') ? ' is-invalid' : ''), 'placeholder' => 'Nit', 'readonly' => 'readonly']) }}
             {!! $errors->first('NIT', '<div class="invalid-feedback"></div>') !!}
             @error('NIT')
              <small class="text-danger">{{ str_replace("n i t","NIT",$errors->first('NIT')) }}</small>
             @enderror
         </div>
-        
 
 
-    
+
+
 
 
         <div class="form-group">
@@ -60,8 +60,8 @@
                 <small class="text-danger">{{ str_replace("direccion","Direccion",$errors->first('Direccion')) }}</small>
             @enderror
         </div>
-       
-       
+
+
 
     </div>
     <div class="box-footer mt20">

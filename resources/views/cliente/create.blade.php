@@ -16,7 +16,7 @@
                         <span class="card-title">Nuevo Cliente</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('clientes.store') }}"  role="form" enctype="multipart/form-data">
+                        <form id="form-cliente" method="POST" action="{{ route('clientes.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('cliente.form')
@@ -27,4 +27,34 @@
             </div>
         </div>
     </section>
+    @section("script")
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+                            // Agrega el Sweet Alert cuando se envía el formulario
+        $('#form-cliente').on('submit', function(event) {
+            event.preventDefault();
+            swal({
+                title: "¿Estás seguro?",
+                text: "Una vez agregado el cliente, no podrás editar su NIT.",
+                icon: "warning",
+                buttons: ["Cancelar", "Agregar"],
+                dangerMode: true,
+            })
+                .then((willAdd) => {
+                    if (willAdd) {
+                                        // Envía el formulario
+                    this.submit();
+                } else {
+                    swal("El cliente no se ha agregado.", {
+                        icon: "info",
+                    });
+                }
+            });
+        });
+    });
+</script>
+@endsection
 @endsection

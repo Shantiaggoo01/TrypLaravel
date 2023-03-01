@@ -7,6 +7,8 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Detalle_produccion;
+use App\Models\Insumo;
+use App\Models\producto_insumo;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -78,6 +80,17 @@ class ProduccionController extends Controller
                      ]);
                      $ins = Producto::find($value);
                      $ins->update(['cantidad' => $ins->cantidad + $input['cantidades'][$key]]);
+                     if(is_array($input['producto_id'])){
+                        foreach ($input['producto_id'] as $key => $value) {
+                            $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
+                            $producto = Producto::where('id', $produccion->id_producto)->first();
+                            $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
+                            foreach ($producto_insumo as $producto_insumo) {
+                                $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
+                                $insumo->update(['cantidad' => $insumo->cantidad - $producto_insumo->cantidad * $input['cantidades'][$key]]);
+                            }
+                        }
+                 }
                  }
                  
              } 
