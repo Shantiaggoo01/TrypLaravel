@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\TipoCliente;
 use App\Models\TipoProveedor;
+use App\Models\Tiposcuenta;
+use App\Models\Regiman;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -96,6 +98,22 @@ class SuperAdminSeeder extends Seeder
         ]);
         $tipocliente = TipoCliente::create([
             'Nombre' => 'Persona Jurídica',
+
+        ]);
+        $tipocuenta = Tiposcuenta::create([
+            'nombre' => 'Ahorros',
+
+        ]);
+        $tipocuenta = Tiposcuenta::create([
+            'nombre' => 'Corriente',
+
+        ]);
+        $regimen = Regiman::create([
+            'nombre' => 'Simplificado',
+
+        ]);
+        $regimen = Regiman::create([
+            'nombre' => 'Común',
 
         ]);
     }

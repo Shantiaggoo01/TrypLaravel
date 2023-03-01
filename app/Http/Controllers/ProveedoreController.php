@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Proveedore;
 use App\Models\TipoProveedor;
+use App\Models\Regiman;
+use App\Models\TiposCuenta;
 use Illuminate\Http\Request;
 
 //Agregamos 
@@ -52,8 +54,10 @@ class ProveedoreController extends Controller
     public function create()
     {
         $proveedore = new Proveedore();
+        $regimen = Regiman::pluck('nombre', 'id');
+        $tiposCuenta = TiposCuenta::pluck('nombre', 'id');
         $tipo_proveedors = TipoProveedor::pluck('nombre', 'id');
-        return view('proveedore.create', compact('proveedore', 'tipo_proveedors'));
+        return view('proveedore.create', compact('proveedore', 'tipo_proveedors', 'regimen', 'tiposCuenta'));
     }
 
     /**
@@ -73,6 +77,11 @@ class ProveedoreController extends Controller
             'banco' => 'required|string',
             'cuenta' => 'required|numeric',
             'idtipo_proveedor' => 'required',
+            'razon_social' => 'required|string',
+            'NombreContacto' => 'required|string',
+            'TelefonoContacto' => 'required|numeric',
+            'regimen_id' => 'required',
+            'cuenta_id' => 'required',
         ]);
         //convertir el select a un booleano
         $estado = $request->estado == 'on' ? 1 : 0;
@@ -86,7 +95,11 @@ class ProveedoreController extends Controller
         $proveedore->banco = $request->banco;
         $proveedore->cuenta = $request->cuenta;
         $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
-
+        $proveedore->razon_social = $request->razon_social;
+        $proveedore->NombreContacto = $request->NombreContacto;
+        $proveedore->TelefonoContacto = $request->TelefonoContacto;
+        $proveedore->regimen_id = $request->regimen_id;
+        $proveedore->cuenta_id = $request->cuenta_id;
         $proveedore->save();
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
@@ -108,8 +121,11 @@ class ProveedoreController extends Controller
     public function show($id)
     {
         $proveedore = Proveedore::find($id);
-
-        return view('proveedore.show', compact('proveedore'));
+        //encontrar el tipo de proveedor por el id del proveedor y luego el nombre
+        $tipo_proveedors = TipoProveedor::where('id', $proveedore->idtipo_proveedor)->pluck('nombre');
+        $regimen = Regiman::where('id', $proveedore->regimen_id)->pluck('nombre');
+        $tiposCuenta = TiposCuenta::where('id', $proveedore->cuenta_id)->pluck('nombre');
+        return view('proveedore.show', compact('proveedore', 'tipo_proveedors', 'regimen', 'tiposCuenta'));
     }
 
     /**
@@ -121,8 +137,10 @@ class ProveedoreController extends Controller
     public function edit($id)
     {
         $tipo_proveedors = TipoProveedor::pluck('nombre', 'id');
+        $regimen = Regiman::pluck('nombre', 'id');
+        $tiposCuenta = TiposCuenta::pluck('nombre', 'id');
         $proveedore = Proveedore::find($id);
-        return view('proveedore.edit', compact('proveedore', 'tipo_proveedors'));
+        return view('proveedore.edit', compact('proveedore', 'tipo_proveedors', 'regimen', 'tiposCuenta'));
     }
 
     /**
@@ -143,6 +161,11 @@ class ProveedoreController extends Controller
         'banco' => 'required|string',
         'cuenta' => 'required|numeric',
         'idtipo_proveedor' => 'required',
+        'razon_social' => 'required|string',
+        'NombreContacto' => 'required|string',
+        'TelefonoContacto' => 'required|numeric',
+        'regimen_id' => 'required',
+        'cuenta_id' => 'required',
     ]);
 
     $proveedore = Proveedore::find($id);
@@ -153,6 +176,11 @@ class ProveedoreController extends Controller
     $proveedore->banco = $request->banco;
     $proveedore->cuenta = $request->cuenta;
     $proveedore->idtipo_proveedor = $request->idtipo_proveedor;
+    $proveedore->razon_social = $request->razon_social;
+    $proveedore->NombreContacto = $request->NombreContacto;
+    $proveedore->TelefonoContacto = $request->TelefonoContacto;
+    $proveedore->regimen_id = $request->regimen_id;
+    $proveedore->cuenta_id = $request->cuenta_id;
     //$proveedore->estado = $request->estado;// <!-- agregue esto para el estado  valida el estado al actualizar el estado-->
     $proveedore->save();
     return redirect()->route('proveedores.index')

@@ -29,12 +29,20 @@
                             {{ $proveedore->nombre }}
                         </div>
                         <div class="form-group">
+                            <strong>Razón Social:</strong>
+                            {{ $proveedore->razon_social }}
+                        </div>
+                        <div class="form-group">
                             <strong>Direccion:</strong>
                             {{ $proveedore->direccion }}
                         </div>
                         <div class="form-group">
                             <strong>Telefono:</strong>
                             {{ $proveedore->telefono }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Regimen:</strong>
+                            {{ $regimen }}
                         </div>
                         <div class="form-group">
                             <strong>Banco:</strong>
@@ -45,10 +53,21 @@
                             {{ $proveedore->cuenta }}
                         </div>
                         <div class="form-group">
-                            <strong>Idtipo Proveedor:</strong>
-                            {{ $proveedore->idtipo_proveedor->nombre }}
+                            <strong>Tipo de cuenta:</strong>
+                            {{ $tiposCuenta }}
                         </div>
-
+                        <div class="form-group">
+                            <strong>Tipo de Proveedor:</strong>
+                            {{ $tipo_proveedors }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Nombre del contacto:</strong>
+                            {{ $proveedore->NombreContacto }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Teléfono del contacto:</strong>
+                            {{ $proveedore->TelefonoContacto }}
+                        </div>
                     </div>
                 </div>
             </div>

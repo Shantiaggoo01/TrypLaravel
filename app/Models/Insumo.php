@@ -38,4 +38,8 @@ class Insumo extends Model
    * @var array
    */
   protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad','Medida'];
+  
+  public function tieneCantidadDisponible($cantidadNecesaria) {
+    return $this->cantidad >= $cantidadNecesaria;
+}
 }

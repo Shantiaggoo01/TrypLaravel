@@ -88,6 +88,10 @@ class ProduccionController extends Controller
                             foreach ($producto_insumo as $producto_insumo) {
                                 $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
                                 $insumo->update(['cantidad' => $insumo->cantidad - $producto_insumo->cantidad * $input['cantidades'][$key]]);
+                                $cantidadNecesaria = $producto_insumo->cantidad - $input['cantidades'][$key];
+                                if (!$insumo->tieneCantidadDisponible($cantidadNecesaria)) {
+                                    return redirect()->route('produccion.index')->with('error', 'No hay suficiente cantidad de insumos para producir el producto.');
+                                }
                             }
                         }
                  }

@@ -19,6 +19,16 @@ return new class extends Migration
             $table->string('descripcion', 100);
             $table->timestamps();
         });
+        Schema::create('tiposcuentas', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre', 60);
+            $table->timestamps();
+        });
+        Schema::create('regimen', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre', 60);
+            $table->timestamps();
+        });
     }
 
     /**

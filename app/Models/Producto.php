@@ -43,6 +43,8 @@ class Producto extends Model
      */
     protected $fillable = ['idproducto','nombre','tamaño','sabor','invima','peso','cantidad','precio','estado'];
 
-
+    public function tieneCantidadDisponible($cantidadNecesaria) {
+      return $this->cantidad >= $cantidadNecesaria;
+  }
 
 }
