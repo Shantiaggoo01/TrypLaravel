@@ -10,8 +10,7 @@
         $('#form-usuario').on('submit', function(event) {
             event.preventDefault();
             swal({
-                    title: "¿Estás seguro?",
-                    text: "¿Seguro que desea guardar este usuario ?",
+                    title: "¿Seguro que desea guardar este usuario ?",
                     icon: "warning",
                     buttons: ["Cancelar", "Guardar"],
                     dangerMode: true,

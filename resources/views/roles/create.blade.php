@@ -49,8 +49,7 @@ Crear Usuarios
         $('#form-roles').on('submit', function(event) {
             event.preventDefault();
             swal({
-                    title: "¿Estás seguro?",
-                    text: "¿Seguro que desea crear este rol ?",
+                    title: "¿Seguro que desea crear este rol ?",
                     icon: "warning",
                     buttons: ["Cancelar", "Guardar"],
                     dangerMode: true,
