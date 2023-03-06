@@ -55,7 +55,7 @@ class ProduccionController extends Controller
          //validaciones
             $request->validate([
                 'FechaP' => 'required|date',
-                'FechaV' => 'required|date',
+                'FechaV' => 'required|date|before_or_equal:FechaP',
                 'producto' => 'required',
                 'cantidad' => 'required',
             ]);
@@ -89,7 +89,7 @@ class ProduccionController extends Controller
                                 $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
                                 $insumo->update(['cantidad' => $insumo->cantidad - $producto_insumo->cantidad * $input['cantidades'][$key]]);
                                 $cantidadNecesaria = $producto_insumo->cantidad - $input['cantidades'][$key];
-                                if (!$insumo->tieneCantidadDisponible($cantidadNecesaria)) {
+                                if ($cantidadNecesaria <= 0 || !$insumo->tieneCantidadDisponible($cantidadNecesaria))  {
                                     return redirect()->route('produccion.index')->with('error', 'No hay suficiente cantidad de insumos para producir el producto.');
                                 }
                             }

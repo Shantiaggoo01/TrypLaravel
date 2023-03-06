@@ -47,11 +47,7 @@
                                   {{ __('Agregar Cliente') }}
                                 </a>
                                 @endcan
-                                @can('crear-tipocliente')
-                                <a href="{{ route('tipo-clientes.index') }}" class="btn btn-success btn-sm float-right"  data-placement="left">
-                                    {{ __('Tipos de Clientes') }}
-                                  </a>
-                                  @endcan
+                               
                               </div>
                         </div>
                     </div>
