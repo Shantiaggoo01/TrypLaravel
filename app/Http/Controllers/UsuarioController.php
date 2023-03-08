@@ -106,6 +106,13 @@ class UsuarioController extends Controller
     {
 
         $user = ModelsUser::find($id);
+
+
+        // Verifica si el usuario que ha iniciado sesión tiene permisos para editar este perfil
+        if ($user->id !== Auth::user()->id && !Auth::user()->hasRole('Administrador')) {
+            return redirect()->route('usuarios.index')->with('error', 'No tienes permiso para editar este perfil');
+        }
+        
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
 
@@ -143,6 +150,8 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $user = ModelsUser::find($id);
+
+        
 
         // Continúa con la edición del usuario
         $this->validate($request, [
@@ -269,6 +278,11 @@ class UsuarioController extends Controller
 
         $user = ModelsUser::findOrFail($id);
 
+        // Verifica si el usuario es el administrador o si es el usuario que inició sesión
+        if (!Auth::user()->hasRole('Administrador') && $user->id !== Auth::id()) {
+            return redirect()->route('home')->with('error', 'No tienes permiso para ver este perfil');
+        }
+
         //dd($user);
 
         return view('usuarios.show', compact('user'));
@@ -279,6 +293,10 @@ class UsuarioController extends Controller
     public function showPerfil()
     {
         $user = Auth::user();
+
+        
+
+        return view('usuarios.show', compact('user'));
 
         return view('usuarios.showperfil', compact('user'));
     }
