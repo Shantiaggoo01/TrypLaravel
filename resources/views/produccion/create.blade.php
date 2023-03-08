@@ -45,7 +45,7 @@
                                 <div class="row card-body">
                                     <div class="form-group col-6">
                                         <label for="">Fecha Producción</label>
-                                       <input type="date" class="form-control" name="FechaP">
+                                       <input type="datetime" class="form-control" name="FechaP" value='<?php echo date('Y-m-d');?>'>
                                     </div>
                                 
                                     

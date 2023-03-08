@@ -173,8 +173,10 @@ class ProductoController extends Controller
     public function edit($idproducto)
     {
         $producto = Producto::find($idproducto);
-
-        return view('producto.edit', compact('producto'));
+        $insumos = Insumo::all();
+        $detalle = producto_insumo::where('id_producto',$idproducto)->first();
+        
+        return view('producto.edit', compact('producto','insumos','detalle'));
     }
 
     /**

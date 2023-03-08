@@ -32,7 +32,7 @@ class Cliente extends Model
 		'Telefono' => 'required',
 		'Direccion' => 'required',
 		'NIT' => 'required',
-        'Estado' => 'in:Activo,Inactivo',
+        'Estado' => 'in:0,1',
     
     ];
 

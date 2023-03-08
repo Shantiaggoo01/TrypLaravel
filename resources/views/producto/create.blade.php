@@ -88,11 +88,14 @@ Crear Producto
                                                     <select class="form-control" name="id_insumos" id="insumos" onchange="colocar_precio(this)">
                                                         <option value="0">Seleccione el insumo</option>
                                                         @foreach ($insumos as $insumo)
-                                                        <option Precio="{{$insumo->Precio}}" value="{{$insumo->id}}">{{$insumo->Nombre}}</option>
+                                                        <option cantidadExistente='{{$insumo->cantidad}}' Precio="{{$insumo->Precio}}" value="{{$insumo->id}}">{{$insumo->Nombre}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-
+                                                <div class="form-group col-3">
+                                                    <label for="">Cantidad Existente</label>
+                                                    <input id="cantidadExistente" type="number" class="form-control" name="cantidadExistente" readonly>
+                                                </div>
                                                 <div class="form-group col-3">
                                                     <label for="">Cantidad</label>
                                                     <input id="ccantidad" type="number" class="form-control" name="cantidad">
@@ -183,19 +186,21 @@ Crear Producto
 
 
                         function colocar_precio() {
-
+                            let cantidadExistente =$("#insumos option:selected").attr("cantidadExistente");
+        $("#cantidadExistente").val(cantidadExistente);
                             let Precio = $("#insumos option:selected").attr("Precio");
                             $("#Precio").val(Precio);
                             console.log(Precio);
                         }
 
                         function agregar_insumo() {
+                            let cantidadExistente=$("#cantidadExistente").val();
                             let id_insumo = $("#insumos option:selected").val();
                             let insumo_text = $("#insumos option:selected").text();
                             let cantidad = $("#ccantidad").val();
                             let Precio = $("#Precio").val();
-
-                            if (cantidad > 0 && Precio > 0) {
+                            if(cantidad<=cantidadExistente){
+                                if (cantidad > 0 && Precio > 0) {
                                 $("#tblInsumos").append(`<tr id="tr-${id_insumo}"> 
                                 
                     <td><input type="hidden" name="id_insumo[]" value="${id_insumo}"/> ${insumo_text}</td>
@@ -215,9 +220,16 @@ Crear Producto
                                 let precio_total = $("#precio_total").val() || 0;
                                 $("#precio_total").val(parseInt(precio_total) + parseInt(cantidad) * parseInt(Precio));
 
-                            } else {
+                            }
+                            else {
                                 alert("se debe ingresar una cantidad o precio valido");
                             }
+                            } else {
+                                swal("La cantidad ingresada supera la disponible", {
+                                            icon: "error",
+                                        });
+                            }
+                             
 
 
                         }

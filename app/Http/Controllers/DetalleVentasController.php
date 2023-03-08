@@ -29,8 +29,8 @@ class DetalleVentasController extends Controller
     {
         $detalle_ventas = detalle_ventas::paginate();
         $ventas = Venta::all();
-        $clientes = Cliente::all();
-        $productos = Producto::all();
+        $clientes = Cliente::where('estado', '1')->get();
+        $productos = Producto::where('estado', '1')->get();
 
 
         return view('detalle_ventas.create', compact('detalle_ventas','ventas','clientes', 'productos'))
@@ -59,9 +59,8 @@ class DetalleVentasController extends Controller
             ->where("detalle_ventas.idVenta", $id )
             ->get();
         }
-        $pdf = PDF::loadView('detalle_ventas.show',['productos'=>$productos, 'venta'=>$venta, 'ventas'=>$ventas]);
-        return $pdf->stream();
-        //return view('detalle_ventas.show', compact('venta', 'productos'));
+        
+        return view('detalle_ventas.show', compact('venta', 'productos','ventas'));
     }
 
     public function store(Request $request){

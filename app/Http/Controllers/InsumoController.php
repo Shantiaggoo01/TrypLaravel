@@ -56,7 +56,7 @@ class InsumoController extends Controller
     {
         $request->validate([
             
-            'Nombre' => 'required|string',
+            'Nombre' => ['required', 'regex:/^[\pL\s]+$/u'],
             'TipoCantidad' => 'required|string',
             'Precio' => 'required|numeric',
             'Medida' => 'required|numeric',

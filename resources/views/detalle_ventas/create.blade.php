@@ -30,8 +30,8 @@
                                 <div class="row card-body">
                                     <div class="form-group col-6">
                                         <label for="">Cliente</label>
-                                        <select class="form-control" name="Cliente" id="Cliente" placeholder="Seleccion" onchange="colocar()">
-                                            <option value="0">Seleccion</option>
+                                        <select class="form-control" name="Cliente" id="Cliente" placeholder="Seleccion" onchange="colocar()" required>
+                                            <option value="">Seleccion</option>
                                             @foreach ($clientes as $cliente)
                                             <option NIT="{{$cliente->NIT}}" TipoCliente="{{$cliente->tipoCliente->Nombre}}" value="{{$cliente->id}}">{{$cliente->Nombre}}</option>
                                             @endforeach
@@ -41,7 +41,7 @@
 
                                     <div class="form-group col-6">
                                         <label for="">Fecha de venta</label>
-                                        <input type="date" class="form-control" name="FechaVenta">
+                                        <input type="datetime" class="form-control" name="FechaVenta" value='<?php echo date('Y-m-d');?>' readonly>
                                             @error('FechaVenta') 
                                                <small class="text-danger">{{$message}}</small>
                                             @enderror 
@@ -80,10 +80,10 @@
                                 <div class="row card-body">
                                     <div class="form-group col-6">
                                         <label for="">Producto</label>
-                                        <select class="form-control" name="producto" id="producto" onchange="colocar_precio()">
+                                        <select class="form-control" name="producto" id="producto" onchange="colocar_precio()" required>
                                         <option value="0">Seleccion</option>
                                         @foreach ($productos as $producto)
-                                            <option tamaño="{{$producto->tamaño}}" peso="{{$producto->peso}}" sabor="{{$producto->sabor}}" precio="{{$producto->precio}}" value="{{$producto->id}}">{{$producto->nombre}}</option>
+                                            <option cantidadExistente="{{$producto->cantidad}}" tamaño="{{$producto->tamaño}}" peso="{{$producto->peso}}" sabor="{{$producto->sabor}}" precio="{{$producto->precio}}" value="{{$producto->id}}">{{$producto->nombre}}</option>
                                             @endforeach
 
                                         </select>
@@ -97,6 +97,10 @@
                                             @error('cantidad') 
                                                <small class="text-danger">{{$message}}</small>
                                             @enderror
+                                    </div>
+                                    <div class="form-group col-3">
+                                    <label for="">Cantidad Existente</label>
+                                        <input id="cantidadExistente" type="text" value="0" class="form-control" readonly >
                                     </div>
                                     <div class="form-group col-3">
                                     <label for="">Peso</label>
@@ -196,6 +200,10 @@
      
     function colocar_precio(){
         
+        let cantidadExistente =$("#producto option:selected").attr("cantidadExistente");
+        $("#cantidadExistente").val(cantidadExistente);
+        console.log(cantidadExistente);
+
         let precio = $("#producto option:selected").attr("precio");
         $("#precio").val(precio);
         console.log(precio);
@@ -215,12 +223,14 @@
     }
 
     function agregar_producto(){
+        let cantidadExistente=$("#cantidadExistente").val();
         let producto_id = $("#producto option:selected").val();
         let producto_text = $("#producto option:selected").text();
         let cantidad = $("#cantidad").val();
         let precio = $("#precio").val();
 
-        if(cantidad > 0 && precio > 0){
+        if(cantidad<=cantidadExistente){
+            if(cantidad > 0 && precio > 0){
             $("#tblproductos").append(`
                <tr id="tr-${producto_id}"> 
                     <td>
@@ -245,6 +255,12 @@
         }else{
             alert("se debe ingresar una cantidad o precio valido");
         }
+
+        }else{
+            alert("La cantidad ingresada es mayor a la existente");
+        }
+
+       
 
 
     }
