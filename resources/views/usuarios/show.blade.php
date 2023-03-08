@@ -63,10 +63,11 @@ Usuario
                     </div>
                     
                     <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atrás</button>
-
+                    @if(Auth::user()->id == $user->id)
                     @can('editar-usuario')
                     <a class="btn btn-primary float-center" href="{{ route('usuarios.edit', Auth::user()->id) }}">Editar</a>
                     @endcan
+                    @endif
                 </div>
 
             </div>

@@ -16,9 +16,9 @@ class RolController extends Controller
     function __construct()
     {
         $this->middleware('permission:ver-rol|crear-rol|editar-rol|borrar-rol')->only('index');
-        $this->middleware('permission:crear-rol' , ['only' => ['create','store']]);
-        $this->middleware('permission:editar-rol' , ['only' => ['edit','update']]);
-        $this->middleware('permission:borrar-rol' , ['only' => ['destroy']]);
+        $this->middleware('permission:crear-rol', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-rol', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:borrar-rol', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -28,8 +28,7 @@ class RolController extends Controller
     public function index()
     {
         $roles = Role::paginate(5);
-        return view('roles.index',compact('roles'));
-
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -39,8 +38,8 @@ class RolController extends Controller
      */
     public function create()
     {
-         $permission =  Permission::get();
-         return view('roles.create',compact('permission'));
+        $permission =  Permission::get();
+        return view('roles.create', compact('permission'));
     }
 
     /**
@@ -54,15 +53,14 @@ class RolController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:roles|regex:/^[\pL\s]+$/u',
             'permission' => 'required'
-            ] );
+        ]);
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
         return redirect()->route('roles.index')->with('success', 'Se registró con éxito');;
-
     }
 
-  
+
 
     /**
      * Show the form for editing the specified resource.
@@ -74,22 +72,22 @@ class RolController extends Controller
     {
         $role = Role::find($id);
 
-        $role = DB::table('roles')->where('id',$id)->first();
+        $role = DB::table('roles')->where('id', $id)->first();
         if ($role->name == 'Administrador') {
             return redirect()->route('roles.index')->with('error', 'No se puede editar el rol de administrador');
-        } 
+        }
 
         if ($role->name == 'Empleado') {
             return redirect()->route('roles.index')->with('error', 'No se puede editar el rol empleado predeterminado');
-        } 
+        }
 
-       
-       $permission = Permission::get();
-       $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
-       ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-       ->all();
 
-       return view('roles.edit', compact('role','permission','rolePermissions'));
+        $permission = Permission::get();
+        $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+
+        return view('roles.edit', compact('role', 'permission', 'rolePermissions'));
     }
 
     /**
@@ -102,11 +100,13 @@ class RolController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validate($request, ['name' => 'required|regex:/^[\pL\s]+$/u',
-        'permission' => 'required'] );
+        $this->validate($request, [
+            'name' => 'required|regex:/^[\pL\s]+$/u',
+            'permission' => 'required'
+        ]);
         $role = Role::find($id);
-        $role -> name= $request->input('name');
-        $role ->save();
+        $role->name = $request->input('name');
+        $role->save();
 
         $role->syncPermissions($request->input('permission'));
         return redirect()->route('roles.index')->with('success', 'Se actualizó con éxito');
@@ -120,24 +120,22 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
-        // Verificar si hay usuarios con este rol
-        $usersWithRole = DB::table('users')->where('id', $id)->count();
-    
-        if ($usersWithRole > 0) {
-            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol porque hay usuarios asignados a él. Si desea eliminar el rol, debe eliminar el usuario primero.');
-        }
-    
-        $role = DB::table('roles')->where('id',$id)->first();
-    
+        $role = Role::findById($id);
+
         if ($role->name == 'Administrador') {
             return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
         }
-    
+
         if ($role->name == 'Empleado') {
             return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado');
-        } 
-    
-        DB::table('roles')->where('id',$id)->delete();
+        }
+
+        if ($role->users()->count() > 0) {
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol porque hay usuarios asignados a él');
+        }
+
+
+        DB::table('roles')->where('id', $id)->delete();
         return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');
     }
 }
