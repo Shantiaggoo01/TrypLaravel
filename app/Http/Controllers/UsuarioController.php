@@ -104,10 +104,8 @@ class UsuarioController extends Controller
 
     public function edit($id)
     {
-
         $user = ModelsUser::find($id);
-
-
+    
         // Verifica si el usuario que ha iniciado sesión tiene permisos para editar este perfil
         if ($user->id !== Auth::user()->id && !Auth::user()->hasRole('Administrador')) {
             return redirect()->route('usuarios.index')->with('error', 'No tienes permiso para editar este perfil');
@@ -115,36 +113,15 @@ class UsuarioController extends Controller
         
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
-
             return redirect()->back()->with('error', 'No puedes editar al super administrador');
         }
-
-        $selectedRoles = $user->roles()->pluck('id')->toArray();
-
-        $user = ModelsUser::find($id);
+    
         $roles = Role::pluck('name', 'name')->all();
-
-
-
         unset($roles['Administrador']);
+    
         $selectedRoles = $user->roles()->pluck('name')->toArray();
-
-        $userRole = $user->roles->pluck('name', 'roles', 'userRole');
-
-        // Establece el valor seleccionado en el menú desplegable como el rol actual del usuario
-        $selectedRole = $user->roles()->pluck('name')->first();
-
-        // Si el usuario es administrador, agrega todos los roles disponibles al array de roles
-        if (auth()->user()->hasRole('Administrador')) {
-            $roles = Role::pluck('name', 'name')->all();
-        } else {
-            $roles = ['Empleado' => 'Empleado'];
-        }
-
-
-
-
-        return view('usuarios.edit', compact('user', 'roles', 'userRole', 'selectedRoles'));
+    
+        return view('usuarios.edit', compact('user', 'roles', 'selectedRoles'));
     }
 
     public function update(Request $request, $id)
