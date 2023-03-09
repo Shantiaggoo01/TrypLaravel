@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('id_insumo')->unsigned();
             $table->date('FechaCompra');
             $table->double('Total', 60);
+            $table->unsignedBigInteger('user_id'); // <!--<--- agregue esto para guardar el usuario que creo la compra  -->
 
             $table->foreign('id_proveedor')->references('id')->on('Proveedores');
             $table->foreign('id_insumo')->references('id')->on('insumos');

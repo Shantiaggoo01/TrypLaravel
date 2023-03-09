@@ -63,9 +63,7 @@ class CompraInsumoController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-
-        $user_id = auth()->user()->id;
-
+    
         $this->validate($request, [
             'nFactura' => 'required|unique:compras',
             'id_proveedor' => 'required',
@@ -75,44 +73,44 @@ class CompraInsumoController extends Controller
             'nFactura.required' => 'El campo Número de Factura es obligatorio.',
             'nFactura.unique' => 'El Número de Factura ya existe.',
         ]);
-
+    
         try {
-            
+            // Obtenemos el usuario actual autenticado <--- agregue esto para guardar el usuario que creo la compra 
             $user = auth()->user();
+            
+            // Iniciamos una transacción de base de datos
             DB::beginTransaction();
+    
+            // Creamos la compra y asociamos al usuario que la creó
             $compra = Compra::create([
                 "nFactura" => $input["nFactura"],
                 "id_proveedor" => $input["id_proveedor"],
                 "id_insumo" => $input["id_insumos"],
                 "FechaCompra" => $input["FechaCompra"],
-                "Total" => $this->calcular_precio($input["id_insumo"], $input["cantidades"])
-
+                "Total" => $this->calcular_precio($input["id_insumo"], $input["cantidades"]),
+                "user_id" => $user->id // Agregamos el usuario que realizó la compra <--- agregue esto para guardar el usuario que creo la compra 
             ]);
-
+    
             foreach ($input["id_insumo"] as $key => $value) {
                 CompraInsumo::create([
                     "id_insumo" => $value,
-                    /* "id_proveedor"=>$input["proveedor"][$key],*/
                     "id_compra" => $compra->id,
                     "cantidad" => $input["cantidades"][$key],
                 ]);
-
+    
                 $ins = Insumo::find($value);
-               $ins->update(["cantidad" => $ins->cantidad + $input["cantidades"][$key]]);
-
+                $ins->update(["cantidad" => $ins->cantidad + $input["cantidades"][$key]]);
             }
-
-
-
+    
+            // Confirmamos la transacción
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Compra realizada con exitó');
+            return redirect("compra_insumos")->with('success', 'Compra realizada con éxito');
         } catch (Exception $e) {
+            // Si ocurre un error, hacemos un rollback de la transacción
             DB::rollback();
-
             return redirect("compra_insumos")->with('status', $e->getMessage());
         }
     }
-
 
     public function Calcular_precio($insumos, $cantidades)
     {
@@ -153,6 +151,9 @@ class CompraInsumoController extends Controller
                 ->get();
         }
 
-        return view("compra_insumos.show", compact("insumos", "compras"));
+        $compra = Compra::with('user')->find($id); //<--- agregue esto para guardar el usuario que creo la compra 
+
+
+        return view("compra_insumos.show", compact("insumos", "compras","compra"));
     }
 }
