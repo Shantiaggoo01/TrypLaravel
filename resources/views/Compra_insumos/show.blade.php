@@ -60,62 +60,61 @@ detalle de el proveedor
         <div class="col">
             <h2 colspan="4" class="text-center">INSUMOS COMPRADOS</h2>
             <hr>
-            <table class="table table-bordered">
-                <thead>
-                    <b>
-                        <tr>
-                            <th>Nombre Insumo </th>
-                            <th>Cantidad Compradas </th>
-                            <th>Precio Unitario</th>
-                            <th>Sub Total </th>
-                        </tr>
-                    </b>
-                </thead>
-                <tbody>
-                    @php
-                    $total = 0;
-                    @endphp
-                    @forelse ($insumos as $value)
-                    <tr>
-                        <th>{{$value->Nombre}}</th>
-                        <th>{{$value->cantidad}}</th>
-                        <th>{{$value->Precio}}</th>
-                        <th>{{$value->Precio * $value->cantidad}}</th>
-                        @php
-                        $total += $value->Precio * $value->cantidad;
-                        @endphp
-                    </tr>
-                    @empty no hay Insumos Regustrados
-                    @endforelse
-                    <tr>
-                        <th colspan="3"></th>
-                        <th>
-                            Total de la compra
-                        </th>
-                        <th>
-                            {{$total}}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3"></th>
-                        <th>
-                            Compra Realizada por :
-                        </th>
-                        <th>
-                             {{ $compra->user->name }} <!--<--- agregue esto para guardar el usuario que creo la compra  -->
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3"></th>
-                        <th>
-                            Fecha de Creación
-                        </th>
-                        <th>
-                            {{ $compras[0]->created_at }}
-                        </th>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- Primera sección: lista de insumos comprados -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre Insumo</th>
+            <th>Cantidad Compradas</th>
+            <th>Precio Unitario</th>
+            <th>Sub Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @php
+        $total = 0;
+        @endphp
+        @forelse ($insumos as $value)
+        <tr>
+            <td>{{ $value->Nombre }}</td>
+            <td>{{ $value->cantidad }}</td>
+            <td>{{ $value->Precio }}</td>
+            <td>{{ $value->Precio * $value->cantidad }}</td>
+            @php
+            $total += $value->Precio * $value->cantidad;
+            @endphp
+        </tr>
+        @empty
+        <tr>
+            <td colspan="4">No hay Insumos Registrados</td>
+        </tr>
+        @endforelse
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="3">Total de la compra</th>
+            <th>{{ $total }}</th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Segunda sección: detalles del comprador y fecha de creación -->
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <th>Compra Realizada por:</th>
+            <td>{{ $compra->user->name }} {{ $compra->user->apellido }}</td>
+        </tr>
+        <tr>
+            <th>Documento:</th>
+            <td>{{ $compra->user->documento }}</td>
+        </tr>
+        <tr>
+            <th>Fecha de Creación:</th>
+            <td>{{ $compras[0]->created_at }}</td>
+        </tr>
+    </tbody>
+</table>
 
         </div>
         <br>

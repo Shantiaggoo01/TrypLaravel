@@ -21,7 +21,7 @@ class SuperAdminSeeder extends Seeder
         $admin = User::create([
             'name' => 'Sandra',
             'documento' => '43600777',
-            'apellido' => 'Gomez',
+            'apellido' => 'Gomez Estrada',
             'telefono' => '3002818634',
             'direccion' => 'Carrera 48b # 85 cc 10',
             'email' => 'papascaseraseg@gmail.com',
@@ -30,12 +30,12 @@ class SuperAdminSeeder extends Seeder
         ]);
 
         $empleado = new User;
-        $empleado->name = 'Empleado';
-        $empleado->documento = '1234567890';
-        $empleado->apellido = 'Empleado';
-        $empleado->telefono = 'Empleado';
-        $empleado->direccion = 'Empleado';
-        $empleado->email = 'empleado@gmail.com';
+        $empleado->name = 'Jean Paul';
+        $empleado->documento = '1017253837';
+        $empleado->apellido = 'Estrada Gomez';
+        $empleado->telefono = '3022141126';
+        $empleado->direccion = 'Carrera 48b # 85 cc 10';
+        $empleado->email = 'jean2304paul@gmail.com';
         $empleado->password = bcrypt('12345678');
         $empleado->image = null;
         $empleado->save();
