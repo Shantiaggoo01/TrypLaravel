@@ -57,9 +57,14 @@
                     <span>Configuración</span>
                 </a>
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded"> 
-                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>                       
-                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>                       
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        @can('ver-usuario') 
+                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>
+                        @endcan
+                        
+                        @can('ver-roles')
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a> 
+                        @endcan                      
                     </div>
                 </div>
             </li>
@@ -75,9 +80,15 @@
                 </a>
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                    @can('ver-proveedor')
                         <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
+                        @endCan
+                        @can('ver-insumos')
                         <a class="collapse-item" href="{{route('insumos.index')}}">Insumos</a>
+                        @endCan
+                        @can('ver-compras')
                         <a class="collapse-item" href="{{route('compra_insumos.index')}}">Compras</a>
+                        @endCan
                     </div>
                 </div>
             </li>
@@ -93,10 +104,15 @@
                 </a>
                 <div id="collapseVenta" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+                        @can('ver-venta')
                         <a class="collapse-item" href="{{route('detalle_ventas.index')}}">Gestion de Ventas</a>
+                        @endcan
+                        @can('ver-cliente')
                         <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
+                        @endcan
+                        @can('ver-producto')
                         <a class="collapse-item" href="{{route('productos.index')}}">Productos</a>
+                        @endcan
                     </div>
                 </div>
             </li>
@@ -112,7 +128,9 @@
                 </a>
                 <div id="collapseProducción" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                        @can( 'ver-produccion')
                         <a class="collapse-item" href="{{route('produccion.index')}}">Gestión de Producción</a>
+                        @endcan
                     </div>
                 </div>
             </li>

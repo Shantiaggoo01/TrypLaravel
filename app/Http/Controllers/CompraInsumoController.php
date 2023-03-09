@@ -16,11 +16,11 @@ use Exception;
  */
 class CompraInsumoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:ver-compras')->only('index');
+    }
+
     public function index()
     {
         $compraInsumos = CompraInsumo::paginate();
@@ -64,17 +64,21 @@ class CompraInsumoController extends Controller
     {
         $input = $request->all();
 
+        $user_id = auth()->user()->id;
+
         $this->validate($request, [
             'nFactura' => 'required|unique:compras',
             'id_proveedor' => 'required',
             'id_insumo' => 'required',
-            'FechaCompra' => 'required',
+            'FechaCompra' => 'required|date|before_or_equal:today',
         ], [
             'nFactura.required' => 'El campo Número de Factura es obligatorio.',
             'nFactura.unique' => 'El Número de Factura ya existe.',
         ]);
 
         try {
+            
+            $user = auth()->user();
             DB::beginTransaction();
             $compra = Compra::create([
                 "nFactura" => $input["nFactura"],
@@ -151,6 +155,4 @@ class CompraInsumoController extends Controller
 
         return view("compra_insumos.show", compact("insumos", "compras"));
     }
-
-
 }

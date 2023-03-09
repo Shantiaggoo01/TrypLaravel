@@ -70,6 +70,26 @@ Usuario
     }
 </style>
 
+<style>
+    .estado-label {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 8px;
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    .estado-activo {
+        background-color: green;
+        color: white;
+    }
+
+    .estado-inactivo {
+        background-color: yellow;
+        color: black;
+    }
+</style>
+
 @endsection
 
 
@@ -93,11 +113,12 @@ Usuario
         <table id="example" class="table table-striped table-hover">
             <thead class="thead">
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Rol</th>
-                    <th>Acciones</th>
+                    <th >ID</th>
+                    <th >Nombre</th>
+                    <th >Apellido</th>
+                    <th class="text-center">Rol</th>
+                    <th class="text-center">Estado del usuario</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -106,35 +127,58 @@ Usuario
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name}}</td>
                     <td>{{ $user->apellido }}</td>
-                    <td>
+                    <td class="text-center" >
                         @if(!empty($user->getRoleNames()))
                         @foreach($user->getRoleNames() as $rolName)
                         <h5><span class="role-label">{{$rolName}}</span></h5>
                         @endforeach
                         @endif
                     </td>
-                    <td>
-                        @if(auth()->user()->hasRole('Empleado') && auth()->user()->id == $user->id)
-                        <a class="btn btn-primary" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
+                    <td class="text-center" >
+                        @if ($user->estado == 1)
+                        <h5> <span class="estado-label estado-activo">Activo</span> </h5>
                         @else
-                        <a class="btn btn-primary" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
+                        <h5> <span class="estado-label estado-inactivo">Inactivo</span> </h5>
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if(auth()->user()->hasRole('Empleado') && auth()->user()->id == $user->id)
+                        <a class="btn btn-primary btn-sm d-inline-block" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
+                        @else
+                        <a class="btn btn-primary btn-sm d-inline-block" href="{{ route('usuarios.show', $user->id) }}">Ver Perfil</a>
                         @endif
 
                         @can('editar-usuario')
-                        <a class="btn btn-primary" href="{{ route('usuarios.edit', $user->id) }}">Editar / Asignar Rol</a>
+                        @if ($user->id !== 1)
+                        <a class="btn btn-success btn-sm d-inline-block" href="{{ route('usuarios.edit', $user->id) }}">
+                            <i class="fas fa-pencil-alt"></i> Editar
+                            <span class="badge badge-secondary">Asignar rol</span>
+                        </a>
+                        @endif
                         @endcan
 
-                        @can('borrar-usuario')
-                        {!! Form::open(['method' => 'DELETE', 'onclick' => 'return confirmacion()', 'route' => ['usuarios.destroy', $user->id], 'style' => 'display:inline']) !!}
-                        {!! Form::submit('Borrar', ['class' => 'btn btn-danger']) !!}
-                        {!! Form::close() !!}
-                        @endcan
+                        @if ($user->id !== 1)
+                        @if($user->estado == 1)
+                        <form action="{{ route('usuarios.desactivar', $user->id) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            <button type="submit" class="btn btn-danger btn-sm">Inactivar usuario</button>
+                        </form>
+                        @else
+                        <form action="{{ route('usuarios.activar', $user->id) }}" method="POST" class="d-inline-block">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm">Activar usuario</button>
+                        </form>
+                        @endif
+                        @endif
                     </td>
+
+
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+
 
 
     @endsection

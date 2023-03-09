@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('direccion',100);
             $table->string('email')->unique();
             $table->string('image')->nullable(); // <-- agrega esta línea
+            $table->boolean('estado')->default('1');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -170,60 +170,7 @@ class UsuarioController extends Controller
         }
     }
 
-    // Codigo Original 
-    //     public function update(Request $request, $id)
-    //     {
-
-    //         $user = ModelsUser::find($id);
-    //         // Continúa con la edición del usuario
-    //         $this->validate($request, [
-    //             'name' => ['required', 'regex:/^[\pL\s]+$/u'],
-    //             'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
-    //             'email' => 'required| email|unique:users,email,' . $id,
-    //             'password' => 'same:confirm-password',
-    //             'roles' => 'required',
-    //         ]);
-
-    //         $input = $request->all();
-    //         if (!empty($input['password'])) {
-
-    //             $input['password'] = Hash::make($input['password']);
-    //         } else {
-    //             $input = Arr::except($input, array('password'));
-    //         }
-
-
-    //         $user->update($input);
-    //         DB::table('model_has_roles')->where('model_id', $id)->delete();
-
-    //         $user->assignRole($request->input('roles'));
-
-    //         if ($request->hasFile('image')) {
-    //             // Get the current image
-    //             $currentImage = $user->image;
-
-    //             // Get the new image
-    //             $image = $request->file('image');
-
-    //             // Generate a unique file name
-    //             $fileName = uniqid() . '.' . $image->getClientOriginalExtension();
-
-    //             // Store the new image
-    //             $path = $image->storeAs('public/images', $fileName);
-
-    //             // Update the user image
-    //             $user->image = $fileName;
-
-    //             // Delete the current image
-    //             Storage::delete("public/images/$currentImage");
-    //         }
-
-    //         $user->save();
-
-    //         Session::flash('success', 'Se Actualizó Correctamente');
-    //         return redirect()->route('usuarios.index');
-    //     }
-
+    
 
     public function destroy($id)
     {
@@ -265,50 +212,22 @@ class UsuarioController extends Controller
         return view('usuarios.show', compact('user'));
     }
 
-    // esto es el visualizar perfil 
-
-    public function showPerfil()
+    public function activar($id)
     {
-        $user = Auth::user();
-
-        
-
-        return view('usuarios.show', compact('user'));
-
-        return view('usuarios.showperfil', compact('user'));
+        $user = ModelsUser::findOrFail($id);
+        $user->estado = 1;
+        $user->save();
+    
+        return redirect()->back()->with('success', 'El usuario ha sido activado correctamente.');
     }
-
-    // Agregado para imagend e usuario // con este controlador se soluciona el problema de la imagen 
-
-    //     public function store(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'documento' => 'required|numeric|min:10|unique:users',
-    //         'name' => ['required', 'regex:/^[\pL\s]+$/u'],
-    //         'apellido' => ['required', 'regex:/^[\pL\s]+$/u'],
-    //         'telefono' => 'required|numeric',
-    //         'direccion' => 'required',
-    //         'email' => 'required|email|unique:users,email',
-    //         'password' => 'required|same:confirm-password',
-    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    //     ]);
-
-    //     $input = $request->all();
-    //     $input['password'] = Hash::make($input['password']);
-
-    //     if ($request->hasFile('image')) {
-    //         $image = $request->file('image');
-    //         $input['image'] = $image->getClientOriginalName();
-    //         $destinationPath = public_path('/images');
-    //         $image->move($destinationPath, $input['image']);
-    //     }
-
-    //     $user = ModelsUser::create($input);
-    //     $user->roles()->sync($request->input('roles'));
-
-    //     return redirect()->route('usuarios.index')->with('success', 'Se Agrego Correctamente');
-    // }
-
-
+    
+    public function desactivar($id)
+    {
+        $user = ModelsUser::findOrFail($id);
+        $user->estado = 0;
+        $user->save();
+    
+        return redirect()->back()->with('success', 'El usuario ha sido inactivado correctamente.');
+    }
 
 }

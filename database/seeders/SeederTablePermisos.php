@@ -77,6 +77,7 @@ class SeederTablePermisos extends Seeder
             'crear-usuario',
             'borrar-usuario',
 
+            'ver-compras',
 
 
             // tabla venta

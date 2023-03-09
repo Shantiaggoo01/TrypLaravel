@@ -30,6 +30,26 @@ Crear Usuarios
         });
     });
 </script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#exampledos').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.1/i18n/es-ES.json"
+            },
+            "order": [
+                [1, "asc"]
+            ]
+        });
+
+        // Checkbox de selección "todos"
+        $('#select-all').click(function() {
+            $('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+        });
+    });
+</script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 @if ($message = Session::get('success') )
@@ -81,62 +101,76 @@ Crear Usuarios
         <div class="card-body">
 
 
+            {!! Form::model($role,['method'=>'PATCH','route'=>['roles.update',$role->id],'id' => 'form-rol']) !!}
 
-            {!!Form::model($role,['method'=>'PATCH','route'=>['roles.update',$role->id],'id' => 'form-rol']) !!}
-            <div class="row">
-                <div class="col-md-12">
+            <div class="form-group">
+                <label for="">
+                    <h3>Nombre del rol</h3>
+                </label>
+                {!!Form::text('name',$role->name,array('class'=>'form-control'))!!}
 
-                    <div class="form-group">
-                        <label for="">
-                            <h3>Nombre del rol</h3>
-                        </label>
-                        {!!Form::text('name',null,array('class'=>'form-control'))!!}
-                    </div>
-                    @error('name')
-                    <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
-                    @enderror
-                </div>
-                <div class="col-md-12 ">
-                    <div class="form-group">
+                @error('name')
+                <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
+                @enderror
 
-                        <input type="checkbox" id="select-all"> Seleccionar todos
-                        <hr>
-
-                        <table id="example" class="table table-striped table-hover">
-                            <thead class="thead">
-                                <tr>
-                                    <th class="col-md-1 "><label>Seleccione</label> </th>
-                                    <th> <label for="">Permisos para este rol:</label></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($permission as $value)
-                                <tr>
-                                    <td>
-                                        <label>
-                                            {{Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions))}}
-                                        </label>
-                                    </td>
-                                    <td><label>{{ ucwords(str_replace('-', ' ', $value->name)) }}</label></td>
-                                </tr>
-
-                                @endforeach
-                                @error('permission')
-                                <div class="text-danger">{{ str_replace("permission", "Seleccione", $errors->first('permission')) }}</div>
-                                @enderror
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <button type="submit" class="btn btn-primary float-right" onclick="return confirmacionGuardar()">Guardar</button>
-
-                    <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
-                </div>
             </div>
-            {!!Form::close()!!}
+
+            <h3>Permisos del menú:</h3>
+            <table id="example" class="table table-striped table-hover">
+                <thead class="thead">
+                    <tr>
+                        <th class="col-md-1 "><label>Seleccione</label></th>
+                        <th><label for="">Permisos para este Rol:</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($permission as $value)
+                    @if($value->name == 'Ver-Menu-Configuracion' || $value->name == 'Ver-Menu-Compras' || $value->name == 'Ver-Menu-Ventas' || $value->name == 'Ver-Menu-Produccion' || $value->name == 'Ver-Menu-Reportes')
+                    <tr>
+                        <td>{{Form::checkbox('permission[]',$value->id, in_array($value->id, $rolePermissions) ? true : false ,array('class'=>'name'))}}</td>
+                        <td>{{ ucwords(str_replace('-', ' ', $value->name)) }}</td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+            <br>
+            <hr>
+
+            <h3>Otros permisos:</h3>
+            <table id="exampledos" class="table table-striped table-hover">
+                <thead class="thead">
+                    <tr>
+                        <th class="col-md-1 "><label>Seleccione</label></th>
+                        <th><label for="">Permisos para este Rol:</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($permission as $value)
+                    @if($value->name != 'Ver-Menu-Configuracion' && $value->name != 'Ver-Menu-Compras' && $value->name != 'Ver-Menu-Ventas' && $value->name != 'Ver-Menu-Produccion' && $value->name != 'Ver-Menu-Reportes')
+                    <tr>
+                        <td>{{Form::checkbox('permission[]',$value->id, in_array($value->id, $rolePermissions) ? true : false ,array('class'=>'name'))}}</td>
+                        <td>{{ ucwords(str_replace('-', ' ', $value->name)) }}</td>
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+            </table>
+
+            @error('permission')
+            <div class="text-danger">{{ str_replace("permission", "Seleccione", $errors->first('permission')) }}</div>
+            @enderror
+
+            <br>
+
+            <div class="col-md-12">
+
+                <button onclick="history.back()" type="button" class="btn btn-primary float-left">Cancelar</button>
+
+                <button type="submit" class="btn btn-primary float-right">Guardar</button>
+            </div>
+            {!! Form::close() !!}
+
 
 
         </div>
