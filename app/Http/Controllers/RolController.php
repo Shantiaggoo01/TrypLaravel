@@ -104,6 +104,14 @@ class RolController extends Controller
             'name' => 'required|regex:/^[\pL\s]+$/u',
             'permission' => 'required'
         ]);
+
+        // Verificar si existe otro rol con el mismo nombre
+        $existingRole = Role::where('name', $request->input('name'))->where('id', '!=', $id)->first();
+        if ($existingRole) {
+            return redirect()->route('roles.edit', $id)->with('error', 'El nombre del rol ya existe en la base de datos');
+        }
+
+
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
@@ -136,7 +144,7 @@ class RolController extends Controller
 
 
         DB::table('roles')->where('id', $id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');
+        return redirect()->route('roles.index')->with('success', 'Se eliminó con éxito');
     }
 
     public function showPermissions($id)

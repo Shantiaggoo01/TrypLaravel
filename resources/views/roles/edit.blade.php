@@ -62,6 +62,17 @@ Crear Usuarios
 </script>
 @endif
 
+
+@if(session('error'))
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
+        button: "Aceptar",
+    });
+</script>
+@endif
+
 <script>
     $(document).ready(function() {
         // Agrega el Sweet Alert cuando se envía el formulario
