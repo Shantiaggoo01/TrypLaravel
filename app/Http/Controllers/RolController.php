@@ -138,4 +138,12 @@ class RolController extends Controller
         DB::table('roles')->where('id', $id)->delete();
         return redirect()->route('roles.index')->with('success', 'Se elimino con éxito');
     }
+
+    public function showPermissions($id)
+    {
+        $role = Role::find($id);
+        $permissions = $role->permissions;
+
+        return view('roles.permissions', compact('role', 'permissions'));
+    }
 }

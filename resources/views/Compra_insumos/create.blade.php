@@ -58,12 +58,12 @@ Crear Compra
 
                                                 <div class="form-group col-6">
                                                     <label for="">Fecha de compra</label>
-                                                    <input type="date" class="form-control" name="FechaCompra" required>
-                                                    @error('date')
+                                                    <input type="date" class="form-control" name="FechaCompra" required max="{{ now()->toDateString() }}">
+                                                    @error('FechaCompra')
                                                     <div class="text-danger">{{ $message }}</div>
                                                     @enderror
-
                                                 </div>
+
 
                                                 <div class="form-group col-6">
                                                     <label for=""><i>Precio total de la compra</i></label>

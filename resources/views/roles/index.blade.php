@@ -95,11 +95,14 @@ function confirmacion() {
                             @can('editar-rol')
                             <a class="btn btn-primary" href="{{route('roles.edit',$role->id)}}"> Editar </a>
                             @endcan
+                            <a href="{{ route('roles.showPermissions', $role->id) }}" class="btn btn-primary">Mostrar Permisos</a>
                             @can('borrar-rol')
                             {!!Form::open(['method'=>'DELETE','onclick'=>'return confirmacion()','route'=>['roles.destroy',$role->id],'style'=>'display:inline'])!!}
                             {!!Form::submit('Borrar',['class' => 'btn btn-danger'])!!}
                             {!!Form::close()!!}
                             @endcan
+
+                            
                         </td>
                     </tr>
                     @endforeach

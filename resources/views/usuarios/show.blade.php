@@ -62,7 +62,7 @@ Usuario
                         <h6 class="title mt-3"><b>Fecha de creación&nbsp;:&nbsp; {{ $user->created_at }}</b></h6>
                     </div>
                     
-                    <button onclick="history.back()" type="button" class="btn btn-primary float-center">Atrás</button>
+                  
                     @if(Auth::user()->id == $user->id)
                     @can('editar-usuario')
                     <a class="btn btn-primary float-center" href="{{ route('usuarios.edit', Auth::user()->id) }}">Editar</a>

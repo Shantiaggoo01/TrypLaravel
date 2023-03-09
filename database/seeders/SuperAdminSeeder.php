@@ -48,6 +48,7 @@ class SuperAdminSeeder extends Seeder
             'editar-usuario',
             'crear-proveedor',
             'ver-insumos',
+            'ver-compras',
             'Crear-Compra',
             'ver-venta',
             'crear-venta',

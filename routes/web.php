@@ -53,6 +53,12 @@ Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updat
 
 Route::get('/perfil', 'App\Http\Controllers\UsuarioController@showPerfil')->name('perfil');
 
+Route::post('/usuarios/{id}/activar', 'App\Http\Controllers\UsuarioController@activar')->name('usuarios.activar');
+Route::post('/usuarios/{id}/desactivar', 'App\Http\Controllers\UsuarioController@desactivar')->name('usuarios.desactivar');
+Route::get('/roles/{id}/permissions', [RolController::class, 'showPermissions'])->name('roles.showPermissions');
+
+
+
 
 
 
