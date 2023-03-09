@@ -42,6 +42,7 @@ class producto_insumo extends Model
         return $this->hasOne('App\Models\Insumo', 'id', 'id_insumo');
     }
     
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */

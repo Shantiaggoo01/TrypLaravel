@@ -33,8 +33,9 @@ Crear Producto
                     <div class="box box-info padding-1">
                         <div class="box-body">
 
-                            <form method="POST" action="{{ route('productos.store') }}" id="form-producto">
+                            <form method="POST" action="{{ route('productos.update', ['producto' => $producto->id]) }}" id="form-producto">
                                 @csrf
+                                @method('GET')
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card">
@@ -138,15 +139,49 @@ Crear Producto
 
                                 <div class="col text-center">
                                     <div class="box-footer mt20">
+                                        
                                         <button type="submit" class="btn btn-primary" onclick="return confirmacionGuardar()">Guardar</button>
                                     </div>
                                 </div>
                         </div>
                         </form>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre Insumo</th>
+                                    <th>Cantidad</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="detalle">
+                                @foreach ($detalle as $item)
+                                    <tr>
+                                        <td>{{ $item->Insumo->Nombre }}</td>
+                                        <td>{{ $item->cantidad }}</td>
+                                        <td>
+                                            <form action="{{ route('productos.destroy', ['producto' => $item->id_insumo]) }}" method="POST" style="display: inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este detalle?')"><i class="fas fa-times"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
 
                     @section('script')
+                    @if ($message = Session::get('error') )
+<script>
+    swal({
+        title: "{{session::get('error')}}",
+        icon: "error",
+        button: "Aceptar",
+    });
+</script>
+@endif
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -252,7 +287,7 @@ Crear Producto
 
                         }
                     </script>
-
+                    
                     @endsection
                 </div>
             </div>

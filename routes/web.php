@@ -49,7 +49,7 @@ Route::post('proveedor/{id}/estado', [ProveedoreController::class, 'updateStatus
 Route::post('producto/{id}/estado', [ProductoController::class, 'updateStatus'])->name('producto.updateStatus');
 Route::post('insumo/{id}/Estado', 'App\Http\Controllers\InsumoController@updateStatus')->name('insumo.updateStatus');
 Route::post('cliente/{id}/Estado', 'App\Http\Controllers\ClienteController@updateStatus')->name('cliente.updateStatus');
-
+//Route::delete('/productos/{producto}', [ProductosController::class, 'destroy'])->name('productos.destroy');
 
 Route::get('/perfil', 'App\Http\Controllers\UsuarioController@showPerfil')->name('perfil');
 
