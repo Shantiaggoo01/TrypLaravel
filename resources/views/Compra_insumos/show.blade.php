@@ -62,12 +62,13 @@ detalle de el proveedor
             <hr>
             <table class="table table-bordered">
                 <thead>
-                    <b><tr>
-                        <th>Nombre Insumo </th>
-                        <th>Cantidad Compradas </th>
-                        <th>Precio Unitario</th>
-                        <th>Sub Total </th>
-                    </tr>
+                    <b>
+                        <tr>
+                            <th>Nombre Insumo </th>
+                            <th>Cantidad Compradas </th>
+                            <th>Precio Unitario</th>
+                            <th>Sub Total </th>
+                        </tr>
                     </b>
                 </thead>
                 <tbody>
@@ -88,8 +89,30 @@ detalle de el proveedor
                     @endforelse
                     <tr>
                         <th colspan="3"></th>
-                       <th><h3>Total de la compra</h3></th>
-                        <th><h3>{{$total}}</h3></th>
+                        <th>
+                            Total de la compra
+                        </th>
+                        <th>
+                            {{$total}}
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3"></th>
+                        <th>
+                            Compra Realizada por :
+                        </th>
+                        <th>
+                             {{ $compra->user->name }} <!--<--- agregue esto para guardar el usuario que creo la compra  -->
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3"></th>
+                        <th>
+                            Fecha de Creación
+                        </th>
+                        <th>
+                            {{ $compras[0]->created_at }}
+                        </th>
                     </tr>
                 </tbody>
             </table>

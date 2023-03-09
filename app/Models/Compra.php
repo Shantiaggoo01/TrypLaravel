@@ -23,13 +23,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Compra extends Model
 {
-    
+
     static $rules = [
-		'nFactura' => 'required',
-		'id_proveedor' => 'required',
-		'id_insumo' => 'required',
-		'FechaCompra' => 'required',
-		'Total' => 'required',
+        'nFactura' => 'required',
+        'id_proveedor' => 'required',
+        'id_insumo' => 'required',
+        'FechaCompra' => 'required',
+        'Total' => 'required',
     ];
 
     protected $perPage = 20;
@@ -39,7 +39,7 @@ class Compra extends Model
      *
      * @var array
      */
-    protected $fillable = ['nFactura','id_proveedor','id_insumo','FechaCompra','Total'];
+    protected $fillable = ['nFactura', 'id_proveedor', 'id_insumo', 'FechaCompra', 'Total', 'user_id'];//<--- agregue user_id para guardar el usuario que creo la compra 
 
 
     /**
@@ -49,7 +49,7 @@ class Compra extends Model
     {
         return $this->hasOne('App\Models\Insumo', 'id', 'id_insumo');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -57,6 +57,9 @@ class Compra extends Model
     {
         return $this->hasOne('App\Models\Proveedore', 'id', 'id_proveedor');
     }
-    
 
+    public function user() //<--- agregue esto para guardar el usuario que creo la compra 
+    {
+        return $this->belongsTo(User::class);
+    }
 }
