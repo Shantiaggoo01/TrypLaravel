@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreign('idtipo_proveedor')->references('id')->on('tipo_proveedor');
             $table->foreign('cuenta_id')->references('id')->on('tiposcuentas');
             $table->foreign('regimen_id')->references('id')->on('regimen');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

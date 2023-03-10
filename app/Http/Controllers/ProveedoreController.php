@@ -86,7 +86,7 @@ class ProveedoreController extends Controller
         //convertir el select a un booleano
         $estado = $request->estado == 'on' ? 1 : 0;
         request()->validate(Proveedore::$rules);
-
+        $user = auth()->user();
         $proveedore = new Proveedore();
         $proveedore->nit = $request->nit;
         $proveedore->nombre = $request->nombre;
@@ -100,6 +100,7 @@ class ProveedoreController extends Controller
         $proveedore->TelefonoContacto = $request->TelefonoContacto;
         $proveedore->regimen_id = $request->regimen_id;
         $proveedore->cuenta_id = $request->cuenta_id;
+        $proveedore->user_id = $user->id;
         $proveedore->save();
         return redirect()->route('proveedores.index')->with('success', 'Proveedor creado correctamente.');
     }
@@ -122,10 +123,15 @@ class ProveedoreController extends Controller
     {
         $proveedore = Proveedore::find($id);
         //encontrar el tipo de proveedor por el id del proveedor y luego el nombre
-        $tipo_proveedors = TipoProveedor::where('id', $proveedore->idtipo_proveedor)->pluck('nombre');
-        $regimen = Regiman::where('id', $proveedore->regimen_id)->pluck('nombre');
-        $tiposCuenta = TiposCuenta::where('id', $proveedore->cuenta_id)->pluck('nombre');
-        return view('proveedore.show', compact('proveedore', 'tipo_proveedors', 'regimen', 'tiposCuenta'));
+        $proveedore = Proveedore::join('tipo_proveedor', 'proveedores.idtipo_proveedor', '=', 'tipo_proveedor.id')
+        ->join('regimen', 'proveedores.regimen_id', '=', 'regimen.id')
+        ->join('tiposcuentas', 'proveedores.cuenta_id', '=', 'tiposcuentas.id')
+        ->with('user')
+        ->select('proveedores.*', 'tipo_proveedor.nombre as tipo_proveedor', 'regimen.nombre as regimen', 'tiposcuentas.nombre as tipos_cuenta')
+        ->where('proveedores.id', $id)
+        ->first();
+        $user = Proveedore::with('user')->find($id);
+        return view('proveedore.show', compact('proveedore', 'user'));
     }
 
     /**

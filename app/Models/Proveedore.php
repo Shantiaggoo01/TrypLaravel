@@ -54,6 +54,9 @@ class Proveedore extends Model
     {
         return $this->hasOne('App\Models\TipoProveedor', 'id', 'idtipo_proveedor');
     }
-    
+    public function user() //<--- agregue esto para guardar el usuario que creo la compra 
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
