@@ -16,6 +16,8 @@ use Illuminate\support\Arr;
 use App\Http\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
+use Spatie\Permission\Models\Permission;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -62,8 +64,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $role = Role::pluck('name', 'name')->all();
-        return view('usuarios.create', compact('role'));
+        $roles = Role::pluck('name', 'name')->all();
+
+        return view('usuarios.create', compact('roles'));
     }
 
     /**
@@ -97,7 +100,13 @@ class UsuarioController extends Controller
         }
 
         $user = ModelsUser::create($input);
-        $user->roles()->sync($request->input('roles'));
+        $user->syncRoles($request->input('roles')); // asignar roles al usuario creado
+
+        // Agregar el permiso "editar-usuario" al usuario recién creado
+        $permission = Permission::findByName('editar-usuario');
+        $user->givePermissionTo($permission);
+
+
 
         return redirect()->route('usuarios.index')->with('success', 'Se agregó correctamente');
     }
@@ -105,22 +114,22 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $user = ModelsUser::find($id);
-    
+
         // Verifica si el usuario que ha iniciado sesión tiene permisos para editar este perfil
         if ($user->id !== Auth::user()->id && !Auth::user()->hasRole('Administrador')) {
             return redirect()->route('usuarios.index')->with('error', 'No tienes permiso para editar este perfil');
         }
-        
+
         // Verifica si el usuario es el superadministrador
         if ($user->hasRole('Administrador')) {
             return redirect()->back()->with('error', 'No puedes editar al super administrador');
         }
-    
+
         $roles = Role::pluck('name', 'name')->all();
         unset($roles['Administrador']);
-    
+
         $selectedRoles = $user->roles()->pluck('name')->toArray();
-    
+
         return view('usuarios.edit', compact('user', 'roles', 'selectedRoles'));
     }
 
@@ -128,7 +137,7 @@ class UsuarioController extends Controller
     {
         $user = ModelsUser::find($id);
 
-        
+
 
         // Continúa con la edición del usuario
         $this->validate($request, [
@@ -165,12 +174,13 @@ class UsuarioController extends Controller
             // Si el usuario no es el superadministrador, se puede editar su rol
             $user->syncRoles($request->input('roles'));
             $user->update($input);
+
             Session::flash('success', 'Se actualizó correctamente');
-            return redirect()->route('usuarios.show', $id);
+            return redirect()->route('usuarios.show', $id)->with('success', 'Se actualizó correctamente');
         }
     }
 
-    
+
 
     public function destroy($id)
     {
@@ -217,17 +227,16 @@ class UsuarioController extends Controller
         $user = ModelsUser::findOrFail($id);
         $user->estado = 1;
         $user->save();
-    
+
         return redirect()->back()->with('success', 'El usuario ha sido activado correctamente.');
     }
-    
+
     public function desactivar($id)
     {
         $user = ModelsUser::findOrFail($id);
         $user->estado = 0;
         $user->save();
-    
+
         return redirect()->back()->with('success', 'El usuario ha sido inactivado correctamente.');
     }
-
 }

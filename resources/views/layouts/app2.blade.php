@@ -53,18 +53,18 @@
             @can('Ver-Menu-Configuracion')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdministracion">
-                    <i class="fas fa-fw fa-cog"></i>                   
+                    <i class="fas fa-fw fa-cog"></i>
                     <span>Configuración</span>
                 </a>
                 <div id="collapseAdministracion" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        @can('ver-usuario') 
+                        @can('ver-usuario')
                         <a class="collapse-item" href="{{route('usuarios.index')}}">Usuarios</a>
                         @endcan
-                        
+
                         @can('ver-roles')
-                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a> 
-                        @endcan                      
+                        <a class="collapse-item" href="{{route('roles.index')}}">Roles</a>
+                        @endcan
                     </div>
                 </div>
             </li>
@@ -80,7 +80,7 @@
                 </a>
                 <div id="collapseInventario" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                    @can('ver-proveedor')
+                        @can('ver-proveedor')
                         <a class="collapse-item" href="{{route('proveedores.index')}}">Proveedores</a>
                         @endCan
                         @can('ver-insumos')
@@ -150,7 +150,7 @@
                 </div>
             </li>
             @endcan
-            
+
 
 
             <!-- Divider -->
@@ -186,17 +186,17 @@
 
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }} {{ Auth::user()->apellido }}</span>
                                 <img class="img-profile rounded-circle" src="{{ asset('images/' . Auth::user()->image) }}">
-                                
-                          
 
+
+
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ route('usuarios.show',  Auth::user()->id) }}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Ver Perfil
                                 </a>
-                                <!-- Dropdown - User Information -->
-                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="{{ route('usuarios.show',  Auth::user()->id) }}">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Ver Perfil
-                                    </a>
-                                    <hr>
+                                <hr>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -237,7 +237,7 @@
     <!-- End of Page Wrapper -->
     <!-- Bootstrap core JavaScript-->
 
-    
+
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -249,6 +249,7 @@
     <script src="{{asset('vendor/toastr/toastr.min.js')}}"></script>
     <script src="{{asset('vendor/sweetalert/sweetalert.js')}}"></script>
     <script src="{{asset('vendor/loadingoverlay/loadingoverlay.min.js')}}"></script>
+
     @yield('js')
 
     @yield("script")

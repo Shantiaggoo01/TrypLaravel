@@ -36,7 +36,7 @@ Crear Usuarios
         $('#form-usuario').on('submit', function(event) {
             event.preventDefault();
             swal({
-                    title:"¿Seguro que desea editar este usuario ?",
+                    title: "¿Seguro que desea editar este usuario ?",
                     icon: "warning",
                     buttons: ["Cancelar", "Guardar"],
                     dangerMode: true,
@@ -65,7 +65,7 @@ Crear Usuarios
 
 
 
-    
+
 
     {!! Form::model($user, ['method' => 'PATCH', 'route' => ['usuarios.update', $user->id], 'enctype' => 'multipart/form-data', 'id' => 'form-usuario']) !!}
 
@@ -110,8 +110,8 @@ Crear Usuarios
                     </span>
                     @endif
                     @else
-                    {!! Form::text('roles[]', 'Empleado', ['class' => 'form-control', 'readonly' => 'readonly']) !!}
-                    {!! Form::hidden('roles[]', 'Empleado') !!}
+                    {!! Form::select('roles[]', $roles, $selectedRoles, ['class' => 'form-control', 'disabled' => 'disabled']) !!}
+                    <input type="hidden" name="roles[]" value="{{ $selectedRole }}">
                     @endif
                 </div>
             </div>
@@ -140,20 +140,25 @@ Crear Usuarios
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="documento">Documento</label>
-                            {!!Form::text('documento',null,array('class'=>'form-control'))!!}
-                            @error('documento')
-                    <div class="text-danger">{{ str_replace("documento", "Documento", $errors->first('documento')) }}</div>
-                    @enderror
-                        </div>
-
+                    <label for="roles">Documento</label>
+                        @if(Auth::user()->hasRole('Administrador'))
+                        {!!Form::text('documento',null,array('class'=>'form-control'))!!}
+                        @if ($errors->has('documento'))
+                        @error('documento')
+                        <div class="text-danger">{{ str_replace("documento", "Documento", $errors->first('documento')) }}</div>
+                        @enderror
+                        @endif
+                        @else
+                        {!!Form::text('documento',null,array('class'=> 'form-control', 'disabled' => 'disabled')) !!}
+                        @endif
+                    </div>
+                    <div class="col-md-12">
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             {!!Form::text('name',null,array('class'=>'form-control'))!!}
                             @error('name')
-                    <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("name", "Nombre", $errors->first('name')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -162,8 +167,8 @@ Crear Usuarios
                             <label for="apellido">Apellido</label>
                             {!!Form::text('apellido',null,array('class'=>'form-control'))!!}
                             @error('apellido')
-                    <div class="text-danger">{{ str_replace("apellido", "Apellido", $errors->first('apellido')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("apellido", "Apellido", $errors->first('apellido')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -172,8 +177,8 @@ Crear Usuarios
                             <label for="telefono">Teléfono</label>
                             {!!Form::text('telefono',null,array('class'=>'form-control'))!!}
                             @error('telefono')
-                    <div class="text-danger">{{ str_replace("telefono", "Teléfono", $errors->first('telefono')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("telefono", "Teléfono", $errors->first('telefono')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -182,8 +187,8 @@ Crear Usuarios
                             <label for="direccion">Dirección</label>
                             {!!Form::text('direccion',null,array('class'=>'form-control'))!!}
                             @error('direccion')
-                    <div class="text-danger">{{ str_replace("direccion", "Dirección", $errors->first('direccion')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("direccion", "Dirección", $errors->first('direccion')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -192,18 +197,18 @@ Crear Usuarios
                             <label for="email">E-mail</label>
                             {!!Form::text('email',null,array('class'=>'form-control'))!!}
                             @error('email')
-                    <div class="text-danger">{{ str_replace("email", "E-Mail", $errors->first('email')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("email", "E-Mail", $errors->first('email')) }}</div>
+                            @enderror
                         </div>
                     </div>
-
+                    
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="password"> Cambiar Contraseña </label>
                             {!!Form::password('password',array('class'=>'form-control'))!!}
                             @error('password')
-                    <div class="text-danger">{{ str_replace("password", "Contraseña", $errors->first('password')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("password", "Contraseña", $errors->first('password')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -212,8 +217,8 @@ Crear Usuarios
                             <label for="confirm-password"> Confirmar contraseña </label>
                             {!!Form::password('confirm-password',array('class'=>'form-control'))!!}
                             @error('confirm-password')
-                    <div class="text-danger">{{ str_replace("confirm-password", "Confirmar Contraseña", $errors->first('confir-password')) }}</div>
-                    @enderror
+                            <div class="text-danger">{{ str_replace("confirm-password", "Confirmar Contraseña", $errors->first('confir-password')) }}</div>
+                            @enderror
                         </div>
                     </div>
 
