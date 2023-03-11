@@ -149,6 +149,20 @@
                         @enderror
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="roles">Rol a seleccionar</label>
+                        <?php
+                        // Agregar opción vacía en el arreglo $roles
+                        $roles = ['' => '--- Ninguno ---'] + $roles;
+                        ?>
+                        {!! Form::select('roles[]', $roles, null, ['class' => 'form-control', 'id' => 'roles']) !!}
+                        @error('roles')
+                        <div class="text-danger">{{ str_replace("roles", "Rol", $errors->first('roles')) }}</div>
+                        @enderror
+                    </div>
+                </div>
+
 
                 <div class="col-md-12">
                     <div class="form group">
