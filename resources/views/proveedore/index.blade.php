@@ -47,7 +47,7 @@ Proveedores
                         <div class="float-right">
                             @can('crear-proveedor')
                             <a href="{{ route('proveedores.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
-                                {{ __('Agregar proveedor') }}
+                                <i class="fa fa-plus"></i> {{ __('Agregar proveedor') }}
                             </a>
                             @endcan
                         </div>
@@ -97,7 +97,7 @@ Proveedores
                                             @csrf
                                             @method('post')
                                            
-                                            <button type="submit" class="btn btn-sm btn-{{ $proveedore->estado ? 'danger' : 'success' }}">
+                                            <button type="submit" class="btn btn-sm btn-  mr-2-{{ $proveedore->estado ? 'danger' : 'success' }}">
                                                 {{ $proveedore->estado ? 'Desactivar' : 'Activar' }}
                                             </button>
                                            
@@ -110,15 +110,15 @@ Proveedores
                                     <td>
 
                                         <form action="{{ route('proveedores.destroy',$proveedore->id) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary " href="{{ route('proveedores.show',$proveedore->id) }}"><i class="fa fa-fw fa-eye"></i> Ver detalle</a> 
+                                            <a class="btn btn-sm btn-primary  mr-2 " href="{{ route('proveedores.show',$proveedore->id) }}"><i class="fa fa-fw fa-eye"></i> Ver detalle</a> 
                                             @can('editar-proveedor')
-                                            <a class="btn btn-sm btn-success" href="{{ route('proveedores.edit',$proveedore->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                            <a class="btn btn-sm btn-success mr-2" href="{{ route('proveedores.edit',$proveedore->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                             @endcan
                                             @csrf
 
                                             @method('DELETE')
                                             @can('borrar-proveedor')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                            <button type="submit" class="btn btn-danger btn-sm mr-2 mt-2"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
                                             @endcan
                                         </form>
                                     </td>
