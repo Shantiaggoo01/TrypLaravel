@@ -80,18 +80,27 @@ class ProduccionController extends Controller
                      ]);
                      $ins = Producto::find($value);
                      $ins->update(['cantidad' => $ins->cantidad + $input['cantidades'][$key]]);
-                     if(is_array($input['producto_id'])){
-                        foreach ($input['producto_id'] as $key => $value) {
-                            $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
-                            $producto = Producto::where('id', $produccion->id_producto)->first();
-                            $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
-                            foreach ($producto_insumo as $producto_insumo) {
-                                $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
-                                $insumo->update(['cantidad' => $insumo->cantidad - $producto_insumo->cantidad * $input['cantidades'][$key]]);
-                                $cantidadNecesaria = $producto_insumo->cantidad - $input['cantidades'][$key];
+                     try {
+                        if(is_array($input['producto_id'])){
+                            foreach ($input['producto_id'] as $key => $value) {
+                                $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
+                                $producto = Producto::where('id', $produccion->id_producto)->first();
+                                $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
+                                $insumos_restantes = 0;
+                                foreach ($producto_insumo as $producto_insumo) {
+                                    $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
+                                    $cantidadNecesaria = $producto_insumo->cantidad * $input['cantidades'][$key];
+                                    $insumo->update(['cantidad' => max(0, $insumo->cantidad - $cantidadNecesaria)]);
+                                    $insumos_restantes += $insumo->cantidad;
+                                }
+                                if ($insumos_restantes < 0) {
+                                    throw new \Exception('No hay suficientes insumos para producir este producto');
+                                }
                             }
                         }
-                 }
+                    } catch (\Exception $e) {
+                        return redirect()->route('produccion.index')->with('error', 'No hay suficientes insumos para producir este producto');
+                    }
                  }
                  
              } 

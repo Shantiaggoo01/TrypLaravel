@@ -13,7 +13,7 @@ Crear Producto
 
             <div class="card card-default">
                 <div class="card-header">
-                    <span class="card-title">Crear Producto</span>
+                    <span class="card-title">Editar Producto</span>
 
                 </div>
 
@@ -41,7 +41,7 @@ Crear Producto
                                         <div class="card">
                                             <br>
                                             <div class="card-head">
-                                            <h4>&nbsp;&nbsp;&nbsp;<i>Información de los productos</i></h4>
+                                            <h4>&nbsp;&nbsp;&nbsp;<i>Información del producto</i></h4>
                                             </div>
                                             <div class="row card-body">
                                                 
@@ -213,7 +213,7 @@ Crear Producto
                                 if (cantidad > 0 && Precio > 0) {
                                 $("#tblInsumos").append(`<tr id="tr-${id_insumo}"> 
                     
-                    <td><input type="hidden" name="id_insumo[]" value="${id_insumo}"/> ${insumo_text} {{$detalle}}</td>
+                    <td><input type="hidden" name="id_insumo[]" value="${id_insumo}"/> ${insumo_text} </td>
                                     
                     <td><input type="hidden" name="cantidades[]" value="${cantidad}"/> ${cantidad}</td>
 
