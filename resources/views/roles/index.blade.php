@@ -28,8 +28,11 @@ Roles
         title: "{{session::get('success')}}",
         icon: "success",
         button: "Aceptar",
-    });
-    {{ session()->forget('success') }}
+    }).then(function() {
+            @if(Session::has('reload'))
+                window.location.reload();
+            @endif
+        });
 </script>
 @endif
 
@@ -39,8 +42,11 @@ Roles
         title: "{{session::get('error')}}",
         icon: "error",
         button: "Aceptar",
-    });
-    {{ session()->forget('success') }}
+    }).then(function() {
+            @if(Session::has('reload'))
+                window.location.reload();
+            @endif
+        });
 </script>
 @endif
 

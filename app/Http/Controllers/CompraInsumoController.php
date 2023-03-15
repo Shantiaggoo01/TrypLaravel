@@ -104,7 +104,7 @@ class CompraInsumoController extends Controller
     
             // Confirmamos la transacción
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Compra realizada con éxito');
+            return redirect("compra_insumos")->with('success', 'Compra realizada con éxito')->with('reload', true);
         } catch (Exception $e) {
             // Si ocurre un error, hacemos un rollback de la transacción
             DB::rollback();
