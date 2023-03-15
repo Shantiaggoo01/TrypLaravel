@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('Medida');
             $table->double('Precio', 60);
             $table->integer('cantidad')->default(0);
+            $table->integer('cantidadxMedida')->default(0);
             $table->boolean('Estado')->default(1);
             $table->timestamps();
         });

@@ -37,8 +37,8 @@
         $('#form-cliente').on('submit', function(event) {
             event.preventDefault();
             swal({
-                title: "¿Estás seguro?",
-                text: "Una vez agregado el cliente, no podrás editar su NIT.",
+                title: "¿Está seguro?",
+                text: "Una vez agregado el cliente, no se podrá editar su NIT.",
                 icon: "warning",
                 buttons: ["Cancelar", "Agregar"],
                 dangerMode: true,

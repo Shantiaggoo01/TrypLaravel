@@ -65,8 +65,8 @@ Insumo
 
                                     <th>Nombre</th>
                                     <th>Precio</th>
-                                    <th>Tipo de cantidad de medida</th>
-                                    <th>Cantidad de medida</th>
+                                    <th>Tipo de medida</th>
+                                    <th>Unidad de medida</th>
                                     <th>Cantidad</th>
 
                                     <th>Estado</th>

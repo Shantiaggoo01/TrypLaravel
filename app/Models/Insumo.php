@@ -27,6 +27,7 @@ class Insumo extends Model
     'TipoCantidad' => 'required',
     'Medida'=>'required',
     'cantidad',
+    'cantidadxMedida',
     'Estado' => 'in:0,1',
   ];
 
@@ -37,7 +38,7 @@ class Insumo extends Model
    *
    * @var array
    */
-  protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad','Medida'];
+  protected $fillable = ['Nombre', 'Precio', 'TipoCantidad', 'Estado','cantidad','Medida','cantidadxMedida'];
   
   public function tieneCantidadDisponible($cantidadNecesaria) {
     return $this->cantidad >= $cantidadNecesaria;
