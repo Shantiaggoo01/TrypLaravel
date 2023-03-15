@@ -109,7 +109,7 @@ class UsuarioController extends Controller
 
 
 
-        return redirect()->route('usuarios.index')->with('success', 'Se agregó correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Se agregó correctamente')->with('reload', true);
     }
 
     public function edit($id)
@@ -177,36 +177,10 @@ class UsuarioController extends Controller
             $user->update($input);
 
             Session::flash('success', 'Se actualizó correctamente');
-            return redirect()->route('usuarios.show', $id)->with('success', 'Se actualizó correctamente');
+            return redirect()->route('usuarios.show', $id)->with('success', 'Se actualizó correctamente')->with('reload', true);
         }
     }
 
-
-
-    public function destroy($id)
-    {
-        $user = ModelsUser::findOrFail($id);
-
-        // Verifica si el usuario es el superadministrador
-        if ($user->hasRole('Administrador')) {
-            return redirect()->back()->with('error', 'No puedes eliminar al super administrador');
-        } else {
-
-            // Elimina la asociación de roles del usuario
-            $user->roles()->detach();
-
-            // Elimina al usuario
-            $deleteSuccessful = $user->delete();
-
-            if ($deleteSuccessful) {
-                Session::flash('success', 'Se eliminó correctamente');
-                return redirect()->route('usuarios.index');
-            } else {
-                Session::flash('error', 'Hubo un problema al eliminar');
-                return redirect()->back();
-            }
-        }
-    }
 
     public function show($id)
     {
@@ -229,7 +203,7 @@ class UsuarioController extends Controller
         $user->estado = 1;
         $user->save();
 
-        return redirect()->back()->with('success', 'El usuario ha sido activado correctamente.');
+        return redirect()->back()->with('success', 'El usuario ha sido activado correctamente.')->with('reload', true);
     }
 
     public function desactivar($id)
@@ -238,6 +212,6 @@ class UsuarioController extends Controller
         $user->estado = 0;
         $user->save();
 
-        return redirect()->back()->with('success', 'El usuario ha sido inactivado correctamente.');
+        return redirect()->back()->with('success', 'El usuario ha sido inactivado correctamente.')->with('reload', true);
     }
 }

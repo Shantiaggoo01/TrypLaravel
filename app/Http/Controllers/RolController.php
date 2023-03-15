@@ -57,7 +57,7 @@ class RolController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
-        return redirect()->route('roles.index')->with('success', 'Se registró con éxito');;
+        return redirect()->route('roles.index')->with('success', 'Se registró con éxito')->with('reload', true);
     }
 
 
@@ -74,11 +74,11 @@ class RolController extends Controller
 
         $role = DB::table('roles')->where('id', $id)->first();
         if ($role->name == 'Administrador') {
-            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol de administrador');
+            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol de administrador')->with('reload', true);
         }
 
         if ($role->name == 'Empleado') {
-            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol empleado predeterminado');
+            return redirect()->route('roles.index')->with('error', 'No se puede editar el rol empleado predeterminado')->with('reload', true);
         }
 
 
@@ -117,7 +117,7 @@ class RolController extends Controller
         $role->save();
 
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index')->with('success', 'Se actualizó con éxito');
+        return redirect()->route('roles.index')->with('success', 'Se actualizó con éxito')->with('reload', true);
     }
 
     /**
@@ -131,20 +131,20 @@ class RolController extends Controller
         $role = Role::findById($id);
 
         if ($role->name == 'Administrador') {
-            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador');
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol de administrador')->with('reload', true);
         }
 
         if ($role->name == 'Empleado') {
-            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado');
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol empleado predeterminado')->with('reload', true);
         }
 
         if ($role->users()->count() > 0) {
-            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol porque hay usuarios asignados a él');
+            return redirect()->route('roles.index')->with('error', 'No se puede eliminar el rol porque hay usuarios asignados a él')->with('reload', true);
         }
 
 
         DB::table('roles')->where('id', $id)->delete();
-        return redirect()->route('roles.index')->with('success', 'Se eliminó con éxito');
+        return redirect()->route('roles.index')->with('success', 'Se eliminó con éxito')->with('reload', true);
     }
 
     public function showPermissions($id)
