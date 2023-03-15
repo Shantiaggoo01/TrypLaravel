@@ -323,7 +323,10 @@ var chart = new Chart(ctx, {
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Ventas de los ultimos 7 días</h6>
-                    <button onclick="downloadPDF1()">Descargar gráfica en PDF</button>
+                    <button onclick="downloadPDF1()" style="background-color: #4e73df; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+    Descargar gráfica en PDF
+</button>
+
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -340,7 +343,7 @@ var chart = new Chart(ctx, {
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Productos más vendidos</h6>
-                    <button onclick="downloadPDF2()">Descargar gráfica en PDF</button>
+                    <button onclick="downloadPDF2()" style="background-color: #4e73df; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Descargar gráfica en PDF</button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -355,7 +358,7 @@ var chart = new Chart(ctx, {
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Ventas y compras del año</h6>
-                    <button onclick="downloadPDFC()">Descargar gráfica en PDF</button>
+                    <button onclick="downloadPDFC()" style="background-color: #4e73df; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Descargar gráfica en PDF</button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
@@ -370,7 +373,7 @@ var chart = new Chart(ctx, {
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 bg-second-primary">
                     <h6 class="m-0 font-weight-bold text-white">Clientes que generan mayores ingresos</h6>
-                    <button onclick="downloadPDF3()">Descargar gráfica en PDF</button>
+                    <button onclick="downloadPDF3()" style="background-color: #4e73df; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Descargar gráfica en PDF</button>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
