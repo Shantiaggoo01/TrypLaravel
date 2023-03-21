@@ -16,7 +16,7 @@ return new class extends Migration
         //
         Schema::create('insumos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Nombre', 60);
+            $table->string('Nombre', 60)->unique();
             $table->string('TipoCantidad', 60);
             $table->integer('Medida');
             $table->double('Precio', 60);

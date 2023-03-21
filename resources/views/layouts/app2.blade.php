@@ -141,11 +141,11 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Reportes</span>
+                    <span>Ayudas</span>
                 </a>
                 <div id="collapseReportes" class="collapse" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="reporte_venta.html">Reporte de Ventas</a>
+                        <a class="collapse-item" href="reporte_venta.html">Vídeos informativos</a>
                     </div>
                 </div>
             </li>

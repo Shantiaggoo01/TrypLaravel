@@ -52,6 +52,7 @@ class ProduccionController extends Controller
      public function store(Request $request)
      {
          $input = $request->all();
+         $contador_papas = $input['cantidad'];
          //validaciones
             $request->validate([
                 'FechaP' => 'required|date',
@@ -80,27 +81,27 @@ class ProduccionController extends Controller
                      ]);
                      $ins = Producto::find($value);
                      $ins->update(['cantidad' => $ins->cantidad + $input['cantidades'][$key]]);
-                     try {
-                        if(is_array($input['producto_id'])){
-                            foreach ($input['producto_id'] as $key => $value) {
-                                $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
-                                $producto = Producto::where('id', $produccion->id_producto)->first();
-                                $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
-                                $insumos_restantes = 0;
-                                foreach ($producto_insumo as $producto_insumo) {
-                                    $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
-                                    $cantidadNecesaria = $producto_insumo->cantidad * $input['cantidades'][$key];
-                                    $insumo->update(['cantidad' => max(0, $insumo->cantidad - $cantidadNecesaria)]);
-                                    $insumos_restantes += $insumo->cantidad;
-                                }
-                                if ($insumos_restantes < 0) {
-                                    throw new \Exception('No hay suficientes insumos para producir este producto');
-                                }
-                            }
-                        }
-                    } catch (\Exception $e) {
-                        return redirect()->route('produccion.index')->with('error', 'No hay suficientes insumos para producir este producto');
-                    }
+                    //  try {
+                    //     if(is_array($input['producto_id'])){
+                    //         foreach ($input['producto_id'] as $key => $value) {
+                    //             $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
+                    //             $producto = Producto::where('id', $produccion->id_producto)->first();
+                    //             $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
+                    //             $insumos_restantes = 0;
+                    //             foreach ($producto_insumo as $producto_insumo) {
+                    //                 $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
+                    //                 $cantidadNecesaria = $producto_insumo->cantidad * $input['cantidades'][$key];
+                    //                 $insumo->update(['cantidad' => max(0, $insumo->cantidad - $cantidadNecesaria)]);
+                    //                 $insumos_restantes += $insumo->cantidad;
+                    //             }
+                    //             if ($insumos_restantes < 0) {
+                    //                 throw new \Exception('No hay suficientes insumos para producir este producto');
+                    //             }
+                    //         }
+                    //     }
+                    // } catch (\Exception $e) {
+                    //     return redirect()->route('produccion.index')->with('error', 'No hay suficientes insumos para producir este producto')->with('reload', 'true');
+                    // }
                  }
                  
              } 
@@ -108,12 +109,29 @@ class ProduccionController extends Controller
              
              DB::commit();
              Log::debug('Producción creada correctamente');
-             return redirect()->route('produccion.index')->with('success', 'Producción creada con éxito.');
-             
+             return redirect()->route('produccion.index')->with('success', 'Producción creada con éxito.')->with('reload', 'true');
+             if ($input['cantidades'] % 150 == 0) {
+                $insumo_papas = Insumo::where('nombre', 'papas')->first();
+                $insumo_papas->update(['cantidad' => $insumo_papas->cantidad - 1]);
+                $insumo_papas->save();
+            }
+            $total_paquetes = Produccion::sum('cantidad');
+if ($total_paquetes % 300 == 0) {
+    $insumo_aceite = Insumo::where('nombre', 'aceite')->first();
+    $insumo_aceite->cantidad -= 1;
+    $insumo_aceite->save();
+}
+$total_producciones = Produccion::count();
+if ($total_producciones % 25 == 0) {
+    $insumo_sal = Insumo::where('nombre', 'sal')->first();
+    $insumo_sal->cantidad -= 1;
+    $insumo_sal->save();
+}
+            
          } catch (\Exception $e) {
              DB::rollback();
              Log::error($e->getMessage());
-             return redirect()->route('produccion.index')->with('error', 'Error al crear la producción.');
+             return redirect()->route('produccion.index')->with('error', 'Error al crear la producción.')->with('reload', 'true');
          }
      }
      

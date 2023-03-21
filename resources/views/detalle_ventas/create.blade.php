@@ -168,8 +168,8 @@
         $('#form-venta').on('submit', function(event) {
             event.preventDefault();
             swal({
-                title: "¿Estás seguro?",
-                text: "Una vez agregada la venta, no podrás editarlo.",
+                title: "¿Está seguro?",
+                text: "Una vez agregada la venta, no podrá ser editada.",
                 icon: "warning",
                 buttons: ["Cancelar", "Agregar"],
                 dangerMode: true,

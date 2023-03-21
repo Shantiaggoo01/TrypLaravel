@@ -100,11 +100,12 @@ class CompraInsumoController extends Controller
     
                 $ins = Insumo::find($value);
                 $ins->update(["cantidad" => $ins->cantidad + $input["cantidades"][$key]]);
+                $ins->update(["cantidadxMedida" => $ins->Medida * $input["cantidades"][$key]]);
             }
     
             // Confirmamos la transacción
             DB::commit();
-            return redirect("compra_insumos")->with('success', 'Compra realizada con éxito')->with('reload', true);
+            return redirect("compra_insumos")->with('success', 'Compra realizada con éxito');
         } catch (Exception $e) {
             // Si ocurre un error, hacemos un rollback de la transacción
             DB::rollback();

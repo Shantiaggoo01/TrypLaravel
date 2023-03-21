@@ -268,14 +268,14 @@ class ProductoController extends Controller
             }
     
             DB::commit();
-            return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
+            return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.')->with('reload', 'true');
     
         } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             DB::rollback();
-            return redirect()->route('productos.index')->with('error', 'No se encontró el producto a actualizar.');
+            return redirect()->route('productos.index')->with('error', 'No se encontró el producto a actualizar.')->with('reload', 'true');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('productos.index')->with('error', 'Ha ocurrido un error al actualizar el producto: ' . $e->getMessage());
+            return redirect()->route('productos.index')->with('error', 'Ha ocurrido un error al actualizar el producto: ' . $e->getMessage())->with('reload', 'true');
         }
     }
     

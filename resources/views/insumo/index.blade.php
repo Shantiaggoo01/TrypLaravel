@@ -65,9 +65,10 @@ Insumo
 
                                     <th>Nombre</th>
                                     <th>Precio</th>
-                                    <th>Tipo de medida</th>
                                     <th>Unidad de medida</th>
-                                    <th>Cantidad</th>
+                                    <th>Medida</th>
+                                    <th>Cantidad de insumo</th>
+                                    <th>Total de insumo</th>
 
                                     <th>Estado</th>
                                     @can('cambiar-estado')
@@ -89,6 +90,7 @@ Insumo
                                     <td>{{ $insumo->TipoCantidad }}</td>
                                     <td>{{ $insumo->Medida}}</td>
                                     <td>{{ $insumo->cantidad }}</td>
+                                    <td>{{ $insumo->cantidadxMedida }}</td>
 
                                     <td>{{ $insumo->Estado ? 'Activo' : 'Inactivo' }}</td>
 
