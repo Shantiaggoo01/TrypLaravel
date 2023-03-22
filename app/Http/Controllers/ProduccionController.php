@@ -89,14 +89,7 @@ class ProduccionController extends Controller
                                 $insumos_restantes = 0;
                                  foreach ($producto_insumo as $producto_insumo) {
                                      $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
-                                     if($insumo && $insumo->Nombre == 'papas') {
-                                        $gramos = $producto->peso * $input['cantidades'][$key];
-                                        $insumo->cantidadxMedida -= $gramos;
-                                        $insumo->save();
-                                    }
-                                     $count = 0;
-
-DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($insumo,  &$count) {
+                                     DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($insumo,  &$count) {
     foreach ($producciones as $produccion) {
         // Aquí va la lógica para procesar cada registro
         
@@ -107,6 +100,7 @@ DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($
         if ($count % 2 == 0 && $insumo->Nombre == 'aceite') {
             // Restar 20 litros de aceite a la cantidad de insumo actual
             $insumo->cantidadxMedida -= 20000;
+            $insumo->cantidad -= 1;
             
             // Guardar los cambios en la base de datos
             $insumo->save();
@@ -121,6 +115,27 @@ DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($
     }
     
 });
+                                     if ($insumo && $insumo->Nombre == 'papas') {
+                                        if ($input['cantidades'][$key] > 150) {
+                                            $total = intval($input['cantidades'][$key] / 150);
+                                            $insumo->cantidadxMedida -= $total * 50000;
+                                            $insumo->cantidad -= $total;
+                                    
+                                            // Restar 1 si la cantidad de medida es un múltiplo de 150
+                                            
+                                        } else {
+                                            $insumo->cantidadxMedida -= 50000;
+                                            $insumo->cantidad -= 1;
+                                        }
+                                    
+                                        $insumo->save();
+                                    }
+                                    
+                                    
+                                    
+                                     $count = 0;
+
+
                                }
                                  
                              }

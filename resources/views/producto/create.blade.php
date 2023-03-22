@@ -69,7 +69,7 @@ Crear Producto
                                                     <label for=""><i>Peso</i></label>
                                                     <input id="peso" type="text" class="form-control" name="peso">
                                                 </div>
-                                                {{ Form::hidden('cantidad', '0') }}
+                                                {{ Form::hidden('cantidad', 0) }}
                                                 <div class="form-group col-6">
                                                     <label for=""><i>Precio</i></label>
                                                     <input id="precio" type="text" class="form-control" name="precio">
@@ -88,13 +88,9 @@ Crear Producto
                                                     <select class="form-control" name="id_insumos" id="insumos" onchange="colocar_precio(this)">
                                                         <option value="0">Seleccione el insumo</option>
                                                         @foreach ($insumos as $insumo)
-                                                        <option cantidadExistente='{{$insumo->cantidad}}' Precio="{{$insumo->Precio}}" value="{{$insumo->id}}">{{$insumo->Nombre}}</option>
+                                                        <option  Precio="{{$insumo->Precio}}" value="{{$insumo->id}}">{{$insumo->Nombre}}</option>
                                                         @endforeach
                                                     </select>
-                                                </div>
-                                                <div class="form-group col-3">
-                                                    <label for="">Cantidad Existente</label>
-                                                    <input id="cantidadExistente" type="number" class="form-control" name="cantidadExistente" readonly>
                                                 </div>
                                                 <div class="form-group col-3">
                                                     <label for="">Cantidad</label>
@@ -157,7 +153,7 @@ Crear Producto
                                 event.preventDefault();
                                 swal({
                                     title: "¿Estás seguro?",
-                                    text: "Una vez agregado el producto, no podrás editarlo.",
+                                    text: "Una vez agregado el producto, no puede eliminarlo.",
                                     icon: "warning",
                                     buttons: ["Cancelar", "Agregar"],
                                     dangerMode: true,
@@ -186,20 +182,16 @@ Crear Producto
 
 
                         function colocar_precio() {
-                            let cantidadExistente =$("#insumos option:selected").attr("cantidadExistente");
-        $("#cantidadExistente").val(cantidadExistente);
                             let Precio = $("#insumos option:selected").attr("Precio");
                             $("#Precio").val(Precio);
                             console.log(Precio);
                         }
 
                         function agregar_insumo() {
-                            let cantidadExistente=$("#cantidadExistente").val();
                             let id_insumo = $("#insumos option:selected").val();
                             let insumo_text = $("#insumos option:selected").text();
                             let cantidad = $("#ccantidad").val();
                             let Precio = $("#Precio").val();
-                            if(cantidad<=cantidadExistente){
                                 if (cantidad > 0 && Precio > 0) {
                                 $("#tblInsumos").append(`<tr id="tr-${id_insumo}"> 
                                 
@@ -222,13 +214,11 @@ Crear Producto
 
                             }
                             else {
-                                alert("se debe ingresar una cantidad o precio valido");
-                            }
-                            } else {
                                 swal("La cantidad ingresada supera la disponible", {
                                             icon: "error",
                                         });
                             }
+
                              
 
 

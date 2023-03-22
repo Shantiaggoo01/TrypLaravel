@@ -55,11 +55,7 @@
                                                 
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="">Total</label>
-                                        <input id="precio_total" type="text" class="form-control" name="cantidad" readonly>
-                                                
-                                    </div>
+                                    
                                 </div>
                             </div>
                                 
@@ -88,7 +84,7 @@
                                     
                                     <div class="form-group col-3">
                                         <label for="">Cantidad</label>
-                                        <input id="cantidad" type="number" class="form-control" name="cantidad">
+                                        <input id="cantidad" type="number" class="form-control" name="cantidad" min="150">
                                                 
                                     </div>
 
@@ -183,7 +179,7 @@ let detalle = {
 detalles.push(detalle);
 
 
-        if(cantidad > 0 && precio > 0){
+        if(cantidad >= 150 && precio > 0){
             $("#tblproductos").append(`
                <tr id="tr-${producto_id}"> 
                     <td>
@@ -203,9 +199,9 @@ detalles.push(detalle);
             let precio_total = $("#precio_total").val() || 0;
             $("#precio_total").val( parseInt(cantidad) + parseInt(precio_total));
 
-        }else{
+        }else if(cantidad<150){
             //mostrar error con sweet alert
-            swal("Error", "Ingrese una cantidad valida", "error");
+            swal("Error", "La cantidad debe ser mayor a 150", "error");
         }
 
 
