@@ -116,10 +116,10 @@ Proveedores
                                             @endcan
                                             @csrf
 
-                                            @method('DELETE')
+                                            {{-- @method('DELETE')
                                             @can('borrar-proveedor')
                                             <button type="submit" class="btn btn-danger btn-sm mr-2 mt-2"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
-                                            @endcan
+                                            @endcan --}}
                                         </form>
                                     </td>
                                 </tr>

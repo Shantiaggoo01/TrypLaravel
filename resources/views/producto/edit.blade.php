@@ -135,6 +135,31 @@ Crear Producto
                                         </tbody>
                                     </table>
 
+
+<table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre Insumo</th>
+                                            <th>Cantidad</th>
+                                            <th>Opciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle">
+                                        @foreach ($detalle as $item)
+                                        <tr id="fila-{{ $item->id }}">
+                                                <td>{{ $item->Insumo->Nombre }}</td>
+                                                <td>{{ $item->cantidad }}</td>
+                                                <td>
+                                                    <form action="{{ route('productos.destroy', $item->id_insumo) }}" method="POST" style="display: inline-block">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este detalle?')"><i class="fas fa-times"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                                 <hr>
 
                                 <div class="col text-center">
@@ -158,6 +183,32 @@ Crear Producto
     });
 </script>
 @endif
+<script>
+    $(document).ready(function() {
+        // Detectar el evento click en el botón eliminar
+        $('#detalle').on('click', '.btn-danger', function(event) {
+            event.preventDefault();
+            // Obtener el id del detalle a eliminar
+            var id = $(this).closest('tr').attr('id').replace('fila-', '');
+            // Hacer la petición AJAX
+            $.ajax({
+                url: "{{ route('productos.destroy', ['producto' => $item->id]) }}",
+                type: "DELETE",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    // Eliminar la fila de la tabla
+                    $('#fila-' + id).remove();
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
+
                     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

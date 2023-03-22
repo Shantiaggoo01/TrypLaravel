@@ -302,11 +302,11 @@ class ProductoController extends Controller
         $detalle->delete();
 
         DB::commit();
-        return redirect()->route('productos.edit', ['id' => $detalle->id_producto])->with('success', 'Detalle eliminado correctamente');
+       
         
     } catch (Exception $e) {
         DB::rollback();
-        return redirect()->route('productos.edit', ['id' => $detalle->id_producto])->with('error', 'Error al eliminar detalle: ' . $e->getMessage());
+        
     }
 }
 

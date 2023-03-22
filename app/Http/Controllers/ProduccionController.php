@@ -52,7 +52,6 @@ class ProduccionController extends Controller
      public function store(Request $request)
      {
          $input = $request->all();
-         $contador_papas = $input['cantidad'];
          //validaciones
             $request->validate([
                 'FechaP' => 'required|date',
@@ -81,27 +80,54 @@ class ProduccionController extends Controller
                      ]);
                      $ins = Producto::find($value);
                      $ins->update(['cantidad' => $ins->cantidad + $input['cantidades'][$key]]);
-                    //  try {
-                    //     if(is_array($input['producto_id'])){
-                    //         foreach ($input['producto_id'] as $key => $value) {
-                    //             $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
-                    //             $producto = Producto::where('id', $produccion->id_producto)->first();
-                    //             $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
-                    //             $insumos_restantes = 0;
-                    //             foreach ($producto_insumo as $producto_insumo) {
-                    //                 $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
-                    //                 $cantidadNecesaria = $producto_insumo->cantidad * $input['cantidades'][$key];
-                    //                 $insumo->update(['cantidad' => max(0, $insumo->cantidad - $cantidadNecesaria)]);
-                    //                 $insumos_restantes += $insumo->cantidad;
-                    //             }
-                    //             if ($insumos_restantes < 0) {
-                    //                 throw new \Exception('No hay suficientes insumos para producir este producto');
-                    //             }
-                    //         }
-                    //     }
-                    // } catch (\Exception $e) {
-                    //     return redirect()->route('produccion.index')->with('error', 'No hay suficientes insumos para producir este producto')->with('reload', 'true');
-                    // }
+                      try {
+                       if(is_array($input['producto_id'])){
+                             foreach ($input['producto_id'] as $key => $value) {
+                                 $produccion = Detalle_produccion::where('id_produccion', $produccion->id)->first();
+                               $producto = Producto::where('id', $produccion->id_producto)->first();
+                               $producto_insumo = producto_insumo::where('id_producto', $producto->id)->get();
+                                $insumos_restantes = 0;
+                                 foreach ($producto_insumo as $producto_insumo) {
+                                     $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
+                                     if($insumo && $insumo->Nombre == 'papas') {
+                                        $gramos = $producto->peso * $input['cantidades'][$key];
+                                        $insumo->cantidadxMedida -= $gramos;
+                                        $insumo->save();
+                                    }
+                                     $count = 0;
+
+DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($insumo,  &$count) {
+    foreach ($producciones as $produccion) {
+        // Aquí va la lógica para procesar cada registro
+        
+        // Incrementar el contador
+        $count++;
+        
+        // Verificar si el insumo es aceite y el contador va en múltiplos de 2
+        if ($count % 2 == 0 && $insumo->Nombre == 'aceite') {
+            // Restar 20 litros de aceite a la cantidad de insumo actual
+            $insumo->cantidadxMedida -= 20000;
+            
+            // Guardar los cambios en la base de datos
+            $insumo->save();
+        }
+        if ($count % 25 == 0 && $insumo->Nombre == 'sal') {
+            // Restar la cantidad de sales a la cantidad de insumo actual
+            $insumo->cantidadxMedida -= 5000;
+            
+            // Guardar los cambios en la base de datos
+            $insumo->save();
+        }
+    }
+    
+});
+                               }
+                                 
+                             }
+                        }
+                    } catch (\Exception $e) {
+                         return redirect()->route('produccion.index')->with('error', 'No hay suficientes insumos para producir este producto')->with('reload', 'true');
+                 }
                  }
                  
              } 
@@ -110,24 +136,7 @@ class ProduccionController extends Controller
              DB::commit();
              Log::debug('Producción creada correctamente');
              return redirect()->route('produccion.index')->with('success', 'Producción creada con éxito.')->with('reload', 'true');
-             if ($input['cantidades'] % 150 == 0) {
-                $insumo_papas = Insumo::where('nombre', 'papas')->first();
-                $insumo_papas->update(['cantidad' => $insumo_papas->cantidad - 1]);
-                $insumo_papas->save();
-            }
-            $total_paquetes = Produccion::sum('cantidad');
-if ($total_paquetes % 300 == 0) {
-    $insumo_aceite = Insumo::where('nombre', 'aceite')->first();
-    $insumo_aceite->cantidad -= 1;
-    $insumo_aceite->save();
-}
-$total_producciones = Produccion::count();
-if ($total_producciones % 25 == 0) {
-    $insumo_sal = Insumo::where('nombre', 'sal')->first();
-    $insumo_sal->cantidad -= 1;
-    $insumo_sal->save();
-}
-            
+             
          } catch (\Exception $e) {
              DB::rollback();
              Log::error($e->getMessage());
