@@ -41,6 +41,17 @@
 @endif
 @endsection
 @section('content')
+@if($productos->count() > 0)
+    <div class="alert alert-danger">
+        <h4>Productos con cantidad menor a 25:</h4>
+        <ul>
+            @foreach($productos as $producto)
+                <li>{{ $producto->nombre }} ({{ $producto->cantidad }})</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">

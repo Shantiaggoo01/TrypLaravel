@@ -1,4 +1,37 @@
-<!-- <!DOCTYPE html>
+@section('script')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.0.0/html2canvas.min.js"></script>
+<script>
+    // Agrega un evento click al botón
+    document.getElementById('convertir-a-imagen').addEventListener('click', function() {
+        // Crea un objeto JsPdf
+        const doc = new jsPDF();
+        
+        // Selecciona la vista que deseas convertir a imagen
+        const element = document.getElementById('venta');
+        
+        // Convierte la vista en una imagen utilizando html2canvas
+        html2canvas(element).then((canvas) => {
+            // Agrega la imagen a tu objeto JsPdf
+            const imgData = canvas.toDataURL('image/png');
+            doc.addImage(imgData, 'PNG', 10, 10, 100, 100);
+            
+            // Exporta el archivo
+            doc.save('vista.pdf');
+        });
+    });
+</script>
+En el código anterior, 'vista-a-convertir' es el identificador único de la vista que deseas convertir a imagen. También puedes ajustar los parámetros de la función addImage para personalizar la posición y el tamaño de la imagen en tu archivo PDF.
+
+
+
+
+
+
+@endsection
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,9 +39,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-    <title>Detalle de venta</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <title>venta</title>
+    
 </head>
-<body> -->
+<body>
 @extends('layouts.app2')
 
 @section('template_title')
@@ -16,7 +51,7 @@
 @endsection
 
 @section('content')
-    <section class="content container-fluid">
+    <section class="content container-fluid" id="venta">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -28,7 +63,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+                        <button type="button" id="convertir-a-imagen">Convertir a imagen</button>
                     
                     <div class="row card-body">
                         <div class="form-group col-6">

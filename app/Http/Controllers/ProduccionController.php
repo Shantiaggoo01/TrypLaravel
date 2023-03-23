@@ -25,8 +25,9 @@ class ProduccionController extends Controller
     public function index()
     {
         $produccions = Produccion::paginate();
+        $productos = Producto::where('cantidad', '<', 25)->get();
 
-        return view('produccion.index', compact('produccions'))
+        return view('produccion.index', compact('produccions', 'productos'))
             ->with('i', (request()->input('page', 1) - 1) * $produccions->perPage());
     }
 
@@ -89,32 +90,24 @@ class ProduccionController extends Controller
                                 $insumos_restantes = 0;
                                  foreach ($producto_insumo as $producto_insumo) {
                                      $insumo = Insumo::where('id', $producto_insumo->id_insumo)->first();
-                                     DB::table('produccion')->orderBy('id')->chunk(2, function ($producciones) use ($insumo,  &$count) {
-    foreach ($producciones as $produccion) {
-        // Aquí va la lógica para procesar cada registro
-        
-        // Incrementar el contador
-        $count++;
-        
-        // Verificar si el insumo es aceite y el contador va en múltiplos de 2
-        if ($count % 2 == 0 && $insumo->Nombre == 'aceite') {
-            // Restar 20 litros de aceite a la cantidad de insumo actual
-            $insumo->cantidadxMedida -= 20000;
-            $insumo->cantidad -= 1;
-            
-            // Guardar los cambios en la base de datos
-            $insumo->save();
-        }
-        if ($count % 25 == 0 && $insumo->Nombre == 'sal') {
-            // Restar la cantidad de sales a la cantidad de insumo actual
-            $insumo->cantidadxMedida -= 5000;
-            
-            // Guardar los cambios en la base de datos
-            $insumo->save();
-        }
-    }
-    
-});
+                                     if($insumo && $insumo->Nombre =='aceite'){
+                                        $total = intval($input['cantidades'][$key] / 150);
+                                        $insumo->cantidadxMedida -= $total * 20000;
+                                        
+                                            $insumo->cantidad -= $total;
+                                        
+                                            
+                                            $insumo->save();
+                                     }
+                                     if($insumo && $insumo->Nombre =='sal'){
+                                        $total = intval($input['cantidades'][$key] / 150);
+                                        $insumo->cantidadxMedida -= $total * 5000;
+                                        
+                                            $insumo->cantidad -= $total;
+                                        
+                                            
+                                            $insumo->save();
+                                     }
                                      if ($insumo && $insumo->Nombre == 'papas') {
                                         if ($input['cantidades'][$key] > 150) {
                                             $total = intval($input['cantidades'][$key] / 150);

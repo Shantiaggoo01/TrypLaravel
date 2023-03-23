@@ -108,12 +108,33 @@ class InsumoController extends Controller
      * @param  Insumo $insumo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Insumo $insumo)
+    public function update(Request $request, $id)
     {
-        request()->validate(Insumo::$rules);
+        
+        $request->validate([
+            
+            'Nombre' => ['required', 'regex:/^[\pL\s]+$/u'],
+            'TipoCantidad' => 'required|string',
+            'Precio' => 'required|numeric',
+            'Medida' => 'required|numeric',
+        ]);
+        
+        $insumo = Insumo::findOrFail($id);
 
-        $insumo->update($request->all());
+        // Actualizar los campos medida y unidad del registro
+        $insumo->Medida = $request->Medida;
+        $insumo->cantidad = $request->cantidad;
+        $insumo->Precio= $request->Precio;
+        $insumo->Nombre = $request->Nombre;
 
+
+        // Actualizar el valor del campo total
+        $insumo->cantidadxMedida = $request->Medida * $request->cantidad;
+
+        // Guardar el registro actualizado
+        $insumo->save();
+
+       
         return redirect()->route('insumos.index')
             ->with('success', 'Insumo actualizado correctamente');
     }

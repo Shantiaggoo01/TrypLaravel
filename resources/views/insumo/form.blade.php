@@ -3,6 +3,15 @@
 
     
     <div class="box-body">
+
+    <div class="form-group">
+         
+            {{ Form::number('cantidad', $insumo->cantidad, ['class' => 'form-control' . ($errors->has('cantidad') ? ' is-invalid' : ''), 'placeholder' => 'cantidad', 'hidden' => 'hidden']) }}
+            {!! $errors->first('cantidad', '<div class="invalid-feedback"></div>') !!}
+            @error('cantidad')
+             <small class="text-danger">{{ str_replace("n i t","cantidad",$errors->first('cantidad')) }}</small>
+            @enderror
+        </div>
         
 
 
